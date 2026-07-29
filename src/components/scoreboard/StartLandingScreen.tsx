@@ -53,8 +53,11 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
         contentContainerStyle={styles.scrollContentContainer}
         showsVerticalScrollIndicator={false}
       >
-      {/* 우측 상단 테마 모드 선택 버튼 */}
-      <View style={styles.topRightHeaderRow}>
+      {/* 상단 헤더 영역: [경기 선택] 타이틀 & 우측 테마 변경 버튼 */}
+      <View style={styles.topHeaderRow}>
+        <Text style={[styles.headerSectionTitle, !theme.isDark && { color: theme.textPrimary }]}>
+          경기 선택
+        </Text>
         <TouchableOpacity
           style={[styles.topRightThemeBtn, !theme.isDark && styles.lightTopRightThemeBtn]}
           onPress={onToggleTheme}
@@ -353,25 +356,29 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       justifyContent: 'space-between',
       marginBottom: s(14),
     },
-    topRightHeaderRow: {
+    topHeaderRow: {
       flexDirection: 'row',
-      justifyContent: 'flex-end',
-      marginBottom: s(6),
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginTop: s(4),
+      marginBottom: s(12),
+      paddingHorizontal: s(4),
+    },
+    headerSectionTitle: {
+      fontSize: f(22),
+      fontWeight: '900',
+      color: '#FFFFFF',
+      letterSpacing: s(0.5),
     },
     topRightThemeBtn: {
-      position: 'absolute',
-      top: s(10),
-      right: s(24),
-      paddingHorizontal: s(16),
-      paddingVertical: s(8),
-      borderRadius: s(14),
-      borderWidth: line(1),
-      borderColor: 'rgba(255, 255, 255, 0.25)',
-      zIndex: 20,
+      paddingHorizontal: s(18),
+      paddingVertical: s(10),
+      borderRadius: s(12),
+      backgroundColor: 'rgba(255, 255, 255, 0.08)',
     },
     topRightThemeBtnText: {
       color: '#00F2FE',
-      fontSize: f(13),
+      fontSize: f(15),
       fontWeight: '800',
     },
     hudStatusRow: {
