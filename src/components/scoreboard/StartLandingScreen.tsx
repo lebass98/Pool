@@ -356,7 +356,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             activeOpacity={0.85}
           >
             <BlurView intensity={theme.isDark ? 50 : 0} tint={theme.isDark ? 'light' : 'light'} style={[styles.btnGlassInner, !theme.isDark && styles.lightBtnGlassInner]}>
-              <Text style={[styles.startGameBtnText, !theme.isDark && styles.lightStartGameBtnText]}>⚡ 경기 시작 (START MATCH)</Text>
+              <Text style={[styles.startGameBtnText, !theme.isDark && styles.lightStartGameBtnText]}>경기 시작</Text>
             </BlurView>
           </TouchableOpacity>
         </View>
