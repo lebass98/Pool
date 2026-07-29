@@ -89,6 +89,13 @@ npx expo start
 
 ---
 
+## 🌐 라이브 데모 (Live Web Demo)
+
+GitHub Pages를 통해 브라우저에서 바로 웹 스코어보드를 체험하실 수 있습니다:  
+👉 **[LeBass 웹 스코어보드 바로가기](https://lebass98.github.io/Pool/)**
+
+---
+
 ## 📱 빌드 및 배포 (Build)
 
 Android APK 또는 iOS 앱을 빌드하는 명령:
