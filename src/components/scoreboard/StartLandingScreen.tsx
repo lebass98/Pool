@@ -593,7 +593,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       flex: 1,
       paddingVertical: s(20),
       paddingHorizontal: s(24),
-      justifyContent: 'flex-end',
+      justifyContent: 'flex-start',
       position: 'relative',
       overflow: 'hidden',
       backgroundColor: 'rgba(0, 0, 0, 0.1)',
