@@ -107,8 +107,9 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
           <TouchableOpacity
             style={[
               styles.gameTypeCardContainer,
-              gameType === '3ball' ? styles.activeBall3CardContainer : styles.inactiveCardContainer,
-              !theme.isDark && styles.lightGameTypeCardContainer,
+              gameType === '3ball'
+                ? (theme.isDark ? styles.activeBall3CardContainer : styles.lightActiveBall3CardContainer)
+                : (theme.isDark ? styles.inactiveCardContainer : styles.lightInactiveCardContainer),
             ]}
             onPress={() => onSelectGameType('3ball')}
             activeOpacity={0.85}
@@ -120,34 +121,34 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
               resizeMode="cover"
             />
             <BlurView
-              intensity={gameType === '3ball' ? (theme.isDark ? 65 : 45) : (theme.isDark ? 30 : 20)}
+              intensity={gameType === '3ball' ? (theme.isDark ? 65 : 85) : (theme.isDark ? 30 : 60)}
               tint={theme.isDark ? 'dark' : 'light'}
               style={[
                 styles.cardOverlay,
-                gameType === '3ball' && styles.activeBall3Overlay,
+                gameType === '3ball' && (theme.isDark ? styles.activeBall3Overlay : styles.lightActiveBall3Overlay),
                 !theme.isDark && styles.lightCardOverlay,
               ]}
             >
-              <View style={styles.hudReticleTopRight} />
+              <View style={[styles.hudReticleTopRight, !theme.isDark && { borderColor: 'rgba(2, 132, 199, 0.4)' }]} />
 
               {gameType === '3ball' && (
-                <View style={styles.ball3CheckBadge}>
-                  <Text style={styles.ball3CheckText}>● ACTIVE</Text>
+                <View style={[styles.ball3CheckBadge, !theme.isDark && styles.lightBall3CheckBadge]}>
+                  <Text style={[styles.ball3CheckText, !theme.isDark && { color: '#0284C7' }]}>● ACTIVE</Text>
                 </View>
               )}
 
-              <Text style={[styles.backWatermark3, !theme.isDark && { color: 'rgba(2, 132, 199, 0.12)' }]}>3</Text>
+              <Text style={[styles.backWatermark3, !theme.isDark && { color: 'rgba(2, 132, 199, 0.08)' }]}>3</Text>
 
               <View style={styles.cardTextCol}>
                 <View style={styles.tagRow}>
-                  <View style={[styles.ball3Tag, gameType === '3ball' && styles.activeBall3Tag]}>
-                    <Text style={styles.ball3TagText}>3-CUSHION</Text>
+                  <View style={[styles.ball3Tag, gameType === '3ball' && styles.activeBall3Tag, !theme.isDark && styles.lightBall3Tag]}>
+                    <Text style={[styles.ball3TagText, !theme.isDark && { color: gameType === '3ball' ? '#0284C7' : '#475569' }]}>3-CUSHION</Text>
                   </View>
                 </View>
-                <Text style={[styles.ball3Title, gameType === '3ball' && styles.activeBall3Title, !theme.isDark && { color: theme.textPrimary }]}>
+                <Text style={[styles.ball3Title, gameType === '3ball' && styles.activeBall3Title, !theme.isDark && (gameType === '3ball' ? styles.lightActiveBall3Title : styles.lightInactiveTitle)]}>
                   3구 경기
                 </Text>
-                <Text style={[styles.ball3Desc, gameType === '3ball' && styles.activeBall3Desc, !theme.isDark && { color: theme.textSecondary }]}>
+                <Text style={[styles.ball3Desc, gameType === '3ball' && styles.activeBall3Desc, !theme.isDark && (gameType === '3ball' ? styles.lightActiveDesc : styles.lightInactiveDesc)]}>
                   3쿠션 정통 경기 (기본 핸디 20점)
                 </Text>
               </View>
@@ -158,8 +159,9 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
           <TouchableOpacity
             style={[
               styles.gameTypeCardContainer,
-              gameType === '4ball' ? styles.activeBall4CardContainer : styles.inactiveCardContainer,
-              !theme.isDark && styles.lightGameTypeCardContainer,
+              gameType === '4ball'
+                ? (theme.isDark ? styles.activeBall4CardContainer : styles.lightActiveBall4CardContainer)
+                : (theme.isDark ? styles.inactiveCardContainer : styles.lightInactiveCardContainer),
             ]}
             onPress={() => onSelectGameType('4ball')}
             activeOpacity={0.85}
@@ -171,34 +173,34 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
               resizeMode="cover"
             />
             <BlurView
-              intensity={gameType === '4ball' ? (theme.isDark ? 65 : 45) : (theme.isDark ? 30 : 20)}
+              intensity={gameType === '4ball' ? (theme.isDark ? 65 : 85) : (theme.isDark ? 30 : 60)}
               tint={theme.isDark ? 'dark' : 'light'}
               style={[
                 styles.cardOverlay,
-                gameType === '4ball' && styles.activeBall4Overlay,
+                gameType === '4ball' && (theme.isDark ? styles.activeBall4Overlay : styles.lightActiveBall4Overlay),
                 !theme.isDark && styles.lightCardOverlay,
               ]}
             >
-              <View style={styles.hudReticleTopRight} />
+              <View style={[styles.hudReticleTopRight, !theme.isDark && { borderColor: 'rgba(225, 29, 72, 0.4)' }]} />
 
               {gameType === '4ball' && (
-                <View style={styles.ball4CheckBadge}>
-                  <Text style={styles.ball4CheckText}>● ACTIVE</Text>
+                <View style={[styles.ball4CheckBadge, !theme.isDark && styles.lightBall4CheckBadge]}>
+                  <Text style={[styles.ball4CheckText, !theme.isDark && { color: '#E11D48' }]}>● ACTIVE</Text>
                 </View>
               )}
 
-              <Text style={[styles.backWatermark4, !theme.isDark && { color: 'rgba(236, 72, 153, 0.12)' }]}>4</Text>
+              <Text style={[styles.backWatermark4, !theme.isDark && { color: 'rgba(225, 29, 72, 0.08)' }]}>4</Text>
 
               <View style={styles.cardTextCol}>
                 <View style={styles.tagRow}>
-                  <View style={[styles.ball4Tag, gameType === '4ball' && styles.activeBall4Tag]}>
-                    <Text style={styles.ball4TagText}>4-BALL</Text>
+                  <View style={[styles.ball4Tag, gameType === '4ball' && styles.activeBall4Tag, !theme.isDark && styles.lightBall4Tag]}>
+                    <Text style={[styles.ball4TagText, !theme.isDark && { color: gameType === '4ball' ? '#E11D48' : '#475569' }]}>4-BALL</Text>
                   </View>
                 </View>
-                <Text style={[styles.ball4Title, gameType === '4ball' && styles.activeBall4Title, !theme.isDark && { color: theme.textPrimary }]}>
+                <Text style={[styles.ball4Title, gameType === '4ball' && styles.activeBall4Title, !theme.isDark && (gameType === '4ball' ? styles.lightActiveBall4Title : styles.lightInactiveTitle)]}>
                   4구 경기
                 </Text>
-                <Text style={[styles.ball4Desc, gameType === '4ball' && styles.activeBall4Desc, !theme.isDark && { color: theme.textSecondary }]}>
+                <Text style={[styles.ball4Desc, gameType === '4ball' && styles.activeBall4Desc, !theme.isDark && (gameType === '4ball' ? styles.lightActiveDesc : styles.lightInactiveDesc)]}>
                   4구 친목/클럽 경기 (기본 핸디 100점)
                 </Text>
               </View>
@@ -969,5 +971,75 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       borderColor: '#0284C7',
       shadowColor: '#0284C7',
       shadowOpacity: 0.35,
+    },
+
+    /* 테마 2 전용 경기 선택(3구/4구) 명확한 화이트 스타일 */
+    lightActiveBall3CardContainer: {
+      borderWidth: line(2.5),
+      borderColor: '#0284C7',
+      shadowColor: '#0284C7',
+      shadowOpacity: 0.4,
+      shadowRadius: s(16),
+      elevation: 8,
+      opacity: 1.0,
+    },
+    lightActiveBall4CardContainer: {
+      borderWidth: line(2.5),
+      borderColor: '#E11D48',
+      shadowColor: '#E11D48',
+      shadowOpacity: 0.4,
+      shadowRadius: s(16),
+      elevation: 8,
+      opacity: 1.0,
+    },
+    lightInactiveCardContainer: {
+      borderWidth: line(1.5),
+      borderColor: 'rgba(203, 213, 225, 0.8)',
+      opacity: 0.85,
+    },
+    lightActiveBall3Overlay: {
+      backgroundColor: 'rgba(238, 242, 255, 0.95)',
+    },
+    lightActiveBall4Overlay: {
+      backgroundColor: 'rgba(255, 241, 242, 0.95)',
+    },
+    lightBall3CheckBadge: {
+      backgroundColor: 'rgba(224, 242, 254, 0.95)',
+      borderColor: '#0284C7',
+    },
+    lightBall4CheckBadge: {
+      backgroundColor: 'rgba(255, 228, 230, 0.95)',
+      borderColor: '#E11D48',
+    },
+    lightBall3Tag: {
+      backgroundColor: 'rgba(241, 245, 249, 0.9)',
+      borderColor: 'rgba(203, 213, 225, 0.8)',
+    },
+    lightBall4Tag: {
+      backgroundColor: 'rgba(241, 245, 249, 0.9)',
+      borderColor: 'rgba(203, 213, 225, 0.8)',
+    },
+    lightActiveBall3Title: {
+      color: '#0284C7',
+      fontSize: f(36),
+      fontWeight: '900',
+    },
+    lightActiveBall4Title: {
+      color: '#E11D48',
+      fontSize: f(36),
+      fontWeight: '900',
+    },
+    lightInactiveTitle: {
+      color: '#334155',
+      fontSize: f(34),
+      fontWeight: '900',
+    },
+    lightActiveDesc: {
+      color: '#1E293B',
+      fontWeight: '700',
+    },
+    lightInactiveDesc: {
+      color: '#64748B',
+      fontWeight: '600',
     },
   });
