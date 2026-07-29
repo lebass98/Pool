@@ -1,5 +1,4 @@
-import { Image } from 'expo-image';
-import { Animated, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import classes from './animated-icon.module.css';
 
@@ -10,16 +9,8 @@ export function AnimatedSplashOverlay() {
 export function AnimatedIcon() {
   return (
     <View style={styles.iconContainer}>
-      <View style={styles.glow}>
-        <Image style={styles.glow} source={require('@/assets/images/logo-glow.png')} />
-      </View>
-
       <View style={styles.background}>
         <div className={classes.expoLogoBackground} />
-      </View>
-
-      <View style={styles.imageContainer}>
-        <Image style={styles.image} source={require('@/assets/images/expo-logo.png')} />
       </View>
     </View>
   );

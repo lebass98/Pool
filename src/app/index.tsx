@@ -25,9 +25,6 @@ import {
 import { useBilliardsTimer } from '@/hooks/useBilliardsTimer';
 import { useScoreboard } from '@/hooks/useScoreboard';
 
-const darkBgImage = require('@/assets/images/billiards_dark_bg.png');
-const lightBgImage = require('@/assets/images/billiards_light_bg.png');
-
 export default function BilliardsScoreboardScreen() {
   const [tableNumber, setTableNumber] = useState('1번 테이블');
   const [themeMode, setThemeMode] = useState<ThemeMode>('theme1');
@@ -44,8 +41,6 @@ export default function BilliardsScoreboardScreen() {
       : themeMode === 'theme2'
         ? theme2Light
         : theme3Neon;
-
-  const currentBgImage = themeMode === 'theme2' ? lightBgImage : darkBgImage;
 
   const handleToggleTheme = () => {
     setThemeMode((prev) => {
@@ -162,31 +157,20 @@ export default function BilliardsScoreboardScreen() {
   const isMultiPlayerRule = players.length >= 3;
 
   return (
-    <ImageBackground
-      source={currentBgImage}
-      style={styles.backgroundImage}
-      resizeMode="cover"
+    <View
+      style={[
+        styles.overlayBackground,
+        {
+          backgroundColor:
+            themeMode === 'theme3'
+              ? '#ECE9F8'
+              : theme.isDark
+                ? '#0B132B'
+                : '#F8FAFC',
+        },
+      ]}
     >
-      {/* 서리 낀 고품질 BlurView & 반투명 가림막 */}
-      <BlurView
-        intensity={theme.isDark ? 45 : 35}
-        tint={theme.isDark ? 'dark' : 'light'}
-        style={styles.blurOverlay}
-      >
-        <View
-          style={[
-            styles.overlayBackground,
-            {
-              backgroundColor:
-                themeMode === 'theme3'
-                  ? '#ECE9F8'
-                  : theme.isDark
-                    ? 'rgba(8, 12, 20, 0.55)'
-                    : 'rgba(248, 250, 252, 0.95)',
-            },
-          ]}
-        >
-          <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
+      <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
             {!isGameStarted ? (
               /* 첫 화면 (Start Landing Screen) */
               <StartLandingScreen
@@ -648,9 +632,7 @@ export default function BilliardsScoreboardScreen() {
               </View>
             </Modal>
           </SafeAreaView>
-        </View>
-      </BlurView>
-    </ImageBackground>
+    </View>
   );
 }
 

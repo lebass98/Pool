@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
 import {
-  Image,
-  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
@@ -12,9 +10,6 @@ import { BlurView } from 'expo-blur';
 import { ScaleFn, useScale } from '@/constants/layout';
 import { ThemeColors } from '@/constants/themeColors';
 import { GameType, Player, RegisteredPlayer } from '@/types/scoreboard.types';
-
-const ball3CardBgImage = require('../../../assets/images/billiards_3ball_bg.png');
-const ball4CardBgImage = require('../../../assets/images/billiards_4ball_bg.png');
 
 interface StartLandingScreenProps {
   theme: ThemeColors;
@@ -72,7 +67,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
           activeOpacity={0.8}
         >
           <Text style={[styles.topRightThemeBtnText, !theme.isDark && { color: theme.textAccent }]}>
-            🎨 {theme.themeName}
+            {theme.themeName}
           </Text>
         </TouchableOpacity>
       </View>
@@ -269,7 +264,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             activeOpacity={0.8}
           >
             <Text style={[styles.settingsChipText, !theme.isDark && { color: theme.textPrimary }]}>
-              ⚙ 선수 관리 및 설정
+              선수 관리 및 설정
             </Text>
           </TouchableOpacity>
         </View>

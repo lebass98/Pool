@@ -87,7 +87,7 @@ export const ThemeSelectionModal: React.FC<ThemeSelectionModalProps> = ({
           {/* Header */}
           <View style={styles.headerRow}>
             <Text style={[styles.modalTitle, { color: theme.textPrimary }]}>
-              🎨 테마 선택 (Theme Select)
+              테마 선택 (Theme Select)
             </Text>
             <TouchableOpacity onPress={onClose} style={styles.closeBtn}>
               <Text style={[styles.closeBtnText, { color: theme.textSecondary }]}>
