@@ -126,6 +126,16 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                   <View style={[styles.ball3Tag, gameType === '3ball' && styles.activeBall3Tag, !theme.isDark && styles.lightBall3Tag]}>
                     <Text style={[styles.ball3TagText, !theme.isDark && { color: gameType === '3ball' ? '#0284C7' : '#475569' }]}>3-CUSHION</Text>
                   </View>
+                  {/* 정통 3구 공 3개 그래픽 UI */}
+                  <View style={styles.ballGraphicRow}>
+                    <View style={[styles.billiardBallDot, { backgroundColor: '#FFFFFF' }]}>
+                      <View style={styles.cueRedDot} />
+                    </View>
+                    <View style={[styles.billiardBallDot, { backgroundColor: '#FFD700' }]}>
+                      <View style={styles.cueRedDot} />
+                    </View>
+                    <View style={[styles.billiardBallDot, { backgroundColor: '#DC2626' }]} />
+                  </View>
                 </View>
                 <Text style={[styles.ball3Title, gameType === '3ball' && styles.activeBall3Title, !theme.isDark && (gameType === '3ball' ? styles.lightActiveBall3Title : styles.lightInactiveTitle)]}>
                   3구 경기
@@ -176,6 +186,17 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                 <View style={styles.tagRow}>
                   <View style={[styles.ball4Tag, gameType === '4ball' && styles.activeBall4Tag, !theme.isDark && styles.lightBall4Tag]}>
                     <Text style={[styles.ball4TagText, !theme.isDark && { color: gameType === '4ball' ? '#E11D48' : '#475569' }]}>4-BALL</Text>
+                  </View>
+                  {/* 정통 4구 공 4개 그래픽 UI (흰공, 노란공, 빨간공 2개) */}
+                  <View style={styles.ballGraphicRow}>
+                    <View style={[styles.billiardBallDot, { backgroundColor: '#FFFFFF' }]}>
+                      <View style={styles.cueRedDot} />
+                    </View>
+                    <View style={[styles.billiardBallDot, { backgroundColor: '#FFD700' }]}>
+                      <View style={styles.cueRedDot} />
+                    </View>
+                    <View style={[styles.billiardBallDot, { backgroundColor: '#DC2626' }]} />
+                    <View style={[styles.billiardBallDot, { backgroundColor: '#DC2626' }]} />
                   </View>
                 </View>
                 <Text style={[styles.ball4Title, gameType === '4ball' && styles.activeBall4Title, !theme.isDark && (gameType === '4ball' ? styles.lightActiveBall4Title : styles.lightInactiveTitle)]}>
@@ -601,7 +622,32 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     tagRow: {
       flexDirection: 'row',
+      alignItems: 'center',
+      gap: s(10),
       marginBottom: s(8),
+    },
+    ballGraphicRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: s(6),
+    },
+    billiardBallDot: {
+      width: s(16),
+      height: s(16),
+      borderRadius: s(8),
+      alignItems: 'center',
+      justifyContent: 'center',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
+      elevation: 3,
+    },
+    cueRedDot: {
+      width: s(4),
+      height: s(4),
+      borderRadius: s(2),
+      backgroundColor: '#DC2626',
     },
     ball3Tag: {
       backgroundColor: 'rgba(255, 255, 255, 0.1)',
