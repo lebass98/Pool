@@ -182,7 +182,7 @@ export default function BilliardsScoreboardScreen() {
                   ? 'rgba(15, 5, 29, 0.65)'
                   : theme.isDark
                     ? 'rgba(8, 12, 20, 0.55)'
-                    : 'rgba(255, 255, 255, 0.35)',
+                    : 'rgba(248, 250, 252, 0.95)',
             },
           ]}
         >

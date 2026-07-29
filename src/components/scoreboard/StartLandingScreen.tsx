@@ -905,33 +905,35 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
 
     /* 테마 2 (라이트 모드 전용 화이트 아크릴 스타일) */
     lightHeaderBlurGlass: {
-      borderColor: 'rgba(255, 255, 255, 0.9)',
+      borderColor: 'rgba(203, 213, 225, 0.9)',
       shadowColor: '#64748B',
-      shadowOpacity: 0.15,
+      shadowOpacity: 0.1,
     },
     lightHeaderBox: {
-      backgroundColor: 'rgba(255, 255, 255, 0.65)',
+      backgroundColor: '#FFFFFF',
     },
     lightTopRightThemeBtn: {
-      backgroundColor: 'rgba(2, 132, 199, 0.08)',
-      borderColor: 'rgba(2, 132, 199, 0.25)',
+      backgroundColor: '#F1F5F9',
+      borderColor: '#0284C7',
+      borderWidth: line(1.5),
     },
     lightTableBadge: {
-      backgroundColor: 'rgba(255, 255, 255, 0.8)',
-      borderColor: 'rgba(203, 213, 225, 0.8)',
+      backgroundColor: '#F1F5F9',
+      borderColor: '#CBD5E1',
     },
     lightGameTypeCardContainer: {
-      borderColor: 'rgba(255, 255, 255, 0.9)',
+      borderColor: '#CBD5E1',
     },
     lightCardOverlay: {
-      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+      backgroundColor: '#FFFFFF',
     },
     lightCountPillsGlass: {
-      borderColor: 'rgba(255, 255, 255, 0.9)',
+      borderColor: '#CBD5E1',
+      backgroundColor: '#FFFFFF',
     },
     lightCountChip: {
-      backgroundColor: 'rgba(255, 255, 255, 0.6)',
-      borderColor: 'rgba(203, 213, 225, 0.7)',
+      backgroundColor: '#F1F5F9',
+      borderColor: '#CBD5E1',
     },
     lightActiveCountChip: {
       backgroundColor: '#0284C7',
@@ -942,37 +944,38 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       fontWeight: '900',
     },
     lightSettingsChip: {
-      backgroundColor: 'rgba(255, 255, 255, 0.85)',
-      borderColor: 'rgba(203, 213, 225, 0.8)',
+      backgroundColor: '#F1F5F9',
+      borderColor: '#0284C7',
+      borderWidth: line(1.5),
     },
     lightPlayerGlassBlur: {
-      borderColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#CBD5E1',
     },
     lightPlayerCardContent: {
-      backgroundColor: 'rgba(255, 255, 255, 0.75)',
+      backgroundColor: '#FFFFFF',
     },
     lightOrderBadge: {
-      backgroundColor: 'rgba(2, 132, 199, 0.12)',
+      backgroundColor: '#E0F2FE',
       borderColor: '#0284C7',
     },
     lightTargetScoreBox: {
-      backgroundColor: 'rgba(241, 245, 249, 0.9)',
-      borderColor: 'rgba(203, 213, 225, 0.8)',
+      backgroundColor: '#F8FAFC',
+      borderColor: '#CBD5E1',
     },
     lightMinusBtn: {
-      backgroundColor: 'rgba(254, 226, 226, 0.9)',
-      borderColor: '#F87171',
+      backgroundColor: '#FEE2E2',
+      borderColor: '#EF4444',
     },
     lightPlusBtn: {
-      backgroundColor: 'rgba(209, 250, 229, 0.9)',
-      borderColor: '#34D399',
+      backgroundColor: '#D1FAE5',
+      borderColor: '#10B981',
     },
     lightStartGameBtn: {
       borderColor: '#0284C7',
       borderWidth: line(2),
       shadowColor: '#0284C7',
       shadowOffset: { width: 0, height: s(6) },
-      shadowOpacity: 0.45,
+      shadowOpacity: 0.3,
       shadowRadius: s(16),
       elevation: 10,
     },
@@ -985,9 +988,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       fontSize: f(22),
       fontWeight: '900',
       letterSpacing: s(1.5),
-      textShadowColor: 'rgba(0, 0, 0, 0.25)',
-      textShadowOffset: { width: 0, height: 1 },
-      textShadowRadius: s(4),
     },
 
     /* 테마 2 전용 경기 선택(3구/4구) 명확한 화이트 스타일 */
@@ -996,7 +996,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       borderColor: '#0284C7',
       shadowColor: '#0284C7',
       shadowOffset: { width: 0, height: s(8) },
-      shadowOpacity: 0.5,
+      shadowOpacity: 0.4,
       shadowRadius: s(20),
       elevation: 12,
       opacity: 1.0,
@@ -1006,15 +1006,15 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       borderColor: '#E11D48',
       shadowColor: '#E11D48',
       shadowOffset: { width: 0, height: s(8) },
-      shadowOpacity: 0.5,
+      shadowOpacity: 0.4,
       shadowRadius: s(20),
       elevation: 12,
       opacity: 1.0,
     },
     lightInactiveCardContainer: {
-      borderWidth: line(1.5),
-      borderColor: 'rgba(203, 213, 225, 0.8)',
-      opacity: 0.7,
+      borderWidth: line(2),
+      borderColor: '#CBD5E1',
+      opacity: 0.85,
     },
     lightActiveBall3Overlay: {
       backgroundColor: '#0284C7',
@@ -1023,20 +1023,20 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       backgroundColor: '#E11D48',
     },
     lightBall3CheckBadge: {
-      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      backgroundColor: '#FFFFFF',
       borderColor: '#FFFFFF',
     },
     lightBall4CheckBadge: {
-      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      backgroundColor: '#FFFFFF',
       borderColor: '#FFFFFF',
     },
     lightBall3Tag: {
-      backgroundColor: 'rgba(241, 245, 249, 0.9)',
-      borderColor: 'rgba(203, 213, 225, 0.8)',
+      backgroundColor: '#F1F5F9',
+      borderColor: '#CBD5E1',
     },
     lightBall4Tag: {
-      backgroundColor: 'rgba(241, 245, 249, 0.9)',
-      borderColor: 'rgba(203, 213, 225, 0.8)',
+      backgroundColor: '#F1F5F9',
+      borderColor: '#CBD5E1',
     },
     lightActiveBall3Title: {
       color: '#FFFFFF',
@@ -1049,16 +1049,16 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       fontWeight: '900',
     },
     lightInactiveTitle: {
-      color: '#334155',
+      color: '#0F172A',
       fontSize: f(34),
       fontWeight: '900',
     },
     lightActiveDesc: {
-      color: '#F1F5F9',
+      color: '#FFFFFF',
       fontWeight: '700',
     },
     lightInactiveDesc: {
-      color: '#64748B',
-      fontWeight: '600',
+      color: '#475569',
+      fontWeight: '700',
     },
   });
