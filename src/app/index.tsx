@@ -307,10 +307,10 @@ export default function BilliardsScoreboardScreen() {
                       style={[
                         styles.pauseCard,
                         {
-                          backgroundColor: isDarkMode
+                          backgroundColor: theme.isDark
                             ? 'rgba(15, 23, 42, 0.92)'
                             : 'rgba(255, 255, 255, 0.95)',
-                          borderColor: isDarkMode
+                          borderColor: theme.isDark
                             ? 'rgba(255, 204, 128, 0.4)'
                             : 'rgba(0, 0, 0, 0.15)',
                         },
