@@ -93,22 +93,6 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             onPress={() => onSelectGameType('3ball')}
             activeOpacity={0.85}
           >
-            {/* 정통 3구 당구대 6:3 배경 & 공 3개 그래픽 */}
-            <View style={[StyleSheet.absoluteFill, styles.billiardsFeltBg]}>
-              <View style={styles.heroBallContainer3}>
-                {/* 흰색 수구 (점) */}
-                <View style={[styles.heroBall, styles.whiteCueBall]}>
-                  <View style={styles.heroCueRedDot} />
-                </View>
-                {/* 노란색 수구 (점) */}
-                <View style={[styles.heroBall, styles.yellowCueBall]}>
-                  <View style={styles.heroCueRedDot} />
-                </View>
-                {/* 빨간색 적구 */}
-                <View style={[styles.heroBall, styles.redObjectBall1]} />
-              </View>
-            </View>
-
             <View
               style={[
                 styles.cardOverlay,
@@ -153,28 +137,6 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             onPress={() => onSelectGameType('4ball')}
             activeOpacity={0.85}
           >
-            {/* 정통 4구 당구대 6:3 배경 & 완전히 동일한 빨간 공 2개 + 흰공점 + 노란공점 */}
-            <View style={[StyleSheet.absoluteFill, styles.billiardsFeltBg]}>
-              <View style={styles.heroBallContainer4}>
-                <View style={styles.heroBallRowTop}>
-                  {/* 흰색 수구 (점) */}
-                  <View style={[styles.heroBall, styles.whiteCueBall]}>
-                    <View style={styles.heroCueRedDot} />
-                  </View>
-                  {/* 노란색 수구 (점) */}
-                  <View style={[styles.heroBall, styles.yellowCueBall]}>
-                    <View style={styles.heroCueRedDot} />
-                  </View>
-                </View>
-                <View style={styles.heroBallRowBottom}>
-                  {/* 완전 동일한 빨간 적구 1 */}
-                  <View style={[styles.heroBall, styles.redObjectBall1]} />
-                  {/* 완전 동일한 빨간 적구 2 */}
-                  <View style={[styles.heroBall, styles.redObjectBall1]} />
-                </View>
-              </View>
-            </View>
-
             <View
               style={[
                 styles.cardOverlay,
