@@ -20,7 +20,7 @@ const createPlayer = (
   id,
   name,
   targetScore,
-  currentScore: 0,
+  currentScore: targetScore,
   currentInningScore: 0,
   highRun: 0,
   finishRank: null,
@@ -77,6 +77,7 @@ export const useScoreboard = () => {
       prev.map((p) => ({
         ...p,
         targetScore: defaultTarget,
+        currentScore: defaultTarget,
       }))
     );
   };
@@ -87,7 +88,7 @@ export const useScoreboard = () => {
       prev.map((p, idx) => {
         if (idx !== playerIndex) return p;
         const newTarget = Math.max(1, p.targetScore + delta);
-        return { ...p, targetScore: newTarget };
+        return { ...p, targetScore: newTarget, currentScore: newTarget };
       })
     );
   };
@@ -153,23 +154,22 @@ export const useScoreboard = () => {
 
   /**
    * 점수 변동 후 달성 순위 / 종료 여부를 다시 계산한다.
-   *
-   * - 2인 경기: 한 명이 목표에 도달하면 즉시 종료
-   * - 3인 이상: 목표에 도달한 선수는 턴에서 빠지고, 마지막 한 명(꼴지)이
-   *   남을 때까지 진행 (N-1명이 달성하면 종료)
+   * (목표 점수에서 차감되는 방식: currentScore가 0 이하가 되면 승리)
    */
   const applyScoreChange = (playerIndex: number, delta: number) => {
     const prevPlayers = players;
     const target = prevPlayers[playerIndex];
     if (!target) return;
 
-    const newScore = Math.max(0, target.currentScore + delta);
+    // +1 버튼 룰: 차감(score - 1), -1 버튼 룰: 복구(score + 1)
+    // delta가 +1이면 점수가 1 감소(득점), -1이면 점수가 1 증가(실수/취소)
+    const newScore = Math.max(0, target.currentScore - delta);
     const newInningScore = Math.max(0, target.currentInningScore + delta);
 
-    const reachedTarget = newScore >= target.targetScore;
+    const reachedTarget = newScore === 0;
     const alreadyFinished = target.finishRank !== null;
 
-    // 순위 목록 갱신 (달성 시 추가, 점수 하락으로 미달 시 제거)
+    // 순위 목록 갱신 (0점 도달 시 승리 추가, 점수 상승으로 미달 시 제거)
     let rankings = [...gameState.rankings];
     if (reachedTarget && !alreadyFinished) {
       rankings = [...rankings, target.id];
@@ -244,14 +244,14 @@ export const useScoreboard = () => {
 
   // 수동 경기 종료
   const finishGame = () => {
-    // 이미 목표를 달성한 순위를 우선하고, 나머지는 현재 점수 기준으로 정렬
+    // 이미 목표를 달성한 순위를 우선하고, 나머지는 남아있는 점수가 적은 순(0에 가까운 순)으로 정렬
     const ranked = [...players].sort((a, b) => {
       if (a.finishRank !== null && b.finishRank !== null) {
         return a.finishRank - b.finishRank;
       }
       if (a.finishRank !== null) return -1;
       if (b.finishRank !== null) return 1;
-      return b.currentScore - a.currentScore;
+      return a.currentScore - b.currentScore;
     });
 
     setGameState((prev) => ({
@@ -300,7 +300,7 @@ export const useScoreboard = () => {
     setPlayers((prev) =>
       prev.map((p) => ({
         ...p,
-        currentScore: 0,
+        currentScore: p.targetScore,
         currentInningScore: 0,
         highRun: 0,
         finishRank: null,

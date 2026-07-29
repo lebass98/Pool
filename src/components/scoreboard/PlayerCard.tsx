@@ -26,10 +26,10 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
   const { s, f, line, isSmallHeight } = useScale();
   const styles = useMemo(() => createStyles(s, f, line), [s, f, line]);
 
-  const remainingScore = Math.max(0, player.targetScore - player.currentScore);
+  const scoredPoints = Math.max(0, player.targetScore - player.currentScore);
   const average =
-    player.currentScore > 0 && inning > 0
-      ? (player.currentScore / inning).toFixed(2)
+    scoredPoints > 0 && inning > 0
+      ? (scoredPoints / inning).toFixed(2)
       : '0.00';
   const isFinishedPlayer = player.finishRank !== null;
   const isActiveTurn = isCurrentTurn && !isFinishedPlayer;
@@ -85,7 +85,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
 
           {isFinishedPlayer ? (
             <View style={styles.rankBadgeInline}>
-              <Text style={styles.rankBadgeText}>{player.finishRank}등 · 종료</Text>
+              <Text style={styles.rankBadgeText}>{player.finishRank}등 · 승리</Text>
             </View>
           ) : (
             isCurrentTurn && (
@@ -99,27 +99,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
         <View style={styles.headerRightBadges}>
           <View style={[styles.targetBadge, { backgroundColor: theme.badgeBg }]}>
             <Text style={[styles.targetText, { color: theme.textSecondary }]}>
-              목표 {player.targetScore}점
-            </Text>
-          </View>
-
-          <View
-            style={[
-              styles.remainingBadge,
-              {
-                backgroundColor: isFinishedPlayer
-                  ? (theme.isDark ? 'rgba(255, 213, 79, 0.25)' : '#FEF3C7')
-                  : (theme.isDark ? 'rgba(3, 218, 198, 0.25)' : '#E0F2FE'),
-              },
-            ]}
-          >
-            <Text
-              style={[
-                styles.remainingText,
-                { color: isFinishedPlayer ? (theme.isDark ? '#FFD54F' : '#B45309') : (theme.isDark ? '#03DAC6' : '#0369A1') },
-              ]}
-            >
-              {isFinishedPlayer ? '종료' : `남은 점수 ${remainingScore}점`}
+              시작 {player.targetScore}점
             </Text>
           </View>
         </View>
