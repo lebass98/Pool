@@ -87,16 +87,6 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
         </View>
         <View style={styles.gameTypeRow}>
           {/* 3구 경기 카드 */}
-          <TouchableOpacity
-            style={[
-              styles.gameTypeCardContainer,
-              gameType === '3ball'
-                ? (theme.isDark ? styles.activeBall3CardContainer : styles.lightActiveBall3CardContainer)
-                : (theme.isDark ? styles.inactiveCardContainer : styles.lightInactiveCardContainer),
-            ]}
-            onPress={() => onSelectGameType('3ball')}
-            activeOpacity={0.85}
-          >
           {/* 3구 경기 카드 */}
           <TouchableOpacity
             style={[
