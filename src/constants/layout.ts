@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 import { useWindowDimensions } from 'react-native';
 
 /**
- * 디자인 기준 해상도 (가로 모드 FHD)
- * 모든 스타일 수치는 1920 x 1080 화면에서의 픽셀값으로 작성하고,
+ * 디자인 기준 해상도 (가로 모드 HD - 시원한 대형 텍스트 & 태블릿 최적화 기준)
+ * 모든 스타일 수치는 1280 x 720 화면에서의 픽셀값으로 작성하고,
  * 실제 화면 크기에 맞춰 스케일링한다.
  */
-export const BASE_WIDTH = 1920;
-export const BASE_HEIGHT = 1080;
+export const BASE_WIDTH = 1280;
+export const BASE_HEIGHT = 720;
 
 /** 지나친 축소/확대를 막는 레이아웃 스케일 범위 */
 const MIN_SCALE = 0.34;

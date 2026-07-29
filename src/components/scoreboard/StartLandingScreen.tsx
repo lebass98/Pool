@@ -713,7 +713,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     },
     ball3Title: {
       fontFamily: 'PretendardGOV-ExtraBold',
-      fontSize: f(28),
+      fontSize: f(32),
       fontWeight: '900',
       color: '#94A3B8',
       marginBottom: s(2),
@@ -721,14 +721,14 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     activeBall3Title: {
       fontFamily: 'PretendardGOV-ExtraBold',
       color: '#FFFFFF',
-      fontSize: f(32),
+      fontSize: f(38),
       textShadowColor: 'rgba(0, 242, 254, 0.8)',
       textShadowOffset: { width: 0, height: 0 },
       textShadowRadius: s(6),
     },
     ball3Desc: {
       fontFamily: 'PretendardGOV-Bold',
-      fontSize: f(12),
+      fontSize: f(13),
       color: '#64748B',
       fontWeight: '600',
     },
@@ -737,7 +737,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     },
     ball4Title: {
       fontFamily: 'PretendardGOV-ExtraBold',
-      fontSize: f(28),
+      fontSize: f(32),
       fontWeight: '900',
       color: '#94A3B8',
       marginBottom: s(2),
@@ -745,7 +745,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     activeBall4Title: {
       fontFamily: 'PretendardGOV-ExtraBold',
       color: '#FFFFFF',
-      fontSize: f(32),
+      fontSize: f(38),
       textShadowColor: 'rgba(255, 42, 109, 0.8)',
       textShadowOffset: { width: 0, height: 0 },
       textShadowRadius: s(6),
