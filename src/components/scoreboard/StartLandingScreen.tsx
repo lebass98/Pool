@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import {
+  Image,
   ImageBackground,
   ScrollView,
   StyleSheet,
@@ -96,12 +97,13 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             onPress={() => onSelectGameType('3ball')}
             activeOpacity={0.85}
           >
-            <ImageBackground
-              source={ball3CardBgImage}
-              style={StyleSheet.absoluteFill}
-              imageStyle={styles.cardImageStyle}
-              resizeMode="contain"
-            />
+            <View style={StyleSheet.absoluteFill}>
+              <Image
+                source={ball3CardBgImage}
+                style={styles.cardImageStyle}
+                resizeMode="contain"
+              />
+            </View>
             <View
               style={[
                 styles.cardOverlay,
@@ -146,12 +148,13 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             onPress={() => onSelectGameType('4ball')}
             activeOpacity={0.85}
           >
-            <ImageBackground
-              source={ball4CardBgImage}
-              style={StyleSheet.absoluteFill}
-              imageStyle={styles.cardImageStyle}
-              resizeMode="contain"
-            />
+            <View style={StyleSheet.absoluteFill}>
+              <Image
+                source={ball4CardBgImage}
+                style={styles.cardImageStyle}
+                resizeMode="contain"
+              />
+            </View>
             <View
               style={[
                 styles.cardOverlay,
@@ -509,6 +512,8 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       opacity: 1.0,
     },
     cardImageStyle: {
+      width: '100%',
+      height: '100%',
       borderRadius: s(24),
     },
     ball3CardImageStyle: {
