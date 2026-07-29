@@ -120,9 +120,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
               imageStyle={styles.cardImageStyle}
               resizeMode="cover"
             />
-            <BlurView
-              intensity={gameType === '3ball' ? (theme.isDark ? 35 : 20) : (theme.isDark ? 15 : 10)}
-              tint={theme.isDark ? 'dark' : 'light'}
+            <View
               style={[
                 styles.cardOverlay,
                 gameType === '3ball' && (theme.isDark ? styles.activeBall3Overlay : styles.lightActiveBall3Overlay),
@@ -152,7 +150,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                   3쿠션 정통 경기 (기본 핸디 20점)
                 </Text>
               </View>
-            </BlurView>
+            </View>
           </TouchableOpacity>
 
           {/* 4구 경기 카드 */}
@@ -172,9 +170,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
               imageStyle={styles.cardImageStyle}
               resizeMode="cover"
             />
-            <BlurView
-              intensity={gameType === '4ball' ? (theme.isDark ? 35 : 20) : (theme.isDark ? 15 : 10)}
-              tint={theme.isDark ? 'dark' : 'light'}
+            <View
               style={[
                 styles.cardOverlay,
                 gameType === '4ball' && (theme.isDark ? styles.activeBall4Overlay : styles.lightActiveBall4Overlay),
@@ -204,7 +200,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                   4구 친목/클럽 경기 (기본 핸디 100점)
                 </Text>
               </View>
-            </BlurView>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -531,19 +527,19 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       borderRadius: s(24),
     },
     cardOverlay: {
-      paddingVertical: s(32),
+      paddingVertical: s(36),
       paddingHorizontal: s(28),
-      minHeight: s(190),
-      justifyContent: 'center',
+      minHeight: s(230),
+      justifyContent: 'flex-end',
       position: 'relative',
       overflow: 'hidden',
-      backgroundColor: 'rgba(15, 23, 42, 0.45)',
+      backgroundColor: 'rgba(0, 0, 0, 0.15)',
     },
     activeBall3Overlay: {
-      backgroundColor: '#0284C7',
+      backgroundColor: 'rgba(2, 132, 199, 0.4)',
     },
     activeBall4Overlay: {
-      backgroundColor: '#E11D48',
+      backgroundColor: 'rgba(225, 29, 72, 0.4)',
     },
     hudReticleTopRight: {
       position: 'absolute',
@@ -990,11 +986,14 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       borderColor: '#CBD5E1',
       opacity: 0.85,
     },
+    lightCardOverlay: {
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    },
     lightActiveBall3Overlay: {
-      backgroundColor: '#0284C7',
+      backgroundColor: 'rgba(2, 132, 199, 0.25)',
     },
     lightActiveBall4Overlay: {
-      backgroundColor: '#E11D48',
+      backgroundColor: 'rgba(225, 29, 72, 0.25)',
     },
     lightBall3CheckBadge: {
       backgroundColor: '#FFFFFF',
