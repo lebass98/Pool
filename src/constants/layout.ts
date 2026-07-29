@@ -19,10 +19,10 @@ const MAX_SCALE = 1.6;
  * 레이아웃이 0.67배로 줄 때 글자도 0.67배가 되면 태블릿에서 라벨이 읽기
  * 어려워진다. 작은 글자는 축소를 절반만 따라가게 해 가독성을 지킨다.
  */
-const SMALL_TEXT_FOLLOW = 0.55;
+const SMALL_TEXT_FOLLOW = 0.35;
 
 /** 축소 시 이 크기 아래로는 줄이지 않는다 (가독성 하한선) */
-const MIN_FONT_SIZE = 11;
+const MIN_FONT_SIZE = 13;
 
 /**
  * 완화를 적용할 폰트 크기 구간.

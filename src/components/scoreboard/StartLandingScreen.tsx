@@ -347,20 +347,20 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
           })}
         </View>
       </View>
+    </ScrollView>
 
-        {/* 5. 하단 Spatial Neon Blur Button */}
-        <View style={styles.footerBox}>
-          <TouchableOpacity
-            style={[styles.startGameBtn, !theme.isDark && styles.lightStartGameBtn]}
-            onPress={onStartGame}
-            activeOpacity={0.85}
-          >
-            <BlurView intensity={theme.isDark ? 50 : 0} tint={theme.isDark ? 'light' : 'light'} style={[styles.btnGlassInner, !theme.isDark && styles.lightBtnGlassInner]}>
-              <Text style={[styles.startGameBtnText, !theme.isDark && styles.lightStartGameBtnText]}>경기 시작</Text>
-            </BlurView>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+      {/* 5. 하단 고정 Spatial Neon Blur Button */}
+      <View style={styles.footerBox}>
+        <TouchableOpacity
+          style={[styles.startGameBtn, !theme.isDark && styles.lightStartGameBtn]}
+          onPress={onStartGame}
+          activeOpacity={0.85}
+        >
+          <BlurView intensity={theme.isDark ? 50 : 0} tint={theme.isDark ? 'light' : 'light'} style={[styles.btnGlassInner, !theme.isDark && styles.lightBtnGlassInner]}>
+            <Text style={[styles.startGameBtnText, !theme.isDark && styles.lightStartGameBtnText]}>경기 시작</Text>
+          </BlurView>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -869,10 +869,10 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     orderBadgeText: {
       color: '#00F2FE',
       fontWeight: '900',
-      fontSize: f(11),
+      fontSize: f(13),
     },
     playerName: {
-      fontSize: f(15),
+      fontSize: f(18),
       fontWeight: '900',
       color: '#FFFFFF',
       flex: 1,
@@ -889,8 +889,8 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       borderColor: 'rgba(255, 255, 255, 0.08)',
     },
     adjustBtn: {
-      width: s(28),
-      height: s(28),
+      width: s(32),
+      height: s(32),
       borderRadius: s(8),
       alignItems: 'center',
       justifyContent: 'center',
@@ -907,12 +907,12 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     },
     minusBtnText: {
       color: '#FF2A6D',
-      fontSize: f(16),
+      fontSize: f(18),
       fontWeight: '900',
     },
     plusBtnText: {
       color: '#00F2FE',
-      fontSize: f(16),
+      fontSize: f(18),
       fontWeight: '900',
     },
     targetScoreBox: {
@@ -921,19 +921,20 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       gap: s(4),
     },
     targetScoreNum: {
-      fontSize: f(18),
+      fontSize: f(22),
       fontWeight: '900',
       color: '#FFFFFF',
     },
     targetScoreUnit: {
-      fontSize: f(11),
+      fontSize: f(13),
       fontWeight: '800',
       color: '#64748B',
     },
     footerBox: {
       alignItems: 'center',
-      marginTop: s(8),
-      marginBottom: s(10),
+      marginTop: s(10),
+      marginBottom: s(4),
+      paddingTop: s(6),
     },
     startGameBtn: {
       width: '100%',
