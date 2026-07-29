@@ -470,6 +470,8 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       color: '#00F2FE',
       textShadowColor: 'rgba(0, 242, 254, 0.6)',
       textShadowOffset: { width: 0, height: 0 },
+      textShadowRadius: s(6),
+    },
     sectionContainer: {
       marginVertical: s(6),
     },
