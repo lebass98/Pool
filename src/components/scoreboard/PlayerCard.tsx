@@ -172,10 +172,10 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
           onPress={() => onAddScore(-1)}
           activeOpacity={0.7}
           accessibilityRole="button"
-          accessibilityLabel={`${player.name} 점수 복구 (+1)`}
+          accessibilityLabel={`${player.name} 감점 (+1)`}
         >
           <Text style={[styles.minusBtnText, { color: theme.textSecondary }]}>
-            +1 (취소)
+            감점 (+1)
           </Text>
         </TouchableOpacity>
 
