@@ -1,9 +1,13 @@
-# Expo HAS CHANGED
+# Expo 버전 규칙
 
-Read the exact versioned docs at https://docs.expo.dev/versions/v57.0.0/ before writing any code.
+코드 작성 전 Expo 버전 문서(SDK 54)를 명확히 확인하세요: https://docs.expo.dev/versions/v54.0.0/
 
-# Theme Modification Rules
+# 테마 작업 규칙 (Theme Modification Rules)
 
-1. When the user requests theme-specific work (e.g. "테마3 작업이야"), apply visual styling changes ONLY to that specific theme (e.g. `theme3Neon` in `themeColors.ts` or theme3-scoped logic) without affecting other themes' colors, positions, or component layouts.
-2. Only modify common component positions/layouts or update all themes (e.g., Theme 1, Theme 2, Theme 3) simultaneously when the user explicitly instructs to do so (e.g., "테마1, 테마2도 함께 적용해줘").
+1. 사용자가 특정 테마 작업을 명시할 때(예: "테마3 작업이야"), 해당 전용 테마(예: `themeColors.ts`의 `theme3Neon` 또는 테마3 전용 로직)에만 시각적 스타일 수정을 적용하고, 타 테마의 색상, 위치, 컴포넌트 레이아웃에는 영향을 주지 마세요.
+2. 사용자가 명시적으로 타 테마 함께 적용을 지시할 때만(예: "테마1, 테마2도 함께 적용해줘") 공통 컴포넌트 위치/레이아웃 수정 또는 모든 테마(테마1, 테마2, 테마3)를 동시에 업데이트하세요.
+
+# 깃 커밋 메시지 규칙 (Git Commit Rules)
+
+- 깃 커밋(Git Commit) 시 커밋 메시지 본문 및 요약은 반드시 **한글(한국어)**로 작성하여 커밋 및 푸시하세요.
 
