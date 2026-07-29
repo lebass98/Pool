@@ -349,8 +349,8 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             onPress={onStartGame}
             activeOpacity={0.85}
           >
-            <BlurView intensity={theme.isDark ? 50 : 80} tint={theme.isDark ? 'light' : 'default'} style={styles.btnGlassInner}>
-              <Text style={[styles.startGameBtnText, !theme.isDark && { color: '#FFFFFF' }]}>⚡ 경기 시작 (START MATCH)</Text>
+            <BlurView intensity={theme.isDark ? 50 : 0} tint={theme.isDark ? 'light' : 'light'} style={[styles.btnGlassInner, !theme.isDark && styles.lightBtnGlassInner]}>
+              <Text style={[styles.startGameBtnText, !theme.isDark && styles.lightStartGameBtnText]}>⚡ 경기 시작 (START MATCH)</Text>
             </BlurView>
           </TouchableOpacity>
         </View>
@@ -969,8 +969,25 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     lightStartGameBtn: {
       borderColor: '#0284C7',
+      borderWidth: line(2),
       shadowColor: '#0284C7',
-      shadowOpacity: 0.35,
+      shadowOffset: { width: 0, height: s(6) },
+      shadowOpacity: 0.45,
+      shadowRadius: s(16),
+      elevation: 10,
+    },
+    lightBtnGlassInner: {
+      backgroundColor: '#0284C7',
+      paddingVertical: s(22),
+    },
+    lightStartGameBtnText: {
+      color: '#FFFFFF',
+      fontSize: f(22),
+      fontWeight: '900',
+      letterSpacing: s(1.5),
+      textShadowColor: 'rgba(0, 0, 0, 0.25)',
+      textShadowOffset: { width: 0, height: 1 },
+      textShadowRadius: s(4),
     },
 
     /* 테마 2 전용 경기 선택(3구/4구) 명확한 화이트 스타일 */
