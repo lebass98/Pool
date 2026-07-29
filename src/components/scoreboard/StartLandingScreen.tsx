@@ -101,7 +101,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
               <Image
                 source={ball3CardBgImage}
                 style={styles.cardImageStyle}
-                resizeMode="contain"
+                resizeMode="cover"
               />
             </View>
             <View
@@ -152,7 +152,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
               <Image
                 source={ball4CardBgImage}
                 style={styles.cardImageStyle}
-                resizeMode="contain"
+                resizeMode="cover"
               />
             </View>
             <View
