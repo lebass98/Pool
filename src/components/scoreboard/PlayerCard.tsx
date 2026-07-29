@@ -3,7 +3,6 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScaleFn, useScale } from '@/constants/layout';
 import { ThemeColors } from '@/constants/themeColors';
 import { Player } from '@/types/scoreboard.types';
-import { FlipScoreCard } from './FlipScoreCard';
 
 interface PlayerCardProps {
   player: Player;
@@ -128,14 +127,19 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
         </View>
       </View>
 
-      {/* Main Score Display (두 자릿수 3D 플립 애니메이션 클락) */}
+      {/* Main Score Display (대형 득점 카운터 텍스트) */}
       <View style={styles.scoreContainer}>
-        <FlipScoreCard
-          score={player.currentScore}
-          textColor={theme.textPrimary}
-          isCompact={isCompact}
-          sizeMode={sizeMode}
-        />
+        <Text
+          style={[
+            styles.mainScoreText,
+            sizeMode === 'mini' && styles.miniScoreText,
+            sizeMode === 'compact' && styles.compactScoreText,
+            sizeMode === 'medium' && styles.mediumScoreText,
+            { color: theme.textPrimary },
+          ]}
+        >
+          {player.currentScore}
+        </Text>
       </View>
 
       {/* Sub Stats: 이번이닝 / 에버리지 / 하이런 */}
@@ -327,7 +331,24 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     scoreContainer: {
       alignItems: 'center',
+      justifyContent: 'center',
       marginVertical: s(6),
+    },
+    mainScoreText: {
+      fontFamily: 'PretendardGOV-ExtraBold',
+      fontSize: f(110),
+      fontWeight: '900',
+      letterSpacing: -s(2),
+      includeFontPadding: false,
+    },
+    mediumScoreText: {
+      fontSize: f(85),
+    },
+    compactScoreText: {
+      fontSize: f(65),
+    },
+    miniScoreText: {
+      fontSize: f(50),
     },
     statsRow: {
       flexDirection: 'row',

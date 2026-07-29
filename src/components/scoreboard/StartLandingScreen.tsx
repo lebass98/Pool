@@ -735,12 +735,14 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       zIndex: 10,
     },
     ball3Title: {
+      fontFamily: 'PretendardGOV-ExtraBold',
       fontSize: f(80),
       fontWeight: '900',
       color: '#94A3B8',
       marginBottom: s(6),
     },
     activeBall3Title: {
+      fontFamily: 'PretendardGOV-ExtraBold',
       color: '#FFFFFF',
       fontSize: f(92),
       textShadowColor: 'rgba(0, 242, 254, 0.8)',
@@ -748,6 +750,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       textShadowRadius: s(10),
     },
     ball3Desc: {
+      fontFamily: 'PretendardGOV-Bold',
       fontSize: f(16),
       color: '#64748B',
       fontWeight: '600',
@@ -756,12 +759,14 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       color: '#E2E8F0',
     },
     ball4Title: {
+      fontFamily: 'PretendardGOV-ExtraBold',
       fontSize: f(80),
       fontWeight: '900',
       color: '#94A3B8',
       marginBottom: s(6),
     },
     activeBall4Title: {
+      fontFamily: 'PretendardGOV-ExtraBold',
       color: '#FFFFFF',
       fontSize: f(92),
       textShadowColor: 'rgba(255, 42, 109, 0.8)',
