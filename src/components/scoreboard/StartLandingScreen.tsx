@@ -492,6 +492,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     gameTypeCardContainer: {
       flex: 1,
+      aspectRatio: 4 / 3,
       borderRadius: s(24),
       borderWidth: line(1.5),
       borderColor: 'rgba(255, 255, 255, 0.12)',
@@ -517,9 +518,9 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       top: 0,
     },
     cardOverlay: {
-      paddingVertical: s(36),
-      paddingHorizontal: s(28),
-      minHeight: s(270),
+      flex: 1,
+      paddingVertical: s(20),
+      paddingHorizontal: s(24),
       justifyContent: 'flex-end',
       position: 'relative',
       overflow: 'hidden',
