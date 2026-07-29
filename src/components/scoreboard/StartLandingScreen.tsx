@@ -492,7 +492,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     gameTypeCardContainer: {
       flex: 1,
-      aspectRatio: 4 / 3,
+      aspectRatio: 6 / 3,
       borderRadius: s(24),
       borderWidth: line(1.5),
       borderColor: 'rgba(255, 255, 255, 0.12)',
