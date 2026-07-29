@@ -97,13 +97,33 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             onPress={() => onSelectGameType('3ball')}
             activeOpacity={0.85}
           >
-            <View style={StyleSheet.absoluteFill}>
-              <Image
-                source={ball3CardBgImage}
-                style={styles.cardImageStyle}
-                resizeMode="cover"
-              />
+          {/* 3구 경기 카드 */}
+          <TouchableOpacity
+            style={[
+              styles.gameTypeCardContainer,
+              gameType === '3ball'
+                ? (theme.isDark ? styles.activeBall3CardContainer : styles.lightActiveBall3CardContainer)
+                : (theme.isDark ? styles.inactiveCardContainer : styles.lightInactiveCardContainer),
+            ]}
+            onPress={() => onSelectGameType('3ball')}
+            activeOpacity={0.85}
+          >
+            {/* 정통 3구 당구대 6:3 배경 & 공 3개 그래픽 */}
+            <View style={[StyleSheet.absoluteFill, styles.billiardsFeltBg]}>
+              <View style={styles.heroBallContainer3}>
+                {/* 흰색 수구 (점) */}
+                <View style={[styles.heroBall, styles.whiteCueBall]}>
+                  <View style={styles.heroCueRedDot} />
+                </View>
+                {/* 노란색 수구 (점) */}
+                <View style={[styles.heroBall, styles.yellowCueBall]}>
+                  <View style={styles.heroCueRedDot} />
+                </View>
+                {/* 빨간색 적구 */}
+                <View style={[styles.heroBall, styles.redObjectBall1]} />
+              </View>
             </View>
+
             <View
               style={[
                 styles.cardOverlay,
@@ -125,16 +145,6 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                 <View style={styles.tagRow}>
                   <View style={[styles.ball3Tag, gameType === '3ball' && styles.activeBall3Tag, !theme.isDark && styles.lightBall3Tag]}>
                     <Text style={[styles.ball3TagText, !theme.isDark && { color: gameType === '3ball' ? '#0284C7' : '#475569' }]}>3-CUSHION</Text>
-                  </View>
-                  {/* 정통 3구 공 3개 그래픽 UI */}
-                  <View style={styles.ballGraphicRow}>
-                    <View style={[styles.billiardBallDot, { backgroundColor: '#FFFFFF' }]}>
-                      <View style={styles.cueRedDot} />
-                    </View>
-                    <View style={[styles.billiardBallDot, { backgroundColor: '#FFD700' }]}>
-                      <View style={styles.cueRedDot} />
-                    </View>
-                    <View style={[styles.billiardBallDot, { backgroundColor: '#DC2626' }]} />
                   </View>
                 </View>
                 <Text style={[styles.ball3Title, gameType === '3ball' && styles.activeBall3Title, !theme.isDark && (gameType === '3ball' ? styles.lightActiveBall3Title : styles.lightInactiveTitle)]}>
@@ -158,13 +168,28 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             onPress={() => onSelectGameType('4ball')}
             activeOpacity={0.85}
           >
-            <View style={StyleSheet.absoluteFill}>
-              <Image
-                source={ball4CardBgImage}
-                style={styles.cardImageStyle}
-                resizeMode="cover"
-              />
+            {/* 정통 4구 당구대 6:3 배경 & 완전히 동일한 빨간 공 2개 + 흰공점 + 노란공점 */}
+            <View style={[StyleSheet.absoluteFill, styles.billiardsFeltBg]}>
+              <View style={styles.heroBallContainer4}>
+                <View style={styles.heroBallRowTop}>
+                  {/* 흰색 수구 (점) */}
+                  <View style={[styles.heroBall, styles.whiteCueBall]}>
+                    <View style={styles.heroCueRedDot} />
+                  </View>
+                  {/* 노란색 수구 (점) */}
+                  <View style={[styles.heroBall, styles.yellowCueBall]}>
+                    <View style={styles.heroCueRedDot} />
+                  </View>
+                </View>
+                <View style={styles.heroBallRowBottom}>
+                  {/* 완전 동일한 빨간 적구 1 */}
+                  <View style={[styles.heroBall, styles.redObjectBall1]} />
+                  {/* 완전 동일한 빨간 적구 2 */}
+                  <View style={[styles.heroBall, styles.redObjectBall1]} />
+                </View>
+              </View>
             </View>
+
             <View
               style={[
                 styles.cardOverlay,
@@ -186,17 +211,6 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                 <View style={styles.tagRow}>
                   <View style={[styles.ball4Tag, gameType === '4ball' && styles.activeBall4Tag, !theme.isDark && styles.lightBall4Tag]}>
                     <Text style={[styles.ball4TagText, !theme.isDark && { color: gameType === '4ball' ? '#E11D48' : '#475569' }]}>4-BALL</Text>
-                  </View>
-                  {/* 정통 4구 공 4개 그래픽 UI (흰공, 노란공, 빨간공 2개) */}
-                  <View style={styles.ballGraphicRow}>
-                    <View style={[styles.billiardBallDot, { backgroundColor: '#FFFFFF' }]}>
-                      <View style={styles.cueRedDot} />
-                    </View>
-                    <View style={[styles.billiardBallDot, { backgroundColor: '#FFD700' }]}>
-                      <View style={styles.cueRedDot} />
-                    </View>
-                    <View style={[styles.billiardBallDot, { backgroundColor: '#DC2626' }]} />
-                    <View style={[styles.billiardBallDot, { backgroundColor: '#DC2626' }]} />
                   </View>
                 </View>
                 <Text style={[styles.ball4Title, gameType === '4ball' && styles.activeBall4Title, !theme.isDark && (gameType === '4ball' ? styles.lightActiveBall4Title : styles.lightInactiveTitle)]}>
@@ -529,19 +543,61 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     activeBall3CardContainer: {
       opacity: 1.0,
     },
-    activeBall4CardContainer: {
-      opacity: 1.0,
+    billiardsFeltBg: {
+      backgroundColor: '#0F3826',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
-    cardImageStyle: {
-      width: '100%',
-      height: '100%',
-      borderRadius: s(24),
+    heroBallContainer3: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: s(16),
     },
-    ball3CardImageStyle: {
-      top: 0,
+    heroBallContainer4: {
+      alignItems: 'center',
+      gap: s(8),
     },
-    ball4CardImageStyle: {
-      top: 0,
+    heroBallRowTop: {
+      flexDirection: 'row',
+      gap: s(14),
+    },
+    heroBallRowBottom: {
+      flexDirection: 'row',
+      gap: s(14),
+    },
+    heroBall: {
+      width: s(52),
+      height: s(52),
+      borderRadius: s(26),
+      alignItems: 'center',
+      justifyContent: 'center',
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: s(6) },
+      shadowOpacity: 0.6,
+      shadowRadius: s(8),
+      elevation: 8,
+      position: 'relative',
+    },
+    whiteCueBall: {
+      backgroundColor: '#F8FAFC',
+      borderWidth: line(1),
+      borderColor: '#E2E8F0',
+    },
+    yellowCueBall: {
+      backgroundColor: '#FACC15',
+      borderWidth: line(1),
+      borderColor: '#EAB308',
+    },
+    redObjectBall1: {
+      backgroundColor: '#DC2626',
+      borderWidth: line(1),
+      borderColor: '#B91C1C',
+    },
+    heroCueRedDot: {
+      width: s(12),
+      height: s(12),
+      borderRadius: s(6),
+      backgroundColor: '#DC2626',
     },
     cardOverlay: {
       flex: 1,
