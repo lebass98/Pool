@@ -49,13 +49,8 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
         (isCompact || isSmallHeight) && styles.compactCard,
         {
           backgroundColor: isActiveTurn ? theme.cardActiveBg : theme.cardBg,
-          borderColor: isFinishedPlayer
-            ? '#FFD54F'
-            : isActiveTurn
-              ? theme.activeBorder
-              : theme.border,
+          borderColor: isFinishedPlayer ? '#FFD54F' : theme.border,
         },
-        isActiveTurn && styles.activeShadow,
         isFinishedPlayer && styles.finishedCard,
       ]}
     >
