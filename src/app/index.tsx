@@ -277,13 +277,29 @@ export default function BilliardsScoreboardScreen() {
                     })}
                   </View>
 
-                  {/* 인원 카드 정중앙 십자 교차점 한글 턴 넘기기 버튼 */}
+                  {/* 인원 카드 정중앙 희미한 원형 회전 턴 넘기기 버튼 */}
                   <TouchableOpacity
-                    style={styles.centerTurnBtn}
+                    style={[
+                      styles.centerTurnBtn,
+                      {
+                        backgroundColor: theme.isDark
+                          ? 'rgba(15, 23, 42, 0.45)'
+                          : 'rgba(255, 255, 255, 0.55)',
+                      },
+                    ]}
                     onPress={endTurn}
-                    activeOpacity={0.8}
+                    activeOpacity={0.7}
+                    accessibilityRole="button"
+                    accessibilityLabel="턴 넘기기"
                   >
-                    <Text style={styles.centerTurnText}>턴 넘기기</Text>
+                    <Text
+                      style={[
+                        styles.centerTurnIconText,
+                        { color: theme.isDark ? 'rgba(255, 255, 255, 0.85)' : 'rgba(15, 23, 42, 0.85)' },
+                      ]}
+                    >
+                      ↺
+                    </Text>
                   </TouchableOpacity>
                 </View>
 
@@ -781,26 +797,24 @@ const createStyles = (
       position: 'absolute',
       alignSelf: 'center',
       top: '50%',
-      transform: [{ translateY: -s(20) }],
-      paddingHorizontal: s(18),
-      paddingVertical: s(10),
-      borderRadius: s(20),
-      backgroundColor: '#0A84FF',
+      transform: [{ translateY: -s(25) }],
+      width: s(50),
+      height: s(50),
+      borderRadius: s(25),
       alignItems: 'center',
       justifyContent: 'center',
-      shadowColor: '#0A84FF',
-      shadowOffset: { width: 0, height: s(4) },
-      shadowOpacity: 0.5,
-      shadowRadius: s(10),
-      elevation: 12,
-      borderWidth: line(2),
-      borderColor: 'rgba(255, 255, 255, 0.5)',
       zIndex: 99,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: s(2) },
+      shadowOpacity: 0.2,
+      shadowRadius: s(6),
+      elevation: 6,
     },
-    centerTurnText: {
-      color: '#FFFFFF',
-      fontSize: f(15),
+    centerTurnIconText: {
+      fontSize: f(28),
       fontWeight: '900',
+      lineHeight: f(32),
+      textAlign: 'center',
     },
     confirmOverlay: {
       flex: 1,
