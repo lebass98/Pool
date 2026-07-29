@@ -11,3 +11,7 @@
 
 - 깃 커밋(Git Commit) 시 커밋 메시지 본문 및 요약은 반드시 **한글(한국어)**로 작성하여 커밋 및 푸시하세요.
 
+# 코드 검증 규칙 (Code Verification Rules)
+
+- 모든 코드 작성 및 수정 후에는 커밋/응답 전 반드시 Expo 검증 명령어(`npx expo export --platform web`)를 수행하여 문법(Syntax) 또는 모듈 파싱 오류가 없는지 사전 체킹하세요.
+
