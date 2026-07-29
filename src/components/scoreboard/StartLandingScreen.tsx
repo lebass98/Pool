@@ -63,30 +63,18 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
         contentContainerStyle={styles.scrollContentContainer}
         showsVerticalScrollIndicator={false}
       >
-        {/* 1. visionOS Spatial Glass Header */}
-      <BlurView intensity={theme.isDark ? 55 : 40} tint={theme.isDark ? 'dark' : 'light'} style={[styles.headerBlurGlass, !theme.isDark && styles.lightHeaderBlurGlass]}>
-        <View style={[styles.headerBox, !theme.isDark && styles.lightHeaderBox]}>
-          {/* 우측 상단 테마 모드 선택 버튼 */}
-          <TouchableOpacity
-            style={[styles.topRightThemeBtn, !theme.isDark && styles.lightTopRightThemeBtn]}
-            onPress={onToggleTheme}
-            activeOpacity={0.8}
-          >
-            <Text style={[styles.topRightThemeBtnText, !theme.isDark && { color: theme.textAccent }]}>
-              🎨 {theme.themeName}
-            </Text>
-          </TouchableOpacity>
-
-          <Text style={[styles.mainTitleText, !theme.isDark && { color: theme.textPrimary }]}>
-            당구 디지털 스코어보드
+      {/* 우측 상단 테마 모드 선택 버튼 */}
+      <View style={styles.topRightHeaderRow}>
+        <TouchableOpacity
+          style={[styles.topRightThemeBtn, !theme.isDark && styles.lightTopRightThemeBtn]}
+          onPress={onToggleTheme}
+          activeOpacity={0.8}
+        >
+          <Text style={[styles.topRightThemeBtnText, !theme.isDark && { color: theme.textAccent }]}>
+            🎨 {theme.themeName}
           </Text>
-          <View style={[styles.tableBadge, !theme.isDark && styles.lightTableBadge]}>
-            <Text style={[styles.tableBadgeText, !theme.isDark && { color: theme.textSecondary }]}>
-              ◈ {tableNumber} • {gameType === '3ball' ? '3구 (3-Cushion)' : '4구 (4-Ball)'} • {currentPlayerCount}인 Match
-            </Text>
-          </View>
-        </View>
-      </BlurView>
+        </TouchableOpacity>
+      </View>
 
       {/* 2. 당구 종목 선택 (visionOS Glass Panel & Spatial Glow Cards) */}
       <View style={styles.sectionContainer}>
@@ -413,13 +401,15 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       backgroundColor: 'rgba(15, 23, 42, 0.35)',
       position: 'relative',
     },
+    topRightHeaderRow: {
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      marginBottom: s(6),
+    },
     topRightThemeBtn: {
-      position: 'absolute',
-      top: s(16),
-      right: s(20),
       backgroundColor: 'rgba(255, 255, 255, 0.12)',
-      paddingHorizontal: s(14),
-      paddingVertical: s(7),
+      paddingHorizontal: s(16),
+      paddingVertical: s(8),
       borderRadius: s(14),
       borderWidth: line(1),
       borderColor: 'rgba(255, 255, 255, 0.25)',
