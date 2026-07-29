@@ -160,7 +160,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
         </View>
       </View>
 
-      {/* Control Buttons (+1 / -1) */}
+      {/* Control Buttons (득점: 남은점수 -1, 취소/실수: 남은점수 +1) */}
       <View style={styles.btnRow}>
         <TouchableOpacity
           style={[
@@ -172,10 +172,10 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
           onPress={() => onAddScore(-1)}
           activeOpacity={0.7}
           accessibilityRole="button"
-          accessibilityLabel={`${player.name} 1점 차감`}
+          accessibilityLabel={`${player.name} 점수 복구 (+1)`}
         >
           <Text style={[styles.minusBtnText, { color: theme.textSecondary }]}>
-            -1
+            +1 (취소)
           </Text>
         </TouchableOpacity>
 
@@ -190,10 +190,10 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
           activeOpacity={0.7}
           disabled={isFinishedPlayer}
           accessibilityRole="button"
-          accessibilityLabel={`${player.name} 1점 추가`}
+          accessibilityLabel={`${player.name} 득점 (-1)`}
           accessibilityState={{ disabled: isFinishedPlayer }}
         >
-          <Text style={styles.plusBtnText}>+1</Text>
+          <Text style={styles.plusBtnText}>득점 (-1)</Text>
         </TouchableOpacity>
       </View>
     </View>
