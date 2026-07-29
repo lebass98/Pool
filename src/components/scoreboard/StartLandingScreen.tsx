@@ -992,41 +992,43 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
 
     /* 테마 2 전용 경기 선택(3구/4구) 명확한 화이트 스타일 */
     lightActiveBall3CardContainer: {
-      borderWidth: line(2.5),
+      borderWidth: line(3.5),
       borderColor: '#0284C7',
       shadowColor: '#0284C7',
-      shadowOpacity: 0.4,
-      shadowRadius: s(16),
-      elevation: 8,
+      shadowOffset: { width: 0, height: s(8) },
+      shadowOpacity: 0.5,
+      shadowRadius: s(20),
+      elevation: 12,
       opacity: 1.0,
     },
     lightActiveBall4CardContainer: {
-      borderWidth: line(2.5),
+      borderWidth: line(3.5),
       borderColor: '#E11D48',
       shadowColor: '#E11D48',
-      shadowOpacity: 0.4,
-      shadowRadius: s(16),
-      elevation: 8,
+      shadowOffset: { width: 0, height: s(8) },
+      shadowOpacity: 0.5,
+      shadowRadius: s(20),
+      elevation: 12,
       opacity: 1.0,
     },
     lightInactiveCardContainer: {
       borderWidth: line(1.5),
       borderColor: 'rgba(203, 213, 225, 0.8)',
-      opacity: 0.85,
+      opacity: 0.7,
     },
     lightActiveBall3Overlay: {
-      backgroundColor: 'rgba(238, 242, 255, 0.95)',
+      backgroundColor: '#0284C7',
     },
     lightActiveBall4Overlay: {
-      backgroundColor: 'rgba(255, 241, 242, 0.95)',
+      backgroundColor: '#E11D48',
     },
     lightBall3CheckBadge: {
-      backgroundColor: 'rgba(224, 242, 254, 0.95)',
-      borderColor: '#0284C7',
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#FFFFFF',
     },
     lightBall4CheckBadge: {
-      backgroundColor: 'rgba(255, 228, 230, 0.95)',
-      borderColor: '#E11D48',
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#FFFFFF',
     },
     lightBall3Tag: {
       backgroundColor: 'rgba(241, 245, 249, 0.9)',
@@ -1037,12 +1039,12 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       borderColor: 'rgba(203, 213, 225, 0.8)',
     },
     lightActiveBall3Title: {
-      color: '#0284C7',
+      color: '#FFFFFF',
       fontSize: f(36),
       fontWeight: '900',
     },
     lightActiveBall4Title: {
-      color: '#E11D48',
+      color: '#FFFFFF',
       fontSize: f(36),
       fontWeight: '900',
     },
@@ -1052,7 +1054,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       fontWeight: '900',
     },
     lightActiveDesc: {
-      color: '#1E293B',
+      color: '#F1F5F9',
       fontWeight: '700',
     },
     lightInactiveDesc: {
