@@ -324,10 +324,10 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                       </TouchableOpacity>
 
                       <View style={[styles.targetScoreBox, !theme.isDark && styles.lightTargetScoreBox]}>
-                        <Text style={[styles.targetScoreNum, !theme.isDark && { color: theme.textPrimary }]}>
+                        <Text style={[styles.targetScoreNum, !theme.isDark && { color: '#0F172A' }]}>
                           {player.targetScore}
                         </Text>
-                        <Text style={[styles.targetScoreUnit, !theme.isDark && { color: theme.textSecondary }]}>
+                        <Text style={[styles.targetScoreUnit, !theme.isDark && { color: '#0F172A' }]}>
                           PTS
                         </Text>
                       </View>
@@ -1031,8 +1031,11 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       borderColor: '#0284C7',
     },
     lightTargetScoreBox: {
-      backgroundColor: '#F8FAFC',
-      borderColor: '#CBD5E1',
+      backgroundColor: '#E2E8F0',
+      borderColor: '#94A3B8',
+      paddingHorizontal: s(8),
+      paddingVertical: s(2),
+      borderRadius: s(6),
     },
     lightMinusBtn: {
       backgroundColor: '#FEE2E2',
@@ -1052,11 +1055,11 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       elevation: 10,
     },
     lightBtnGlassInner: {
-      backgroundColor: '#0284C7',
+      backgroundColor: '#38BDF8',
       paddingVertical: s(22),
     },
     lightStartGameBtnText: {
-      color: '#FFFFFF',
+      color: '#0F172A',
       fontSize: f(22),
       fontWeight: '900',
       letterSpacing: s(1.5),
