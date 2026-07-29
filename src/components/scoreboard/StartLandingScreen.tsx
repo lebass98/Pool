@@ -48,237 +48,238 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
 
   return (
     <View style={styles.fullContainer}>
-      <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={styles.scrollContentContainer}
-        showsVerticalScrollIndicator={false}
-      >
-      {/* 상단 헤더 영역: [경기 선택] 타이틀 & 우측 테마 변경 버튼 */}
-      <View style={styles.topHeaderRow}>
-        <Text style={[styles.headerSectionTitle, !theme.isDark && { color: theme.textPrimary }]}>
-          경기 선택
-        </Text>
-        <TouchableOpacity
-          style={[styles.topRightThemeBtn, !theme.isDark && styles.lightTopRightThemeBtn]}
-          onPress={onToggleTheme}
-          activeOpacity={0.8}
-        >
-          <Text style={[styles.topRightThemeBtnText, !theme.isDark && { color: theme.textAccent }]}>
-            {theme.themeName}
+      <View style={styles.mainContentContainer}>
+        {/* 상단 헤더 영역: [경기 선택] 타이틀 & 우측 테마 변경 버튼 */}
+        <View style={styles.topHeaderRow}>
+          <Text style={[styles.headerSectionTitle, !theme.isDark && { color: theme.textPrimary }]}>
+            경기 선택
           </Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* 2. 당구 종목 선택 */}
-      <View style={styles.sectionContainer}>
-        <View style={styles.gameTypeRow}>
-          {/* 3구 경기 카드 */}
           <TouchableOpacity
-            style={[
-              styles.gameTypeCardContainer,
-              gameType === '3ball'
-                ? (theme.isDark ? styles.activeBall3CardContainer : styles.lightActiveBall3CardContainer)
-                : (theme.isDark ? styles.inactiveCardContainer : styles.lightInactiveCardContainer),
-            ]}
-            onPress={() => onSelectGameType('3ball')}
-            activeOpacity={0.85}
-          >
-            <View
-              style={[
-                styles.cardOverlay,
-                gameType === '3ball' && (theme.isDark ? styles.activeBall3Overlay : styles.lightActiveBall3Overlay),
-                !theme.isDark && styles.lightCardOverlay,
-              ]}
-            >
-              {gameType === '3ball' && (
-                <View style={[styles.ball3CheckBadge, !theme.isDark && styles.lightBall3CheckBadge]}>
-                  <Text style={[styles.ball3CheckText, !theme.isDark && { color: '#0284C7' }]}>● ACTIVE</Text>
-                </View>
-              )}
-
-              <Text style={[styles.backWatermark3, !theme.isDark && { color: 'rgba(2, 132, 199, 0.08)' }]}>3</Text>
-
-              <View style={styles.cardTextCol}>
-                <View style={styles.tagRow}>
-                  <View style={[styles.ball3Tag, gameType === '3ball' && styles.activeBall3Tag, !theme.isDark && styles.lightBall3Tag]}>
-                    <Text style={[styles.ball3TagText, !theme.isDark && { color: gameType === '3ball' ? '#0284C7' : '#475569' }]}>3-CUSHION</Text>
-                  </View>
-                </View>
-                <Text style={[styles.ball3Title, gameType === '3ball' && styles.activeBall3Title, !theme.isDark && (gameType === '3ball' ? styles.lightActiveBall3Title : styles.lightInactiveTitle)]}>
-                  3구 경기
-                </Text>
-                <Text style={[styles.ball3Desc, gameType === '3ball' && styles.activeBall3Desc, !theme.isDark && (gameType === '3ball' ? styles.lightActiveDesc : styles.lightInactiveDesc)]}>
-                  3쿠션 정통 경기 (기본 핸디 20점)
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-          {/* 4구 경기 카드 */}
-          <TouchableOpacity
-            style={[
-              styles.gameTypeCardContainer,
-              gameType === '4ball'
-                ? (theme.isDark ? styles.activeBall4CardContainer : styles.lightActiveBall4CardContainer)
-                : (theme.isDark ? styles.inactiveCardContainer : styles.lightInactiveCardContainer),
-            ]}
-            onPress={() => onSelectGameType('4ball')}
-            activeOpacity={0.85}
-          >
-            <View
-              style={[
-                styles.cardOverlay,
-                gameType === '4ball' && (theme.isDark ? styles.activeBall4Overlay : styles.lightActiveBall4Overlay),
-                !theme.isDark && styles.lightCardOverlay,
-              ]}
-            >
-              {gameType === '4ball' && (
-                <View style={[styles.ball4CheckBadge, !theme.isDark && styles.lightBall4CheckBadge]}>
-                  <Text style={[styles.ball4CheckText, !theme.isDark && { color: '#E11D48' }]}>● ACTIVE</Text>
-                </View>
-              )}
-
-              <Text style={[styles.backWatermark4, !theme.isDark && { color: 'rgba(225, 29, 72, 0.08)' }]}>4</Text>
-
-              <View style={styles.cardTextCol}>
-                <View style={styles.tagRow}>
-                  <View style={[styles.ball4Tag, gameType === '4ball' && styles.activeBall4Tag, !theme.isDark && styles.lightBall4Tag]}>
-                    <Text style={[styles.ball4TagText, !theme.isDark && { color: gameType === '4ball' ? '#E11D48' : '#475569' }]}>4-BALL</Text>
-                  </View>
-                </View>
-                <Text style={[styles.ball4Title, gameType === '4ball' && styles.activeBall4Title, !theme.isDark && (gameType === '4ball' ? styles.lightActiveBall4Title : styles.lightInactiveTitle)]}>
-                  4구 경기
-                </Text>
-                <Text style={[styles.ball4Desc, gameType === '4ball' && styles.activeBall4Desc, !theme.isDark && (gameType === '4ball' ? styles.lightActiveDesc : styles.lightInactiveDesc)]}>
-                  4구 친목/클럽 경기 (기본 핸디 100점)
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      {/* 3. 경기 인원 선택 */}
-      <View style={styles.sectionContainer}>
-        <BlurView intensity={theme.isDark ? 40 : 60} tint={theme.isDark ? 'dark' : 'light'} style={[styles.countPillsGlass, !theme.isDark && styles.lightCountPillsGlass]}>
-          <View style={styles.countChipRow}>
-            {[2, 3, 4, 5, 6, 7, 8].map((num) => {
-              const isActive = currentPlayerCount === num;
-              return (
-                <TouchableOpacity
-                  key={num}
-                  style={[
-                    styles.countChip,
-                    !theme.isDark && styles.lightCountChip,
-                    isActive && (theme.isDark ? styles.activeCountChip : styles.lightActiveCountChip),
-                  ]}
-                  onPress={() => onSelectPlayerCount(num)}
-                  activeOpacity={0.8}
-                >
-                  <Text
-                    style={[
-                      styles.countChipText,
-                      !theme.isDark && { color: theme.textSecondary },
-                      isActive && (theme.isDark ? styles.activeCountChipText : styles.lightActiveCountChipText),
-                    ]}
-                  >
-                    {num}명
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        </BlurView>
-      </View>
-
-      {/* 4. 출전 선수 라인업 */}
-      <View style={styles.sectionContainer}>
-        <View style={styles.lineupHeaderRow}>
-          <TouchableOpacity
-            style={[styles.settingsChip, !theme.isDark && styles.lightSettingsChip]}
-            onPress={onOpenSettings}
+            style={[styles.topRightThemeBtn, !theme.isDark && styles.lightTopRightThemeBtn]}
+            onPress={onToggleTheme}
             activeOpacity={0.8}
           >
-            <Text style={[styles.settingsChipText, !theme.isDark && { color: theme.textPrimary }]}>
-              선수 관리 및 설정
+            <Text style={[styles.topRightThemeBtnText, !theme.isDark && { color: theme.textAccent }]}>
+              {theme.themeName}
             </Text>
           </TouchableOpacity>
         </View>
 
-        {/* 동적 1줄 / 2줄 반응형 그리드 */}
-        <View style={styles.responsiveGrid}>
-          {players.map((player, idx) => {
-            let cardWidthStyle: any = styles.widthFull;
-            if (count === 2) cardWidthStyle = styles.widthHalf;
-            else if (count === 3) cardWidthStyle = styles.widthThird;
-            else if (count === 4) cardWidthStyle = styles.widthQuarter;
-            else if (count === 5) {
-              cardWidthStyle = idx < 3 ? styles.widthThird : styles.widthHalf;
-            } else if (count === 6) {
-              cardWidthStyle = styles.widthThird;
-            } else if (count === 7 || count === 8) {
-              cardWidthStyle = styles.widthQuarter;
-            }
-
-            return (
+        {/* 2. 당구 종목 선택 */}
+        <View style={styles.sectionContainer}>
+          <View style={styles.gameTypeRow}>
+            {/* 3구 경기 카드 */}
+            <TouchableOpacity
+              style={[
+                styles.gameTypeCardContainer,
+                gameType === '3ball'
+                  ? (theme.isDark ? styles.activeBall3CardContainer : styles.lightActiveBall3CardContainer)
+                  : (theme.isDark ? styles.inactiveCardContainer : styles.lightInactiveCardContainer),
+              ]}
+              onPress={() => onSelectGameType('3ball')}
+              activeOpacity={0.85}
+            >
               <View
-                key={player.id}
                 style={[
-                  styles.responsivePlayerCard,
-                  cardWidthStyle,
-                  isMultiRow && styles.multiRowCard,
+                  styles.cardOverlay,
+                  gameType === '3ball' && (theme.isDark ? styles.activeBall3Overlay : styles.lightActiveBall3Overlay),
+                  !theme.isDark && styles.lightCardOverlay,
                 ]}
               >
-                <BlurView intensity={theme.isDark ? 45 : 70} tint={theme.isDark ? 'dark' : 'light'} style={[styles.playerGlassBlur, !theme.isDark && styles.lightPlayerGlassBlur]}>
-                  <View style={[styles.playerCardContent, !theme.isDark && styles.lightPlayerCardContent]}>
-                    {/* 상단 순번 HUD 배지 & 선수 이름 */}
-                    <View style={styles.cardHeaderRow}>
-                      <View style={[styles.orderBadge, !theme.isDark && styles.lightOrderBadge]}>
-                        <Text style={[styles.orderBadgeText, !theme.isDark && { color: theme.textAccent }]}>P{idx + 1}</Text>
-                      </View>
-                      <Text
-                        numberOfLines={1}
-                        style={[styles.playerName, !theme.isDark && { color: theme.textPrimary }]}
-                      >
-                        {player.name}
-                      </Text>
-                    </View>
+                {gameType === '3ball' && (
+                  <View style={[styles.ball3CheckBadge, !theme.isDark && styles.lightBall3CheckBadge]}>
+                    <Text style={[styles.ball3CheckText, !theme.isDark && { color: '#0284C7' }]}>● ACTIVE</Text>
+                  </View>
+                )}
 
-                    {/* 하단 목표 점수(핸디) HUD Controls */}
-                    <View style={styles.targetAdjustRow}>
-                      <TouchableOpacity
-                        style={[styles.adjustBtn, styles.minusBtn, !theme.isDark && styles.lightMinusBtn]}
-                        onPress={() => onUpdateTargetScore(idx, -deltaUnit)}
-                        activeOpacity={0.7}
-                      >
-                        <Text style={[styles.minusBtnText, !theme.isDark && { color: '#DC2626' }]}>-</Text>
-                      </TouchableOpacity>
+                <Text style={[styles.backWatermark3, !theme.isDark && { color: 'rgba(2, 132, 199, 0.08)' }]}>3</Text>
 
-                      <View style={[styles.targetScoreBox, !theme.isDark && styles.lightTargetScoreBox]}>
-                        <Text style={[styles.targetScoreNum, !theme.isDark && { color: '#0F172A' }]}>
-                          {player.targetScore}
-                        </Text>
-                        <Text style={[styles.targetScoreUnit, !theme.isDark && { color: '#0F172A' }]}>
-                          PTS
-                        </Text>
-                      </View>
-
-                      <TouchableOpacity
-                        style={[styles.adjustBtn, styles.plusBtn, !theme.isDark && styles.lightPlusBtn]}
-                        onPress={() => onUpdateTargetScore(idx, deltaUnit)}
-                        activeOpacity={0.7}
-                      >
-                        <Text style={[styles.plusBtnText, !theme.isDark && { color: '#059669' }]}>+</Text>
-                      </TouchableOpacity>
+                <View style={styles.cardTextCol}>
+                  <View style={styles.tagRow}>
+                    <View style={[styles.ball3Tag, gameType === '3ball' && styles.activeBall3Tag, !theme.isDark && styles.lightBall3Tag]}>
+                      <Text style={[styles.ball3TagText, !theme.isDark && { color: gameType === '3ball' ? '#0284C7' : '#475569' }]}>3-CUSHION</Text>
                     </View>
                   </View>
-                </BlurView>
+                  <Text style={[styles.ball3Title, gameType === '3ball' && styles.activeBall3Title, !theme.isDark && (gameType === '3ball' ? styles.lightActiveBall3Title : styles.lightInactiveTitle)]}>
+                    3구 경기
+                  </Text>
+                  <Text style={[styles.ball3Desc, gameType === '3ball' && styles.activeBall3Desc, !theme.isDark && (gameType === '3ball' ? styles.lightActiveDesc : styles.lightInactiveDesc)]}>
+                    3쿠션 정통 경기 (기본 핸디 20점)
+                  </Text>
+                </View>
               </View>
-            );
-          })}
+            </TouchableOpacity>
+
+            {/* 4구 경기 카드 */}
+            <TouchableOpacity
+              style={[
+                styles.gameTypeCardContainer,
+                gameType === '4ball'
+                  ? (theme.isDark ? styles.activeBall4CardContainer : styles.lightActiveBall4CardContainer)
+                  : (theme.isDark ? styles.inactiveCardContainer : styles.lightInactiveCardContainer),
+              ]}
+              onPress={() => onSelectGameType('4ball')}
+              activeOpacity={0.85}
+            >
+              <View
+                style={[
+                  styles.cardOverlay,
+                  gameType === '4ball' && (theme.isDark ? styles.activeBall4Overlay : styles.lightActiveBall4Overlay),
+                  !theme.isDark && styles.lightCardOverlay,
+                ]}
+              >
+                {gameType === '4ball' && (
+                  <View style={[styles.ball4CheckBadge, !theme.isDark && styles.lightBall4CheckBadge]}>
+                    <Text style={[styles.ball4CheckText, !theme.isDark && { color: '#E11D48' }]}>● ACTIVE</Text>
+                  </View>
+                )}
+
+                <Text style={[styles.backWatermark4, !theme.isDark && { color: 'rgba(225, 29, 72, 0.08)' }]}>4</Text>
+
+                <View style={styles.cardTextCol}>
+                  <View style={styles.tagRow}>
+                    <View style={[styles.ball4Tag, gameType === '4ball' && styles.activeBall4Tag, !theme.isDark && styles.lightBall4Tag]}>
+                      <Text style={[styles.ball4TagText, !theme.isDark && { color: gameType === '4ball' ? '#E11D48' : '#475569' }]}>4-BALL</Text>
+                    </View>
+                  </View>
+                  <Text style={[styles.ball4Title, gameType === '4ball' && styles.activeBall4Title, !theme.isDark && (gameType === '4ball' ? styles.lightActiveBall4Title : styles.lightInactiveTitle)]}>
+                    4구 경기
+                  </Text>
+                  <Text style={[styles.ball4Desc, gameType === '4ball' && styles.activeBall4Desc, !theme.isDark && (gameType === '4ball' ? styles.lightActiveDesc : styles.lightInactiveDesc)]}>
+                    4구 친목/클럽 경기 (기본 핸디 100점)
+                  </Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* 3. 경기 인원 선택 */}
+        <View style={styles.sectionContainer}>
+          <BlurView intensity={theme.isDark ? 40 : 60} tint={theme.isDark ? 'dark' : 'light'} style={[styles.countPillsGlass, !theme.isDark && styles.lightCountPillsGlass]}>
+            <View style={styles.countChipRow}>
+              {[2, 3, 4, 5, 6, 7, 8].map((num) => {
+                const isActive = currentPlayerCount === num;
+                return (
+                  <TouchableOpacity
+                    key={num}
+                    style={[
+                      styles.countChip,
+                      !theme.isDark && styles.lightCountChip,
+                      isActive && (theme.isDark ? styles.activeCountChip : styles.lightActiveCountChip),
+                    ]}
+                    onPress={() => onSelectPlayerCount(num)}
+                    activeOpacity={0.8}
+                  >
+                    <Text
+                      style={[
+                        styles.countChipText,
+                        !theme.isDark && { color: theme.textSecondary },
+                        isActive && (theme.isDark ? styles.activeCountChipText : styles.lightActiveCountChipText),
+                      ]}
+                    >
+                      {num}명
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </BlurView>
+        </View>
+
+        {/* 4. 출전 선수 라인업 */}
+        <View style={[styles.sectionContainer, isMultiRow ? styles.lineupSectionTwoRows : styles.lineupSectionOneRow]}>
+          <View style={styles.lineupHeaderRow}>
+            <TouchableOpacity
+              style={[styles.settingsChip, !theme.isDark && styles.lightSettingsChip]}
+              onPress={onOpenSettings}
+              activeOpacity={0.8}
+            >
+              <Text style={[styles.settingsChipText, !theme.isDark && { color: theme.textPrimary }]}>
+                선수 관리 및 설정
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* 동적 1줄 / 2줄 반응형 그리드 */}
+          <View style={styles.responsiveGridContainer}>
+            <View style={styles.responsiveGrid}>
+              {players.map((player, idx) => {
+                let cardWidthStyle: any = styles.widthFull;
+                if (count === 2) cardWidthStyle = styles.widthHalf;
+                else if (count === 3) cardWidthStyle = styles.widthThird;
+                else if (count === 4) cardWidthStyle = styles.widthQuarter;
+                else if (count === 5) {
+                  cardWidthStyle = idx < 3 ? styles.widthThird : styles.widthHalf;
+                } else if (count === 6) {
+                  cardWidthStyle = styles.widthThird;
+                } else if (count === 7 || count === 8) {
+                  cardWidthStyle = styles.widthQuarter;
+                }
+
+                const cardHeightStyle = isMultiRow ? styles.heightHalf : styles.heightFull;
+
+                return (
+                  <View
+                    key={player.id}
+                    style={[
+                      styles.responsivePlayerCard,
+                      cardWidthStyle,
+                      cardHeightStyle,
+                      isMultiRow && styles.multiRowCard,
+                    ]}
+                  >
+                    <BlurView intensity={theme.isDark ? 45 : 70} tint={theme.isDark ? 'dark' : 'light'} style={[styles.playerGlassBlur, !theme.isDark && styles.lightPlayerGlassBlur]}>
+                      <View style={[styles.playerCardContent, !theme.isDark && styles.lightPlayerCardContent]}>
+                        {/* 상단 순번 HUD 배지 & 선수 이름 */}
+                        <View style={styles.cardHeaderRow}>
+                          <View style={[styles.orderBadge, !theme.isDark && styles.lightOrderBadge]}>
+                            <Text style={[styles.orderBadgeText, !theme.isDark && { color: theme.textAccent }]}>P{idx + 1}</Text>
+                          </View>
+                          <Text
+                            numberOfLines={1}
+                            style={[styles.playerName, !theme.isDark && { color: theme.textPrimary }]}
+                          >
+                            {player.name}
+                          </Text>
+                        </View>
+
+                        {/* 하단 목표 점수(핸디) HUD Controls */}
+                        <View style={styles.targetAdjustRow}>
+                          <TouchableOpacity
+                            style={[styles.adjustBtn, styles.minusBtn, !theme.isDark && styles.lightMinusBtn]}
+                            onPress={() => onUpdateTargetScore(idx, -deltaUnit)}
+                            activeOpacity={0.7}
+                          >
+                            <Text style={[styles.minusBtnText, !theme.isDark && { color: '#DC2626' }]}>-</Text>
+                          </TouchableOpacity>
+
+                          <View style={[styles.targetScoreBox, !theme.isDark && styles.lightTargetScoreBox]}>
+                            <Text style={[styles.targetScoreNum, !theme.isDark && { color: '#0F172A' }]}>
+                              {player.targetScore}
+                            </Text>
+                            <Text style={[styles.targetScoreUnit, !theme.isDark && { color: '#0F172A' }]}>
+                              PTS
+                            </Text>
+                          </View>
+
+                          <TouchableOpacity
+                            style={[styles.adjustBtn, styles.plusBtn, !theme.isDark && styles.lightPlusBtn]}
+                            onPress={() => onUpdateTargetScore(idx, deltaUnit)}
+                            activeOpacity={0.7}
+                          >
+                            <Text style={[styles.plusBtnText, !theme.isDark && { color: '#059669' }]}>+</Text>
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    </BlurView>
+                  </View>
+                );
+              })}
+            </View>
+          </View>
         </View>
       </View>
-    </ScrollView>
 
       {/* 5. 하단 고정 순정 버튼 */}
       <View style={styles.footerBox}>
@@ -304,6 +305,21 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       paddingHorizontal: s(24),
       paddingVertical: s(12),
       position: 'relative',
+    },
+    mainContentContainer: {
+      flex: 1,
+    },
+    lineupSectionTwoRows: {
+      flex: 1,
+      marginBottom: 0,
+    },
+    lineupSectionOneRow: {
+      flex: 0.5,
+      marginBottom: 0,
+    },
+    responsiveGridContainer: {
+      flex: 1,
+      width: '100%',
     },
     scrollContentContainer: {
       paddingVertical: s(10),
@@ -738,6 +754,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       color: '#00F2FE',
     },
     responsiveGrid: {
+      flex: 1,
       flexDirection: 'row',
       flexWrap: 'wrap',
       rowGap: s(8),
@@ -761,10 +778,18 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       borderRadius: s(14),
       overflow: 'hidden',
     },
+    heightHalf: {
+      height: '48.5%',
+    },
+    heightFull: {
+      height: '100%',
+    },
     playerGlassBlur: {
       width: '100%',
+      height: '100%',
     },
     playerCardContent: {
+      height: '100%',
       paddingHorizontal: s(10),
       paddingVertical: s(8),
       backgroundColor: 'rgba(15, 23, 42, 0.75)',
@@ -797,6 +822,8 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       flex: 1,
     },
     targetAdjustRow: {
+      flex: 1,
+      marginTop: s(6),
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -808,8 +835,8 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       borderColor: 'rgba(255, 255, 255, 0.08)',
     },
     adjustBtn: {
-      width: s(32),
-      height: s(32),
+      height: '100%',
+      aspectRatio: 1,
       borderRadius: s(8),
       alignItems: 'center',
       justifyContent: 'center',
@@ -822,18 +849,20 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     },
     minusBtnText: {
       color: '#FF2A6D',
-      fontSize: f(18),
-      fontWeight: '900',
+      fontSize: f(26),
+      fontWeight: '700',
     },
     plusBtnText: {
       color: '#00F2FE',
-      fontSize: f(18),
-      fontWeight: '900',
+      fontSize: f(26),
+      fontWeight: '700',
     },
     targetScoreBox: {
       flexDirection: 'row',
-      alignItems: 'baseline',
+      alignItems: 'center',
+      justifyContent: 'center',
       gap: s(4),
+      height: '100%',
     },
     targetScoreNum: {
       fontSize: f(22),
@@ -847,9 +876,9 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     },
     footerBox: {
       alignItems: 'center',
-      marginTop: s(10),
+      marginTop: s(4),
       marginBottom: s(4),
-      paddingTop: s(6),
+      paddingTop: 0,
     },
     startGameBtn: {
       width: '100%',
@@ -915,8 +944,11 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     lightTargetScoreBox: {
       backgroundColor: '#E2E8F0',
       paddingHorizontal: s(8),
-      paddingVertical: s(2),
+      paddingVertical: 0,
       borderRadius: s(6),
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     lightMinusBtn: {
       backgroundColor: '#FEE2E2',
