@@ -115,16 +115,16 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
               styles.remainingBadge,
               {
                 backgroundColor: isFinishedPlayer
-                  ? 'rgba(255, 213, 79, 0.2)'
-                  : 'rgba(3, 218, 198, 0.2)',
-                borderColor: isFinishedPlayer ? '#FFD54F' : '#03DAC6',
+                  ? (theme.isDark ? 'rgba(255, 213, 79, 0.2)' : '#FEF3C7')
+                  : (theme.isDark ? 'rgba(3, 218, 198, 0.2)' : '#E0F2FE'),
+                borderColor: isFinishedPlayer ? (theme.isDark ? '#FFD54F' : '#D97706') : (theme.isDark ? '#03DAC6' : '#0284C7'),
               },
             ]}
           >
             <Text
               style={[
                 styles.remainingText,
-                { color: isFinishedPlayer ? '#FFD54F' : '#03DAC6' },
+                { color: isFinishedPlayer ? (theme.isDark ? '#FFD54F' : '#B45309') : (theme.isDark ? '#03DAC6' : '#0369A1') },
               ]}
             >
               {isFinishedPlayer ? '종료' : `남은 점수 ${remainingScore}점`}

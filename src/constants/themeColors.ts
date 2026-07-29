@@ -39,24 +39,24 @@ export const theme1Dark: ThemeColors = {
   statBoxBg: 'rgba(15, 23, 42, 0.7)',
 };
 
-// 2테마: 라이트 모드 (Glassmorphism Frosted Light)
+// 2테마: 라이트 모드 (High-Contrast Clean White Light)
 export const theme2Light: ThemeColors = {
   themeMode: 'theme2',
   themeName: '테마 2',
   isDark: false,
-  bg: '#E2E8F0',
-  cardBg: 'rgba(255, 255, 255, 0.84)',
-  cardActiveBg: 'rgba(236, 253, 245, 0.92)',
-  border: 'rgba(255, 255, 255, 0.95)',
-  activeBorder: '#03DAC6',
+  bg: '#F1F5F9',
+  cardBg: '#FFFFFF',
+  cardActiveBg: '#E0F2FE',
+  border: '#CBD5E1',
+  activeBorder: '#0284C7',
   textPrimary: '#0F172A',
   textSecondary: '#334155',
-  textAccent: '#0284C7',
-  topBarBg: 'rgba(255, 255, 255, 0.78)',
-  badgeBg: 'rgba(241, 245, 249, 0.82)',
-  inputBg: 'rgba(255, 255, 255, 0.9)',
-  modalBg: 'rgba(255, 255, 255, 0.95)',
-  statBoxBg: 'rgba(255, 255, 255, 0.7)',
+  textAccent: '#0369A1',
+  topBarBg: '#FFFFFF',
+  badgeBg: '#F1F5F9',
+  inputBg: '#FFFFFF',
+  modalBg: '#FFFFFF',
+  statBoxBg: '#F8FAFC',
 };
 
 // 3테마: 네온 모드 (Cyberpunk Neon)
