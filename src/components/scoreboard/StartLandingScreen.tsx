@@ -77,12 +77,6 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             </Text>
           </TouchableOpacity>
 
-          <View style={styles.hudStatusRow}>
-            <View style={[styles.hudDotPulse, !theme.isDark && { backgroundColor: theme.textAccent, shadowColor: theme.textAccent }]} />
-            <Text style={[styles.subTitleText, !theme.isDark && { color: theme.textAccent }]}>
-              SYSTEM OVERLAY • AR HUD v2.4
-            </Text>
-          </View>
           <Text style={[styles.mainTitleText, !theme.isDark && { color: theme.textPrimary }]}>
             당구 디지털 스코어보드
           </Text>
@@ -527,19 +521,19 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       borderRadius: s(24),
     },
     ball3CardImageStyle: {
-      top: -s(30),
+      top: 0,
     },
     ball4CardImageStyle: {
-      top: -s(15),
+      top: 0,
     },
     cardOverlay: {
       paddingVertical: s(36),
       paddingHorizontal: s(28),
-      minHeight: s(230),
+      minHeight: s(270),
       justifyContent: 'flex-end',
       position: 'relative',
       overflow: 'hidden',
-      backgroundColor: 'rgba(0, 0, 0, 0.15)',
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
     },
     activeBall3Overlay: {
       backgroundColor: 'rgba(2, 132, 199, 0.4)',
