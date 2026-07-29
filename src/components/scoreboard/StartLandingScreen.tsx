@@ -66,14 +66,8 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
         </TouchableOpacity>
       </View>
 
-      {/* 2. 당구 종목 선택 (visionOS Glass Panel & Spatial Glow Cards) */}
+      {/* 2. 당구 종목 선택 */}
       <View style={styles.sectionContainer}>
-        <View style={styles.sectionTitleRow}>
-          <View style={[styles.sectionAccentLine, !theme.isDark && { backgroundColor: theme.textAccent }]} />
-          <Text style={[styles.sectionTitle, !theme.isDark && { color: theme.textSecondary }]}>
-            GAME MODE SELECT
-          </Text>
-        </View>
         <View style={styles.gameTypeRow}>
           {/* 3구 경기 카드 */}
           <TouchableOpacity
@@ -161,14 +155,8 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
         </View>
       </View>
 
-      {/* 3. 경기 인원 선택 (visionOS Dynamic Glass Segmented Pills) */}
+      {/* 3. 경기 인원 선택 */}
       <View style={styles.sectionContainer}>
-        <View style={styles.sectionTitleRow}>
-          <View style={[styles.sectionAccentLine, !theme.isDark && { backgroundColor: theme.textAccent }]} />
-          <Text style={[styles.sectionTitle, !theme.isDark && { color: theme.textSecondary }]}>
-            PLAYER COUNT (2 - 8 PLAYERS)
-          </Text>
-        </View>
         <BlurView intensity={theme.isDark ? 40 : 60} tint={theme.isDark ? 'dark' : 'light'} style={[styles.countPillsGlass, !theme.isDark && styles.lightCountPillsGlass]}>
           <View style={styles.countChipRow}>
             {[2, 3, 4, 5, 6, 7, 8].map((num) => {
@@ -200,15 +188,9 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
         </BlurView>
       </View>
 
-      {/* 4. 출전 선수 라인업 (Hologram Glass Cards) */}
+      {/* 4. 출전 선수 라인업 */}
       <View style={styles.sectionContainer}>
         <View style={styles.lineupHeaderRow}>
-          <View style={styles.sectionTitleRow}>
-            <View style={[styles.sectionAccentLine, !theme.isDark && { backgroundColor: theme.textAccent }]} />
-            <Text style={[styles.sectionTitle, !theme.isDark && { color: theme.textSecondary }]}>
-              MATCH ROSTER & HANDICAP
-            </Text>
-          </View>
           <TouchableOpacity
             style={[styles.settingsChip, !theme.isDark && styles.lightSettingsChip]}
             onPress={onOpenSettings}
@@ -445,8 +427,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       flex: 1,
       aspectRatio: 9 / 3,
       borderRadius: s(16),
-      borderWidth: line(1.5),
-      borderColor: 'rgba(255, 255, 255, 0.12)',
       overflow: 'hidden',
       position: 'relative',
     },
@@ -709,8 +689,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       borderRadius: s(16),
       overflow: 'hidden',
       padding: s(6),
-      borderWidth: line(1),
-      borderColor: 'rgba(255, 255, 255, 0.12)',
       backgroundColor: 'rgba(15, 23, 42, 0.35)',
     },
     countChipRow: {
@@ -725,9 +703,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       backgroundColor: 'rgba(255, 255, 255, 0.05)',
     },
     activeCountChip: {
-      backgroundColor: 'rgba(0, 242, 254, 0.25)',
-      borderWidth: line(1),
-      borderColor: '#00F2FE',
+      backgroundColor: '#00F2FE',
       shadowColor: '#00F2FE',
       shadowOpacity: 0.6,
       shadowRadius: s(8),
@@ -783,8 +759,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     responsivePlayerCard: {
       borderRadius: s(14),
       overflow: 'hidden',
-      borderWidth: line(1),
-      borderColor: 'rgba(255, 255, 255, 0.15)',
     },
     playerGlassBlur: {
       width: '100%',
@@ -792,7 +766,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     playerCardContent: {
       paddingHorizontal: s(10),
       paddingVertical: s(8),
-      backgroundColor: 'rgba(15, 23, 42, 0.4)',
+      backgroundColor: 'rgba(15, 23, 42, 0.75)',
       justifyContent: 'space-between',
     },
     multiRowCard: {
@@ -808,12 +782,10 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       paddingHorizontal: s(6),
       paddingVertical: s(2),
       borderRadius: s(6),
-      backgroundColor: 'rgba(0, 242, 254, 0.2)',
-      borderWidth: line(1),
-      borderColor: '#00F2FE',
+      backgroundColor: '#00F2FE',
     },
     orderBadgeText: {
-      color: '#00F2FE',
+      color: '#0F172A',
       fontWeight: '900',
       fontSize: f(13),
     },
