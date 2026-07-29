@@ -117,7 +117,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             <ImageBackground
               source={ball3CardBgImage}
               style={StyleSheet.absoluteFill}
-              imageStyle={styles.cardImageStyle}
+              imageStyle={[styles.cardImageStyle, styles.ball3CardImageStyle]}
               resizeMode="cover"
             />
             <View
@@ -167,7 +167,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             <ImageBackground
               source={ball4CardBgImage}
               style={StyleSheet.absoluteFill}
-              imageStyle={styles.cardImageStyle}
+              imageStyle={[styles.cardImageStyle, styles.ball4CardImageStyle]}
               resizeMode="cover"
             />
             <View
@@ -525,6 +525,12 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     cardImageStyle: {
       borderRadius: s(24),
+    },
+    ball3CardImageStyle: {
+      top: -s(30),
+    },
+    ball4CardImageStyle: {
+      top: -s(15),
     },
     cardOverlay: {
       paddingVertical: s(36),
