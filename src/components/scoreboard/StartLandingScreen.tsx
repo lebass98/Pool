@@ -12,8 +12,8 @@ import { ScaleFn, useScale } from '@/constants/layout';
 import { ThemeColors } from '@/constants/themeColors';
 import { GameType, Player, RegisteredPlayer } from '@/types/scoreboard.types';
 
-const darkCardBgImage = require('../../../assets/images/billiards_dark_bg.png');
-const lightCardBgImage = require('../../../assets/images/billiards_light_bg.png');
+const ball3CardBgImage = require('../../../assets/images/billiards_3ball_bg.png');
+const ball4CardBgImage = require('../../../assets/images/billiards_4ball_bg.png');
 
 interface StartLandingScreenProps {
   theme: ThemeColors;
@@ -115,13 +115,13 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             activeOpacity={0.85}
           >
             <ImageBackground
-              source={theme.isDark ? darkCardBgImage : lightCardBgImage}
+              source={ball3CardBgImage}
               style={StyleSheet.absoluteFill}
               imageStyle={styles.cardImageStyle}
               resizeMode="cover"
             />
             <BlurView
-              intensity={gameType === '3ball' ? (theme.isDark ? 65 : 85) : (theme.isDark ? 30 : 60)}
+              intensity={gameType === '3ball' ? (theme.isDark ? 35 : 20) : (theme.isDark ? 15 : 10)}
               tint={theme.isDark ? 'dark' : 'light'}
               style={[
                 styles.cardOverlay,
@@ -167,13 +167,13 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             activeOpacity={0.85}
           >
             <ImageBackground
-              source={theme.isDark ? darkCardBgImage : lightCardBgImage}
+              source={ball4CardBgImage}
               style={StyleSheet.absoluteFill}
               imageStyle={styles.cardImageStyle}
               resizeMode="cover"
             />
             <BlurView
-              intensity={gameType === '4ball' ? (theme.isDark ? 65 : 85) : (theme.isDark ? 30 : 60)}
+              intensity={gameType === '4ball' ? (theme.isDark ? 35 : 20) : (theme.isDark ? 15 : 10)}
               tint={theme.isDark ? 'dark' : 'light'}
               style={[
                 styles.cardOverlay,
