@@ -48,12 +48,6 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
 
   return (
     <View style={styles.fullContainer}>
-      {/* AR HUD Edge Corner Brackets */}
-      <View style={[styles.hudCorner, styles.hudTopLeft]} pointerEvents="none" />
-      <View style={[styles.hudCorner, styles.hudTopRight]} pointerEvents="none" />
-      <View style={[styles.hudCorner, styles.hudBottomLeft]} pointerEvents="none" />
-      <View style={[styles.hudCorner, styles.hudBottomRight]} pointerEvents="none" />
-
       <ScrollView
         style={{ flex: 1 }}
         contentContainerStyle={styles.scrollContentContainer}
@@ -82,7 +76,6 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
         </View>
         <View style={styles.gameTypeRow}>
           {/* 3구 경기 카드 */}
-          {/* 3구 경기 카드 */}
           <TouchableOpacity
             style={[
               styles.gameTypeCardContainer,
@@ -100,8 +93,6 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                 !theme.isDark && styles.lightCardOverlay,
               ]}
             >
-              <View style={[styles.hudReticleTopRight, !theme.isDark && { borderColor: 'rgba(2, 132, 199, 0.4)' }]} />
-
               {gameType === '3ball' && (
                 <View style={[styles.ball3CheckBadge, !theme.isDark && styles.lightBall3CheckBadge]}>
                   <Text style={[styles.ball3CheckText, !theme.isDark && { color: '#0284C7' }]}>● ACTIVE</Text>
@@ -144,8 +135,6 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                 !theme.isDark && styles.lightCardOverlay,
               ]}
             >
-              <View style={[styles.hudReticleTopRight, !theme.isDark && { borderColor: 'rgba(225, 29, 72, 0.4)' }]} />
-
               {gameType === '4ball' && (
                 <View style={[styles.ball4CheckBadge, !theme.isDark && styles.lightBall4CheckBadge]}>
                   <Text style={[styles.ball4CheckText, !theme.isDark && { color: '#E11D48' }]}>● ACTIVE</Text>
@@ -306,16 +295,16 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
       </View>
     </ScrollView>
 
-      {/* 5. 하단 고정 Spatial Neon Blur Button */}
+      {/* 5. 하단 고정 순정 버튼 */}
       <View style={styles.footerBox}>
         <TouchableOpacity
           style={[styles.startGameBtn, !theme.isDark && styles.lightStartGameBtn]}
           onPress={onStartGame}
           activeOpacity={0.85}
         >
-          <BlurView intensity={theme.isDark ? 50 : 0} tint={theme.isDark ? 'light' : 'light'} style={[styles.btnGlassInner, !theme.isDark && styles.lightBtnGlassInner]}>
+          <View style={[styles.btnGlassInner, !theme.isDark && styles.lightBtnGlassInner]}>
             <Text style={[styles.startGameBtnText, !theme.isDark && styles.lightStartGameBtnText]}>경기 시작</Text>
-          </BlurView>
+          </View>
         </TouchableOpacity>
       </View>
     </View>
@@ -854,13 +843,9 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     },
     minusBtn: {
       backgroundColor: 'rgba(255, 42, 109, 0.3)',
-      borderWidth: line(1),
-      borderColor: '#FF2A6D',
     },
     plusBtn: {
       backgroundColor: 'rgba(0, 242, 254, 0.3)',
-      borderWidth: line(1),
-      borderColor: '#00F2FE',
     },
     minusBtnText: {
       color: '#FF2A6D',
@@ -895,23 +880,17 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     },
     startGameBtn: {
       width: '100%',
-      borderRadius: s(16),
+      borderRadius: s(14),
       overflow: 'hidden',
-      borderWidth: line(1.5),
-      borderColor: '#00F2FE',
-      shadowColor: '#00F2FE',
-      shadowOffset: { width: 0, height: s(4) },
-      shadowOpacity: 0.5,
-      shadowRadius: s(12),
-      elevation: 8,
+      backgroundColor: '#00F2FE',
     },
     btnGlassInner: {
       paddingVertical: s(14),
       alignItems: 'center',
-      backgroundColor: 'rgba(0, 242, 254, 0.22)',
+      backgroundColor: '#00F2FE',
     },
     startGameBtnText: {
-      color: '#FFFFFF',
+      color: '#0F172A',
       fontSize: f(18),
       fontWeight: '900',
       letterSpacing: s(1),
@@ -919,7 +898,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
 
     /* 테마 2 (라이트 모드 전용 화이트 아크릴 스타일) */
     lightHeaderBlurGlass: {
-      borderColor: 'rgba(203, 213, 225, 0.9)',
       shadowColor: '#64748B',
       shadowOpacity: 0.1,
     },
@@ -928,30 +906,23 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     },
     lightTopRightThemeBtn: {
       backgroundColor: '#F1F5F9',
-      borderColor: '#0284C7',
-      borderWidth: line(1.5),
     },
     lightTableBadge: {
       backgroundColor: '#F1F5F9',
-      borderColor: '#CBD5E1',
     },
     lightGameTypeCardContainer: {
-      borderColor: '#CBD5E1',
     },
     lightCardOverlay: {
       backgroundColor: '#FFFFFF',
     },
     lightCountPillsGlass: {
-      borderColor: '#CBD5E1',
       backgroundColor: '#FFFFFF',
     },
     lightCountChip: {
       backgroundColor: '#F1F5F9',
-      borderColor: '#CBD5E1',
     },
     lightActiveCountChip: {
       backgroundColor: '#0284C7',
-      borderColor: '#0284C7',
     },
     lightActiveCountChipText: {
       color: '#FFFFFF',
@@ -959,37 +930,28 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     },
     lightSettingsChip: {
       backgroundColor: '#F1F5F9',
-      borderColor: '#0284C7',
-      borderWidth: line(1.5),
     },
     lightPlayerGlassBlur: {
-      borderColor: '#CBD5E1',
     },
     lightPlayerCardContent: {
       backgroundColor: '#FFFFFF',
     },
     lightOrderBadge: {
       backgroundColor: '#E0F2FE',
-      borderColor: '#0284C7',
     },
     lightTargetScoreBox: {
       backgroundColor: '#E2E8F0',
-      borderColor: '#94A3B8',
       paddingHorizontal: s(8),
       paddingVertical: s(2),
       borderRadius: s(6),
     },
     lightMinusBtn: {
       backgroundColor: '#FEE2E2',
-      borderColor: '#EF4444',
     },
     lightPlusBtn: {
       backgroundColor: '#D1FAE5',
-      borderColor: '#10B981',
     },
     lightStartGameBtn: {
-      borderColor: '#0284C7',
-      borderWidth: line(2),
       shadowColor: '#0284C7',
       shadowOffset: { width: 0, height: s(6) },
       shadowOpacity: 0.3,
