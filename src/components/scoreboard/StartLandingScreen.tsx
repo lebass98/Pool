@@ -44,8 +44,8 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
   onStartGame,
   onToggleTheme,
 }) => {
-  const { s, f, line } = useScale();
-  const styles = useMemo(() => createStyles(s, f, line), [s, f, line]);
+  const { s, f, line, isFoldRatio } = useScale();
+  const styles = useMemo(() => createStyles(s, f, line, isFoldRatio), [s, f, line, isFoldRatio]);
 
   const deltaUnit = gameType === '4ball' ? 10 : 1;
   const count = players.length;
@@ -413,21 +413,19 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     /* visionOS Glass Header Panel */
     headerBlurGlass: {
-      borderRadius: s(24),
+      borderRadius: s(20),
       overflow: 'hidden',
+      paddingHorizontal: s(20),
+      paddingVertical: s(12),
       borderWidth: line(1),
-      borderColor: 'rgba(255, 255, 255, 0.18)',
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: s(10) },
-      shadowOpacity: 0.35,
-      shadowRadius: s(20),
+      borderColor: 'rgba(255, 255, 255, 0.15)',
+      backgroundColor: 'rgba(15, 23, 42, 0.6)',
     },
     headerBox: {
+      flexDirection: 'row',
       alignItems: 'center',
-      paddingVertical: s(20),
-      paddingHorizontal: s(24),
-      backgroundColor: 'rgba(15, 23, 42, 0.35)',
-      position: 'relative',
+      justifyContent: 'space-between',
+      marginBottom: s(14),
     },
     topRightHeaderRow: {
       flexDirection: 'row',
@@ -435,7 +433,9 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       marginBottom: s(6),
     },
     topRightThemeBtn: {
-      backgroundColor: 'rgba(255, 255, 255, 0.12)',
+      position: 'absolute',
+      top: s(10),
+      right: s(24),
       paddingHorizontal: s(16),
       paddingVertical: s(8),
       borderRadius: s(14),
@@ -473,13 +473,13 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       textShadowRadius: s(6),
     },
     sectionContainer: {
-      marginVertical: s(6),
+      marginVertical: isFoldRatio ? s(3) : s(6),
     },
     sectionTitleRow: {
       flexDirection: 'row',
       alignItems: 'center',
       gap: s(8),
-      marginBottom: s(10),
+      marginBottom: isFoldRatio ? s(4) : s(10),
     },
     sectionAccentLine: {
       width: s(4),
@@ -488,7 +488,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       backgroundColor: '#00F2FE',
     },
     sectionTitle: {
-      fontSize: f(14),
+      fontSize: f(13),
       fontWeight: '800',
       letterSpacing: s(1.5),
       color: '#94A3B8',
@@ -499,8 +499,8 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     gameTypeCardContainer: {
       flex: 1,
-      aspectRatio: 6 / 3,
-      borderRadius: s(24),
+      aspectRatio: isFoldRatio ? 8 / 3 : 6 / 3,
+      borderRadius: s(20),
       borderWidth: line(1.5),
       borderColor: 'rgba(255, 255, 255, 0.12)',
       overflow: 'hidden',
@@ -715,22 +715,22 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     ball3Title: {
       fontFamily: 'PretendardGOV-ExtraBold',
-      fontSize: f(80),
+      fontSize: isFoldRatio ? f(48) : f(80),
       fontWeight: '900',
       color: '#94A3B8',
-      marginBottom: s(6),
+      marginBottom: s(4),
     },
     activeBall3Title: {
       fontFamily: 'PretendardGOV-ExtraBold',
       color: '#FFFFFF',
-      fontSize: f(92),
+      fontSize: isFoldRatio ? f(54) : f(92),
       textShadowColor: 'rgba(0, 242, 254, 0.8)',
       textShadowOffset: { width: 0, height: 0 },
-      textShadowRadius: s(10),
+      textShadowRadius: s(8),
     },
     ball3Desc: {
       fontFamily: 'PretendardGOV-Bold',
-      fontSize: f(16),
+      fontSize: isFoldRatio ? f(13) : f(16),
       color: '#64748B',
       fontWeight: '600',
     },
@@ -739,18 +739,18 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     ball4Title: {
       fontFamily: 'PretendardGOV-ExtraBold',
-      fontSize: f(80),
+      fontSize: isFoldRatio ? f(48) : f(80),
       fontWeight: '900',
       color: '#94A3B8',
-      marginBottom: s(6),
+      marginBottom: s(4),
     },
     activeBall4Title: {
       fontFamily: 'PretendardGOV-ExtraBold',
       color: '#FFFFFF',
-      fontSize: f(92),
+      fontSize: isFoldRatio ? f(54) : f(92),
       textShadowColor: 'rgba(255, 42, 109, 0.8)',
       textShadowOffset: { width: 0, height: 0 },
-      textShadowRadius: s(10),
+      textShadowRadius: s(8),
     },
     ball4Desc: {
       fontSize: f(16),
@@ -1091,17 +1091,17 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     lightActiveBall3Title: {
       color: '#FFFFFF',
-      fontSize: f(92),
+      fontSize: isFoldRatio ? f(54) : f(92),
       fontWeight: '900',
     },
     lightActiveBall4Title: {
       color: '#FFFFFF',
-      fontSize: f(92),
+      fontSize: isFoldRatio ? f(54) : f(92),
       fontWeight: '900',
     },
     lightInactiveTitle: {
       color: '#0F172A',
-      fontSize: f(80),
+      fontSize: isFoldRatio ? f(48) : f(80),
       fontWeight: '900',
     },
     lightActiveDesc: {

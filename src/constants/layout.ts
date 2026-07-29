@@ -82,7 +82,8 @@ export const useScale = () => {
 
     const isSmallHeight = height < 540;
     const isVerySmallHeight = height < 420;
+    const isFoldRatio = width / height < 1.6;
 
-    return { scale, s, f, line, vs, width, height, isSmallHeight, isVerySmallHeight };
+    return { scale, s, f, line, vs, width, height, isSmallHeight, isVerySmallHeight, isFoldRatio };
   }, [scale, width, height]);
 };
