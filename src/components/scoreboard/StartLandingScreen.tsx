@@ -366,7 +366,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
 };
 
 /** 스타일 수치는 모두 1920 x 1080 기준 픽셀값 */
-const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
+const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolean = false) =>
   StyleSheet.create({
     fullContainer: {
       flex: 1,
