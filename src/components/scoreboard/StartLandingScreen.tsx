@@ -655,9 +655,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       fontFamily: 'PretendardGOV-ExtraBold',
       color: '#FFFFFF',
       fontSize: f(38),
-      textShadowColor: 'rgba(0, 242, 254, 0.8)',
-      textShadowOffset: { width: 0, height: 0 },
-      textShadowRadius: s(6),
     },
     ball3Desc: {
       fontFamily: 'PretendardGOV-Bold',
@@ -679,9 +676,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       fontFamily: 'PretendardGOV-ExtraBold',
       color: '#FFFFFF',
       fontSize: f(38),
-      textShadowColor: 'rgba(255, 42, 109, 0.8)',
-      textShadowOffset: { width: 0, height: 0 },
-      textShadowRadius: s(6),
     },
     ball4Desc: {
       fontSize: f(16),
