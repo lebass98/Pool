@@ -12,7 +12,8 @@ import { ScaleFn, useScale } from '@/constants/layout';
 import { ThemeColors } from '@/constants/themeColors';
 import { GameType, Player, RegisteredPlayer } from '@/types/scoreboard.types';
 
-const cardBgImage = require('../../../assets/images/billiards_dark_bg.png');
+const darkCardBgImage = require('../../../assets/images/billiards_dark_bg.png');
+const lightCardBgImage = require('../../../assets/images/billiards_light_bg.png');
 
 interface StartLandingScreenProps {
   theme: ThemeColors;
@@ -63,30 +64,30 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
         showsVerticalScrollIndicator={false}
       >
         {/* 1. visionOS Spatial Glass Header */}
-      <BlurView intensity={55} tint="dark" style={styles.headerBlurGlass}>
-        <View style={styles.headerBox}>
+      <BlurView intensity={theme.isDark ? 55 : 40} tint={theme.isDark ? 'dark' : 'light'} style={[styles.headerBlurGlass, !theme.isDark && styles.lightHeaderBlurGlass]}>
+        <View style={[styles.headerBox, !theme.isDark && styles.lightHeaderBox]}>
           {/* 우측 상단 테마 모드 선택 버튼 */}
           <TouchableOpacity
-            style={styles.topRightThemeBtn}
+            style={[styles.topRightThemeBtn, !theme.isDark && styles.lightTopRightThemeBtn]}
             onPress={onToggleTheme}
             activeOpacity={0.8}
           >
-            <Text style={styles.topRightThemeBtnText}>
+            <Text style={[styles.topRightThemeBtnText, !theme.isDark && { color: theme.textAccent }]}>
               🎨 {theme.themeName}
             </Text>
           </TouchableOpacity>
 
           <View style={styles.hudStatusRow}>
-            <View style={styles.hudDotPulse} />
-            <Text style={styles.subTitleText}>
+            <View style={[styles.hudDotPulse, !theme.isDark && { backgroundColor: theme.textAccent, shadowColor: theme.textAccent }]} />
+            <Text style={[styles.subTitleText, !theme.isDark && { color: theme.textAccent }]}>
               SYSTEM OVERLAY • AR HUD v2.4
             </Text>
           </View>
-          <Text style={styles.mainTitleText}>
+          <Text style={[styles.mainTitleText, !theme.isDark && { color: theme.textPrimary }]}>
             당구 디지털 스코어보드
           </Text>
-          <View style={styles.tableBadge}>
-            <Text style={styles.tableBadgeText}>
+          <View style={[styles.tableBadge, !theme.isDark && styles.lightTableBadge]}>
+            <Text style={[styles.tableBadgeText, !theme.isDark && { color: theme.textSecondary }]}>
               ◈ {tableNumber} • {gameType === '3ball' ? '3구 (3-Cushion)' : '4구 (4-Ball)'} • {currentPlayerCount}인 Match
             </Text>
           </View>
@@ -96,8 +97,8 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
       {/* 2. 당구 종목 선택 (visionOS Glass Panel & Spatial Glow Cards) */}
       <View style={styles.sectionContainer}>
         <View style={styles.sectionTitleRow}>
-          <View style={styles.sectionAccentLine} />
-          <Text style={styles.sectionTitle}>
+          <View style={[styles.sectionAccentLine, !theme.isDark && { backgroundColor: theme.textAccent }]} />
+          <Text style={[styles.sectionTitle, !theme.isDark && { color: theme.textSecondary }]}>
             GAME MODE SELECT
           </Text>
         </View>
@@ -107,22 +108,24 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             style={[
               styles.gameTypeCardContainer,
               gameType === '3ball' ? styles.activeBall3CardContainer : styles.inactiveCardContainer,
+              !theme.isDark && styles.lightGameTypeCardContainer,
             ]}
             onPress={() => onSelectGameType('3ball')}
             activeOpacity={0.85}
           >
             <ImageBackground
-              source={cardBgImage}
+              source={theme.isDark ? darkCardBgImage : lightCardBgImage}
               style={StyleSheet.absoluteFill}
               imageStyle={styles.cardImageStyle}
               resizeMode="cover"
             />
             <BlurView
-              intensity={gameType === '3ball' ? 65 : 30}
-              tint="dark"
+              intensity={gameType === '3ball' ? (theme.isDark ? 65 : 45) : (theme.isDark ? 30 : 20)}
+              tint={theme.isDark ? 'dark' : 'light'}
               style={[
                 styles.cardOverlay,
                 gameType === '3ball' && styles.activeBall3Overlay,
+                !theme.isDark && styles.lightCardOverlay,
               ]}
             >
               <View style={styles.hudReticleTopRight} />
@@ -133,7 +136,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                 </View>
               )}
 
-              <Text style={styles.backWatermark3}>3</Text>
+              <Text style={[styles.backWatermark3, !theme.isDark && { color: 'rgba(2, 132, 199, 0.12)' }]}>3</Text>
 
               <View style={styles.cardTextCol}>
                 <View style={styles.tagRow}>
@@ -141,10 +144,10 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                     <Text style={styles.ball3TagText}>3-CUSHION</Text>
                   </View>
                 </View>
-                <Text style={[styles.ball3Title, gameType === '3ball' && styles.activeBall3Title]}>
+                <Text style={[styles.ball3Title, gameType === '3ball' && styles.activeBall3Title, !theme.isDark && { color: theme.textPrimary }]}>
                   3구 경기
                 </Text>
-                <Text style={[styles.ball3Desc, gameType === '3ball' && styles.activeBall3Desc]}>
+                <Text style={[styles.ball3Desc, gameType === '3ball' && styles.activeBall3Desc, !theme.isDark && { color: theme.textSecondary }]}>
                   3쿠션 정통 경기 (기본 핸디 20점)
                 </Text>
               </View>
@@ -156,22 +159,24 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
             style={[
               styles.gameTypeCardContainer,
               gameType === '4ball' ? styles.activeBall4CardContainer : styles.inactiveCardContainer,
+              !theme.isDark && styles.lightGameTypeCardContainer,
             ]}
             onPress={() => onSelectGameType('4ball')}
             activeOpacity={0.85}
           >
             <ImageBackground
-              source={cardBgImage}
+              source={theme.isDark ? darkCardBgImage : lightCardBgImage}
               style={StyleSheet.absoluteFill}
               imageStyle={styles.cardImageStyle}
               resizeMode="cover"
             />
             <BlurView
-              intensity={gameType === '4ball' ? 65 : 30}
-              tint="dark"
+              intensity={gameType === '4ball' ? (theme.isDark ? 65 : 45) : (theme.isDark ? 30 : 20)}
+              tint={theme.isDark ? 'dark' : 'light'}
               style={[
                 styles.cardOverlay,
                 gameType === '4ball' && styles.activeBall4Overlay,
+                !theme.isDark && styles.lightCardOverlay,
               ]}
             >
               <View style={styles.hudReticleTopRight} />
@@ -182,7 +187,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                 </View>
               )}
 
-              <Text style={styles.backWatermark4}>4</Text>
+              <Text style={[styles.backWatermark4, !theme.isDark && { color: 'rgba(236, 72, 153, 0.12)' }]}>4</Text>
 
               <View style={styles.cardTextCol}>
                 <View style={styles.tagRow}>
@@ -190,10 +195,10 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                     <Text style={styles.ball4TagText}>4-BALL</Text>
                   </View>
                 </View>
-                <Text style={[styles.ball4Title, gameType === '4ball' && styles.activeBall4Title]}>
+                <Text style={[styles.ball4Title, gameType === '4ball' && styles.activeBall4Title, !theme.isDark && { color: theme.textPrimary }]}>
                   4구 경기
                 </Text>
-                <Text style={[styles.ball4Desc, gameType === '4ball' && styles.activeBall4Desc]}>
+                <Text style={[styles.ball4Desc, gameType === '4ball' && styles.activeBall4Desc, !theme.isDark && { color: theme.textSecondary }]}>
                   4구 친목/클럽 경기 (기본 핸디 100점)
                 </Text>
               </View>
@@ -205,12 +210,12 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
       {/* 3. 경기 인원 선택 (visionOS Dynamic Glass Segmented Pills) */}
       <View style={styles.sectionContainer}>
         <View style={styles.sectionTitleRow}>
-          <View style={styles.sectionAccentLine} />
-          <Text style={styles.sectionTitle}>
+          <View style={[styles.sectionAccentLine, !theme.isDark && { backgroundColor: theme.textAccent }]} />
+          <Text style={[styles.sectionTitle, !theme.isDark && { color: theme.textSecondary }]}>
             PLAYER COUNT (2 - 8 PLAYERS)
           </Text>
         </View>
-        <BlurView intensity={40} tint="dark" style={styles.countPillsGlass}>
+        <BlurView intensity={theme.isDark ? 40 : 60} tint={theme.isDark ? 'dark' : 'light'} style={[styles.countPillsGlass, !theme.isDark && styles.lightCountPillsGlass]}>
           <View style={styles.countChipRow}>
             {[2, 3, 4, 5, 6, 7, 8].map((num) => {
               const isActive = currentPlayerCount === num;
@@ -219,7 +224,8 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                   key={num}
                   style={[
                     styles.countChip,
-                    isActive && styles.activeCountChip,
+                    !theme.isDark && styles.lightCountChip,
+                    isActive && (theme.isDark ? styles.activeCountChip : styles.lightActiveCountChip),
                   ]}
                   onPress={() => onSelectPlayerCount(num)}
                   activeOpacity={0.8}
@@ -227,7 +233,8 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                   <Text
                     style={[
                       styles.countChipText,
-                      isActive && styles.activeCountChipText,
+                      !theme.isDark && { color: theme.textSecondary },
+                      isActive && (theme.isDark ? styles.activeCountChipText : styles.lightActiveCountChipText),
                     ]}
                   >
                     {num}명
@@ -243,17 +250,17 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
       <View style={styles.sectionContainer}>
         <View style={styles.lineupHeaderRow}>
           <View style={styles.sectionTitleRow}>
-            <View style={styles.sectionAccentLine} />
-            <Text style={styles.sectionTitle}>
+            <View style={[styles.sectionAccentLine, !theme.isDark && { backgroundColor: theme.textAccent }]} />
+            <Text style={[styles.sectionTitle, !theme.isDark && { color: theme.textSecondary }]}>
               MATCH ROSTER & HANDICAP
             </Text>
           </View>
           <TouchableOpacity
-            style={styles.settingsChip}
+            style={[styles.settingsChip, !theme.isDark && styles.lightSettingsChip]}
             onPress={onOpenSettings}
             activeOpacity={0.8}
           >
-            <Text style={styles.settingsChipText}>
+            <Text style={[styles.settingsChipText, !theme.isDark && { color: theme.textPrimary }]}>
               ⚙ 선수 관리 및 설정
             </Text>
           </TouchableOpacity>
@@ -283,16 +290,16 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                   isMultiRow && styles.multiRowCard,
                 ]}
               >
-                <BlurView intensity={45} tint="dark" style={styles.playerGlassBlur}>
-                  <View style={styles.playerCardContent}>
+                <BlurView intensity={theme.isDark ? 45 : 70} tint={theme.isDark ? 'dark' : 'light'} style={[styles.playerGlassBlur, !theme.isDark && styles.lightPlayerGlassBlur]}>
+                  <View style={[styles.playerCardContent, !theme.isDark && styles.lightPlayerCardContent]}>
                     {/* 상단 순번 HUD 배지 & 선수 이름 */}
                     <View style={styles.cardHeaderRow}>
-                      <View style={styles.orderBadge}>
-                        <Text style={styles.orderBadgeText}>P{idx + 1}</Text>
+                      <View style={[styles.orderBadge, !theme.isDark && styles.lightOrderBadge]}>
+                        <Text style={[styles.orderBadgeText, !theme.isDark && { color: theme.textAccent }]}>P{idx + 1}</Text>
                       </View>
                       <Text
                         numberOfLines={1}
-                        style={styles.playerName}
+                        style={[styles.playerName, !theme.isDark && { color: theme.textPrimary }]}
                       >
                         {player.name}
                       </Text>
@@ -301,28 +308,28 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                     {/* 하단 목표 점수(핸디) HUD Controls */}
                     <View style={styles.targetAdjustRow}>
                       <TouchableOpacity
-                        style={[styles.adjustBtn, styles.minusBtn]}
+                        style={[styles.adjustBtn, styles.minusBtn, !theme.isDark && styles.lightMinusBtn]}
                         onPress={() => onUpdateTargetScore(idx, -deltaUnit)}
                         activeOpacity={0.7}
                       >
-                        <Text style={styles.minusBtnText}>-</Text>
+                        <Text style={[styles.minusBtnText, !theme.isDark && { color: '#DC2626' }]}>-</Text>
                       </TouchableOpacity>
 
-                      <View style={styles.targetScoreBox}>
-                        <Text style={styles.targetScoreNum}>
+                      <View style={[styles.targetScoreBox, !theme.isDark && styles.lightTargetScoreBox]}>
+                        <Text style={[styles.targetScoreNum, !theme.isDark && { color: theme.textPrimary }]}>
                           {player.targetScore}
                         </Text>
-                        <Text style={styles.targetScoreUnit}>
+                        <Text style={[styles.targetScoreUnit, !theme.isDark && { color: theme.textSecondary }]}>
                           PTS
                         </Text>
                       </View>
 
                       <TouchableOpacity
-                        style={[styles.adjustBtn, styles.plusBtn]}
+                        style={[styles.adjustBtn, styles.plusBtn, !theme.isDark && styles.lightPlusBtn]}
                         onPress={() => onUpdateTargetScore(idx, deltaUnit)}
                         activeOpacity={0.7}
                       >
-                        <Text style={styles.plusBtnText}>+</Text>
+                        <Text style={[styles.plusBtnText, !theme.isDark && { color: '#059669' }]}>+</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -336,12 +343,12 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
         {/* 5. 하단 Spatial Neon Blur Button */}
         <View style={styles.footerBox}>
           <TouchableOpacity
-            style={styles.startGameBtn}
+            style={[styles.startGameBtn, !theme.isDark && styles.lightStartGameBtn]}
             onPress={onStartGame}
             activeOpacity={0.85}
           >
-            <BlurView intensity={50} tint="light" style={styles.btnGlassInner}>
-              <Text style={styles.startGameBtnText}>⚡ 경기 시작 (START MATCH)</Text>
+            <BlurView intensity={theme.isDark ? 50 : 80} tint={theme.isDark ? 'light' : 'default'} style={styles.btnGlassInner}>
+              <Text style={[styles.startGameBtnText, !theme.isDark && { color: '#FFFFFF' }]}>⚡ 경기 시작 (START MATCH)</Text>
             </BlurView>
           </TouchableOpacity>
         </View>
@@ -891,9 +898,76 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       color: '#FFFFFF',
       fontSize: f(22),
       fontWeight: '900',
-      letterSpacing: s(1.5),
-      textShadowColor: 'rgba(0, 242, 254, 0.8)',
-      textShadowOffset: { width: 0, height: 0 },
-      textShadowRadius: s(8),
+      letterSpacing: s(1),
+    },
+
+    /* 테마 2 (라이트 모드 전용 화이트 아크릴 스타일) */
+    lightHeaderBlurGlass: {
+      borderColor: 'rgba(255, 255, 255, 0.9)',
+      shadowColor: '#64748B',
+      shadowOpacity: 0.15,
+    },
+    lightHeaderBox: {
+      backgroundColor: 'rgba(255, 255, 255, 0.65)',
+    },
+    lightTopRightThemeBtn: {
+      backgroundColor: 'rgba(2, 132, 199, 0.08)',
+      borderColor: 'rgba(2, 132, 199, 0.25)',
+    },
+    lightTableBadge: {
+      backgroundColor: 'rgba(255, 255, 255, 0.8)',
+      borderColor: 'rgba(203, 213, 225, 0.8)',
+    },
+    lightGameTypeCardContainer: {
+      borderColor: 'rgba(255, 255, 255, 0.9)',
+    },
+    lightCardOverlay: {
+      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    },
+    lightCountPillsGlass: {
+      borderColor: 'rgba(255, 255, 255, 0.9)',
+    },
+    lightCountChip: {
+      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+      borderColor: 'rgba(203, 213, 225, 0.7)',
+    },
+    lightActiveCountChip: {
+      backgroundColor: '#0284C7',
+      borderColor: '#0284C7',
+    },
+    lightActiveCountChipText: {
+      color: '#FFFFFF',
+      fontWeight: '900',
+    },
+    lightSettingsChip: {
+      backgroundColor: 'rgba(255, 255, 255, 0.85)',
+      borderColor: 'rgba(203, 213, 225, 0.8)',
+    },
+    lightPlayerGlassBlur: {
+      borderColor: 'rgba(255, 255, 255, 0.95)',
+    },
+    lightPlayerCardContent: {
+      backgroundColor: 'rgba(255, 255, 255, 0.75)',
+    },
+    lightOrderBadge: {
+      backgroundColor: 'rgba(2, 132, 199, 0.12)',
+      borderColor: '#0284C7',
+    },
+    lightTargetScoreBox: {
+      backgroundColor: 'rgba(241, 245, 249, 0.9)',
+      borderColor: 'rgba(203, 213, 225, 0.8)',
+    },
+    lightMinusBtn: {
+      backgroundColor: 'rgba(254, 226, 226, 0.9)',
+      borderColor: '#F87171',
+    },
+    lightPlusBtn: {
+      backgroundColor: 'rgba(209, 250, 229, 0.9)',
+      borderColor: '#34D399',
+    },
+    lightStartGameBtn: {
+      borderColor: '#0284C7',
+      shadowColor: '#0284C7',
+      shadowOpacity: 0.35,
     },
   });
