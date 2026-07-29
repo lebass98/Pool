@@ -48,7 +48,6 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
         (isCompact || isSmallHeight) && styles.compactCard,
         {
           backgroundColor: isActiveTurn ? theme.cardActiveBg : theme.cardBg,
-          borderColor: isFinishedPlayer ? '#FFD54F' : theme.border,
         },
         isFinishedPlayer && styles.finishedCard,
       ]}
@@ -109,9 +108,8 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
               styles.remainingBadge,
               {
                 backgroundColor: isFinishedPlayer
-                  ? (theme.isDark ? 'rgba(255, 213, 79, 0.2)' : '#FEF3C7')
-                  : (theme.isDark ? 'rgba(3, 218, 198, 0.2)' : '#E0F2FE'),
-                borderColor: isFinishedPlayer ? (theme.isDark ? '#FFD54F' : '#D97706') : (theme.isDark ? '#03DAC6' : '#0284C7'),
+                  ? (theme.isDark ? 'rgba(255, 213, 79, 0.25)' : '#FEF3C7')
+                  : (theme.isDark ? 'rgba(3, 218, 198, 0.25)' : '#E0F2FE'),
               },
             ]}
           >
@@ -147,7 +145,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
         style={[
           styles.statsRow,
           isCompact && styles.compactStatsRow,
-          { backgroundColor: theme.statBoxBg, borderColor: theme.border },
+          { backgroundColor: theme.statBoxBg },
         ]}
       >
         <View style={styles.statBox}>
@@ -231,7 +229,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       borderRadius: s(22),
       paddingHorizontal: s(20),
       paddingVertical: s(18),
-      borderWidth: line(2),
       justifyContent: 'space-between',
       shadowColor: '#000',
       shadowOffset: { width: 0, height: s(6) },
@@ -323,7 +320,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       paddingHorizontal: s(10),
       paddingVertical: s(5),
       borderRadius: s(10),
-      borderWidth: line(1.5),
     },
     remainingText: {
       fontSize: f(14),
@@ -357,7 +353,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       paddingHorizontal: s(10),
       alignItems: 'center',
       marginVertical: s(8),
-      borderWidth: line(1),
     },
     compactStatsRow: {
       paddingVertical: s(6),

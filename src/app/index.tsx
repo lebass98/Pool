@@ -194,7 +194,7 @@ export default function BilliardsScoreboardScreen() {
                 <View
                   style={[
                     styles.topBar,
-                    { backgroundColor: theme.topBarBg, borderColor: theme.border },
+                    { backgroundColor: theme.topBarBg },
                   ]}
                 >
                   {/* Left: Table Badge & GameType */}
@@ -675,7 +675,6 @@ const createStyles = (
       borderRadius: s(16),
       paddingHorizontal: s(14),
       paddingVertical: s(isSmallHeight ? 4 : 6),
-      borderWidth: line(1.5),
       shadowColor: '#000',
       shadowOffset: { width: 0, height: s(4) },
       shadowOpacity: 0.2,
