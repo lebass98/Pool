@@ -522,21 +522,9 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       opacity: 0.6,
     },
     activeBall3CardContainer: {
-      borderWidth: line(2),
-      borderColor: '#00F2FE',
-      shadowColor: '#00F2FE',
-      shadowOpacity: 0.8,
-      shadowRadius: s(20),
-      elevation: 12,
       opacity: 1.0,
     },
     activeBall4CardContainer: {
-      borderWidth: line(2),
-      borderColor: '#FF2A6D',
-      shadowColor: '#FF2A6D',
-      shadowOpacity: 0.8,
-      shadowRadius: s(20),
-      elevation: 12,
       opacity: 1.0,
     },
     cardImageStyle: {
@@ -552,10 +540,10 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       backgroundColor: 'rgba(15, 23, 42, 0.45)',
     },
     activeBall3Overlay: {
-      backgroundColor: 'rgba(0, 242, 254, 0.12)',
+      backgroundColor: '#0284C7',
     },
     activeBall4Overlay: {
-      backgroundColor: 'rgba(255, 42, 109, 0.12)',
+      backgroundColor: '#E11D48',
     },
     hudReticleTopRight: {
       position: 'absolute',
@@ -992,23 +980,9 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
 
     /* 테마 2 전용 경기 선택(3구/4구) 명확한 화이트 스타일 */
     lightActiveBall3CardContainer: {
-      borderWidth: line(3.5),
-      borderColor: '#0284C7',
-      shadowColor: '#0284C7',
-      shadowOffset: { width: 0, height: s(8) },
-      shadowOpacity: 0.4,
-      shadowRadius: s(20),
-      elevation: 12,
       opacity: 1.0,
     },
     lightActiveBall4CardContainer: {
-      borderWidth: line(3.5),
-      borderColor: '#E11D48',
-      shadowColor: '#E11D48',
-      shadowOffset: { width: 0, height: s(8) },
-      shadowOpacity: 0.4,
-      shadowRadius: s(20),
-      elevation: 12,
       opacity: 1.0,
     },
     lightInactiveCardContainer: {
