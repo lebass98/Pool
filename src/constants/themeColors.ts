@@ -59,24 +59,24 @@ export const theme2Light: ThemeColors = {
   statBoxBg: '#F8FAFC',
 };
 
-// 3테마: 네온 모드 (Cyberpunk Neon)
+// 3테마: 스포츠 그래픽 그래픽카드 모드 (Premier League / Broadcast Graphics Image Feel)
 export const theme3Neon: ThemeColors = {
   themeMode: 'theme3',
   themeName: '테마 3',
-  isDark: true,
-  bg: '#0F051D',
-  cardBg: 'rgba(28, 15, 52, 0.88)',
-  cardActiveBg: 'rgba(255, 0, 127, 0.42)', // 화려한 마젠타 핑크 액티브 카드 배경
-  border: 'rgba(0, 242, 254, 0.45)',
-  activeBorder: 'rgba(0, 242, 254, 0.45)',
-  textPrimary: '#FFFFFF',
-  textSecondary: '#D8B4FE',
-  textAccent: '#00F2FE',
-  topBarBg: 'rgba(20, 8, 40, 0.85)',
-  badgeBg: 'rgba(45, 20, 80, 0.8)',
-  inputBg: 'rgba(25, 10, 50, 0.9)',
-  modalBg: 'rgba(24, 10, 48, 0.96)',
-  statBoxBg: 'rgba(20, 8, 40, 0.75)',
+  isDark: false,
+  bg: '#ECE9F8', // 쿨 라벤더 비주얼 그래픽 모드 배경
+  cardBg: '#FFFFFF', // 깨끗한 불투명 그래픽 카드
+  cardActiveBg: '#3B82F6', // 활성화 턴: 강렬한 네온 엘렉트릭 블루 그래픽 카드
+  border: '#C084FC', // 브로드캐스트 가이드 라인
+  activeBorder: '#7C3AED',
+  textPrimary: '#0F172A',
+  textSecondary: '#4C1D95', // 인텐스 퍼플 헤더 텍스트
+  textAccent: '#6D28D9',
+  topBarBg: '#FFFFFF',
+  badgeBg: '#F3E8FF',
+  inputBg: '#FFFFFF',
+  modalBg: '#FFFFFF',
+  statBoxBg: '#F5F3FF',
 };
 
 // 하위 호환 alias

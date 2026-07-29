@@ -179,7 +179,7 @@ export default function BilliardsScoreboardScreen() {
             {
               backgroundColor:
                 themeMode === 'theme3'
-                  ? 'rgba(15, 5, 29, 0.65)'
+                  ? '#ECE9F8'
                   : theme.isDark
                     ? 'rgba(8, 12, 20, 0.55)'
                     : 'rgba(248, 250, 252, 0.95)',
