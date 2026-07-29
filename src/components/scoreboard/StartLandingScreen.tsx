@@ -375,8 +375,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       position: 'relative',
     },
     scrollContentContainer: {
-      flexGrow: 1,
-      justifyContent: 'space-between',
       paddingVertical: s(10),
     },
     /* AR HUD Corner Brackets */
@@ -844,7 +842,6 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     },
     playerGlassBlur: {
       width: '100%',
-      height: '100%',
     },
     playerCardContent: {
       paddingHorizontal: s(10),
