@@ -11,9 +11,9 @@
 
 - 경기 진행 화면 하단 제어바(일시정지, 경기 종료, 되돌리기, 테마 변경, 경기 설정, 경기 리셋 등) 영역 내의 버튼 모음을 앞으로 **독 버튼 (Dock Buttons / GameControlBar)**으로 칭합니다.
 
-# 깃 커밋 메시지 규칙 (Git Commit Rules)
+# 깃 커밋 및 자동 동기화 규칙 (Git Commit & Sync Rules)
 
-- 깃 커밋(Git Commit) 시 커밋 메시지 본문 및 요약은 반드시 **한글(한국어)**로 작성하여 커밋 및 푸시하세요.
+- 코드 작업 및 코드 검증 완료 후에는 작업 변경 사항을 한글(한국어) 커밋 메시지로 작성하여 자동으로 깃 커밋(git commit), 푸시(git push), 및 풀(git pull)을 수행하세요.
 
 # 코드 검증 규칙 (Code Verification Rules)
 

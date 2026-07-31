@@ -835,11 +835,12 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       borderColor: 'rgba(255, 255, 255, 0.08)',
     },
     adjustBtn: {
-      height: '100%',
+      height: '50%',
       aspectRatio: 1,
-      borderRadius: s(8),
+      borderRadius: 9999,
       alignItems: 'center',
       justifyContent: 'center',
+      alignSelf: 'center',
     },
     minusBtn: {
       backgroundColor: 'rgba(255, 42, 109, 0.3)',
@@ -849,13 +850,15 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
     },
     minusBtnText: {
       color: '#FF2A6D',
-      fontSize: f(26),
+      fontSize: f(16),
       fontWeight: '700',
+      includeFontPadding: false,
     },
     plusBtnText: {
       color: '#00F2FE',
-      fontSize: f(26),
+      fontSize: f(16),
       fontWeight: '700',
+      includeFontPadding: false,
     },
     targetScoreBox: {
       flexDirection: 'row',
