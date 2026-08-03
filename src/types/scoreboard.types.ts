@@ -7,6 +7,7 @@ export interface Player {
   currentScore: number;
   highRun: number;
   currentInningScore: number;
+  lastInningScore: number;
   /** 목표 점수 달성 순위(1등부터). null이면 아직 진행 중 */
   finishRank: number | null;
 }

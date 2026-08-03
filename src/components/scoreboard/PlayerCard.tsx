@@ -123,7 +123,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
         </Text>
       </View>
 
-      {/* Sub Stats: 이번이닝 / 에버리지 / 하이런 */}
+      {/* Sub Stats: 이전 이닝 / 이번 이닝 / 에버리지 / 하이런 */}
       <View
         style={[
           styles.statsRow,
@@ -131,6 +131,17 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
           { backgroundColor: theme.statBoxBg },
         ]}
       >
+        <View style={styles.statBox}>
+          <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+            이전 이닝
+          </Text>
+          <Text style={[styles.statValue, { color: theme.textSecondary }]}>
+            {player.lastInningScore > 0 ? `+${player.lastInningScore}` : `${player.lastInningScore}`}
+          </Text>
+        </View>
+
+        <View style={[styles.statDivider, { backgroundColor: theme.border }]} />
+
         <View style={styles.statBox}>
           <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
             이번 이닝

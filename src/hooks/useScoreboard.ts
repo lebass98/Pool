@@ -22,6 +22,7 @@ const createPlayer = (
   targetScore,
   currentScore: targetScore,
   currentInningScore: 0,
+  lastInningScore: 0,
   highRun: 0,
   finishRank: null,
 });
@@ -285,7 +286,11 @@ export const useScoreboard = () => {
     setPlayers((prev) =>
       prev.map((player, idx) =>
         idx === gameState.currentTurnIndex
-          ? { ...player, currentInningScore: 0 }
+          ? {
+              ...player,
+              lastInningScore: player.currentInningScore,
+              currentInningScore: 0,
+            }
           : player
       )
     );
@@ -313,6 +318,7 @@ export const useScoreboard = () => {
         ...p,
         currentScore: p.targetScore,
         currentInningScore: 0,
+        lastInningScore: 0,
         highRun: 0,
         finishRank: null,
       }))
