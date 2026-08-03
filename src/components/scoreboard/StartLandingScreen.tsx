@@ -46,12 +46,11 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
   const { s, f, line, isFoldRatio } = useScale();
   const styles = useMemo(() => createStyles(s, f, line, isFoldRatio), [s, f, line, isFoldRatio]);
   const [keypadPlayerIndex, setKeypadPlayerIndex] = useState<number | null>(null);
-  const [isScoreWarningOpen, setIsScoreWarningOpen] = useState(false);
 
   const handleStartGamePress = () => {
-    const hasZeroTarget = players.some((p) => p.targetScore <= 0);
-    if (hasZeroTarget) {
-      setIsScoreWarningOpen(true);
+    const zeroIdx = players.findIndex((p) => p.targetScore <= 0);
+    if (zeroIdx !== -1) {
+      setKeypadPlayerIndex(zeroIdx);
       return;
     }
     onStartGame();
@@ -314,32 +313,6 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
           </View>
         </TouchableOpacity>
       </View>
-
-      {/* 점수 미입력 경고 팝업 모달 */}
-      <Modal visible={isScoreWarningOpen} transparent animationType="fade" onRequestClose={() => setIsScoreWarningOpen(false)}>
-        <View style={styles.warningOverlay}>
-          <TouchableOpacity style={styles.warningBackdropTouch} activeOpacity={1} onPress={() => setIsScoreWarningOpen(false)} />
-          <View style={styles.warningModalFrame}>
-            <Text style={styles.warningTitle}>알림</Text>
-            <Text style={styles.warningMessage}>점수를 입력하세요</Text>
-            <Text style={styles.warningSubMessage}>모든 선수의 목표 점수를 설정해야 경기를 시작할 수 있습니다.</Text>
-            
-            <TouchableOpacity
-              style={styles.warningConfirmBtn}
-              onPress={() => {
-                setIsScoreWarningOpen(false);
-                const zeroIdx = players.findIndex((p) => p.targetScore <= 0);
-                if (zeroIdx !== -1) {
-                  setKeypadPlayerIndex(zeroIdx);
-                }
-              }}
-              activeOpacity={0.8}
-            >
-              <Text style={styles.warningConfirmBtnText}>확인</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
 
       {/* 다이얼 키패드 목표 점수 입력 모달 */}
       {keypadPlayerIndex !== null && players[keypadPlayerIndex] && (

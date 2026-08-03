@@ -61,7 +61,11 @@ export const HandicapKeypadModal: React.FC<HandicapKeypadModalProps> = ({
   const handleConfirm = () => {
     const val = parseInt(inputValue, 10) || 0;
     onConfirm(val);
-    onClose();
+    if (hasNextPlayer && onNextPlayer) {
+      onNextPlayer();
+    } else {
+      onClose();
+    }
   };
 
   if (!visible) return null;
@@ -75,7 +79,7 @@ export const HandicapKeypadModal: React.FC<HandicapKeypadModalProps> = ({
           {/* 상단 선수 이름 및 현재 설정 수치 표시창 */}
           <View style={styles.headerDisplay}>
             <Text style={styles.playerTitle} numberOfLines={1}>
-              {playerName} 목표 점수
+              [{playerName}] 선수 목표 점수
             </Text>
             <View style={styles.displayValueRow}>
               <Text style={styles.displayValueText}>{inputValue}</Text>
@@ -127,7 +131,7 @@ export const HandicapKeypadModal: React.FC<HandicapKeypadModalProps> = ({
               ))}
             </View>
 
-            {/* 지움, 0, 확인 */}
+            {/* 지움, 0, 다음/확인 */}
             <View style={styles.row}>
               <TouchableOpacity
                 style={[styles.keyBtn, styles.actionBtn]}
@@ -150,7 +154,7 @@ export const HandicapKeypadModal: React.FC<HandicapKeypadModalProps> = ({
                 onPress={handleConfirm}
                 activeOpacity={0.7}
               >
-                <Text style={styles.nextBtnText}>확인</Text>
+                <Text style={styles.nextBtnText}>{hasNextPlayer ? '다음' : '확인'}</Text>
               </TouchableOpacity>
             </View>
           </View>
