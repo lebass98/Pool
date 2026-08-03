@@ -760,8 +760,6 @@ const createStyles = (
       height: '100%',
       flexDirection: 'row',
       flexWrap: 'wrap',
-      rowGap: s(isSmallHeight ? 4 : 8),
-      columnGap: s(8),
       justifyContent: 'space-between',
       alignContent: 'space-between',
     },
@@ -773,28 +771,28 @@ const createStyles = (
       height: '100%',
     },
     threePlayerWrapper: {
-      width: '32.4%',
+      width: '32.2%',
       height: '100%',
     },
     fourPlayerWrapper: {
       width: '49.2%',
-      height: '48.5%',
+      height: '49.2%',
     },
     fiveTopWrapper: {
-      width: '32.4%',
-      height: '48.5%',
+      width: '32.2%',
+      height: '49.2%',
     },
     fiveBottomWrapper: {
       width: '49.2%',
-      height: '48.5%',
+      height: '49.2%',
     },
     sixPlayerWrapper: {
-      width: '32.4%',
-      height: '48.5%',
+      width: '32.2%',
+      height: '49.2%',
     },
     eightPlayerWrapper: {
-      width: '24.2%',
-      height: '48.5%',
+      width: '23.8%',
+      height: '49.2%',
     },
     centerTurnBtn: {
       position: 'absolute',
