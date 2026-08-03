@@ -133,7 +133,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
       >
         <View style={styles.statBox}>
           <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
-            직전 득점
+            최근 득점
           </Text>
           <Text style={[styles.statValue, { color: theme.textSecondary }]}>
             {player.lastInningScore > 0 ? `+${player.lastInningScore}` : `${player.lastInningScore}`}
