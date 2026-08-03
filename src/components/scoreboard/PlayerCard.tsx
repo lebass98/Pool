@@ -1,8 +1,92 @@
-import React, { useMemo } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScaleFn, useScale } from '@/constants/layout';
 import { ThemeColors } from '@/constants/themeColors';
 import { Player } from '@/types/scoreboard.types';
+
+// 점수 변경 시 버티컬 롤링 애니메이션 컴포넌트 (Slot Machine Roll)
+interface RollingScoreTextProps {
+  score: number;
+  style: any;
+}
+
+const RollingScoreText: React.FC<RollingScoreTextProps> = ({ score, style }) => {
+  const [displayScore, setDisplayScore] = useState(score);
+  const [prevScore, setPrevScore] = useState(score);
+  const [isRolling, setIsRolling] = useState(false);
+  const anim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (score !== displayScore) {
+      setPrevScore(displayScore);
+      setDisplayScore(score);
+      setIsRolling(true);
+      anim.setValue(0);
+      Animated.timing(anim, {
+        toValue: 1,
+        duration: 320,
+        useNativeDriver: true,
+      }).start(() => {
+        setIsRolling(false);
+      });
+    }
+  }, [score, displayScore]);
+
+  if (!isRolling) {
+    return (
+      <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.4} style={style}>
+        {displayScore}
+      </Text>
+    );
+  }
+
+  const isUp = score < prevScore; // 득점 시 점수 감소 (차감형 스코어)
+  const prevTranslateY = anim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, isUp ? -60 : 60],
+  });
+  const prevOpacity = anim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 0],
+  });
+
+  const currTranslateY = anim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [isUp ? 60 : -60, 0],
+  });
+  const currOpacity = anim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+
+  return (
+    <View style={{ position: 'relative', width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
+      {/* 퇴장하는 이전 점수 */}
+      <Animated.View
+        style={[
+          StyleSheet.absoluteFillObject,
+          { justifyContent: 'center', alignItems: 'center', transform: [{ translateY: prevTranslateY }], opacity: prevOpacity },
+        ]}
+      >
+        <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.4} style={style}>
+          {prevScore}
+        </Text>
+      </Animated.View>
+
+      {/* 등장하는 새 점수 */}
+      <Animated.View
+        style={[
+          StyleSheet.absoluteFillObject,
+          { justifyContent: 'center', alignItems: 'center', transform: [{ translateY: currTranslateY }], opacity: currOpacity },
+        ]}
+      >
+        <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.4} style={style}>
+          {displayScore}
+        </Text>
+      </Animated.View>
+    </View>
+  );
+};
 
 interface PlayerCardProps {
   player: Player;
@@ -105,12 +189,10 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
         </View>
       </View>
 
-      {/* Main Score Display (대형 득점 카운터 텍스트) */}
+      {/* Main Score Display (대형 득점 카운터 텍스트 + 버티컬 롤링 애니메이션) */}
       <View style={styles.scoreContainer}>
-        <Text
-          numberOfLines={1}
-          adjustsFontSizeToFit
-          minimumFontScale={0.4}
+        <RollingScoreText
+          score={player.currentScore}
           style={[
             styles.mainScoreText,
             sizeMode === 'mini' && styles.miniScoreText,
@@ -118,9 +200,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
             sizeMode === 'medium' && styles.mediumScoreText,
             { color: theme.textPrimary },
           ]}
-        >
-          {player.currentScore}
-        </Text>
+        />
       </View>
 
       {/* Sub Stats: 이전 이닝 / 이번 이닝 / 에버리지 / 하이런 */}
