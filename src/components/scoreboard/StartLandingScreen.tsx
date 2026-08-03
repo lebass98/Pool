@@ -278,9 +278,11 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                             <Text style={[styles.targetScoreNum, !theme.isDark && { color: '#0F172A' }]}>
                               {player.targetScore}
                             </Text>
-                            <View style={styles.inputBadgeTag}>
-                              <Text style={styles.inputBadgeTagText}>입력</Text>
-                            </View>
+                            {player.targetScore <= 0 && (
+                              <View style={styles.inputBadgeTag}>
+                                <Text style={styles.inputBadgeTagText}>입력</Text>
+                              </View>
+                            )}
                           </TouchableOpacity>
 
                           <TouchableOpacity
