@@ -232,7 +232,7 @@ export default function BilliardsScoreboardScreen() {
                         { backgroundColor: theme.badgeBg },
                       ]}
                     >
-                      <Text style={[styles.timerLabel, { color: theme.textSecondary }]}>
+                      <Text style={styles.timerLabel}>
                         경기 시간
                       </Text>
                       <Text style={styles.timerText}>{formattedTime}</Text>
@@ -731,19 +731,20 @@ const createStyles = (
       flexDirection: 'row',
       alignItems: 'center',
       gap: s(8),
-      paddingHorizontal: s(12),
-      paddingVertical: s(2),
+      paddingHorizontal: s(14),
+      paddingVertical: s(4),
       borderRadius: s(12),
     },
     timerLabel: {
-      fontSize: f(isSmallHeight ? 12 : 14),
-      fontWeight: '700',
+      color: 'rgba(255, 255, 255, 0.85)',
+      fontSize: f(isSmallHeight ? 13 : 15),
+      fontWeight: '800',
     },
     timerText: {
-      color: '#03DAC6',
-      fontSize: f(isSmallHeight ? 32 : 44),
+      color: '#FFD600',
+      fontSize: f(isSmallHeight ? 36 : 48),
       fontWeight: '900',
-      letterSpacing: s(1),
+      letterSpacing: s(1.5),
       fontVariant: ['tabular-nums'],
     },
     cardsScrollContainer: {
