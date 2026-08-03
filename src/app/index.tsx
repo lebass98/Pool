@@ -285,8 +285,8 @@ export default function BilliardsScoreboardScreen() {
                       styles.centerTurnBtn,
                       {
                         backgroundColor: theme.isDark
-                          ? 'rgba(15, 23, 42, 0.45)'
-                          : 'rgba(255, 255, 255, 0.55)',
+                          ? 'rgba(15, 23, 42, 0.12)'
+                          : 'rgba(255, 255, 255, 0.15)',
                       },
                     ]}
                     onPress={endTurn}
@@ -297,7 +297,7 @@ export default function BilliardsScoreboardScreen() {
                     <Text
                       style={[
                         styles.centerTurnIconText,
-                        { color: theme.isDark ? 'rgba(255, 255, 255, 0.85)' : 'rgba(15, 23, 42, 0.85)' },
+                        { color: theme.isDark ? 'rgba(255, 255, 255, 0.22)' : 'rgba(15, 23, 42, 0.22)' },
                       ]}
                     >
                       ↺
