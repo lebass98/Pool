@@ -108,6 +108,9 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
       {/* Main Score Display (대형 득점 카운터 텍스트) */}
       <View style={styles.scoreContainer}>
         <Text
+          numberOfLines={1}
+          adjustsFontSizeToFit
+          minimumFontScale={0.4}
           style={[
             styles.mainScoreText,
             sizeMode === 'mini' && styles.miniScoreText,
@@ -306,25 +309,28 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       fontWeight: '900',
     },
     scoreContainer: {
+      flex: 1,
+      width: '100%',
       alignItems: 'center',
       justifyContent: 'center',
-      marginVertical: s(6),
+      marginVertical: s(2),
     },
     mainScoreText: {
       fontFamily: 'PretendardGOV-ExtraBold',
-      fontSize: f(110),
+      fontSize: f(170),
       fontWeight: '900',
       letterSpacing: -s(2),
       includeFontPadding: false,
+      textAlign: 'center',
     },
     mediumScoreText: {
-      fontSize: f(85),
+      fontSize: f(140),
     },
     compactScoreText: {
-      fontSize: f(65),
+      fontSize: f(110),
     },
     miniScoreText: {
-      fontSize: f(50),
+      fontSize: f(85),
     },
     statsRow: {
       flexDirection: 'row',
