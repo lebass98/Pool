@@ -227,47 +227,98 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
             { backgroundColor: theme.statBoxBg },
           ]}
         >
-          <View style={[styles.statBox, isMultiRow && styles.gridStatBox]}>
-            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
-              최근 득점
-            </Text>
-            <Text style={[styles.statValue, { color: theme.textSecondary }]}>
-              {player.lastInningScore > 0 ? `+${player.lastInningScore}` : `${player.lastInningScore}`}
-            </Text>
-          </View>
+          {isMultiRow ? (
+            <View style={{ flex: 1, width: '100%', justifyContent: 'space-around' }}>
+              {/* 1행: 최근 득점 & 이번 이닝 */}
+              <View style={styles.gridRow}>
+                <View style={styles.gridStatBox}>
+                  <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+                    최근 득점
+                  </Text>
+                  <Text style={[styles.statValue, { color: theme.textSecondary }]}>
+                    {player.lastInningScore > 0 ? `+${player.lastInningScore}` : `${player.lastInningScore}`}
+                  </Text>
+                </View>
+                <View style={[styles.statDividerVertical, { backgroundColor: theme.border, height: '70%' }]} />
+                <View style={styles.gridStatBox}>
+                  <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+                    이번 이닝
+                  </Text>
+                  <Text style={[styles.statValue, { color: theme.textPrimary }]}>
+                    +{player.currentInningScore}
+                  </Text>
+                </View>
+              </View>
 
-          {!isMultiRow && <View style={[styles.statDividerVertical, { backgroundColor: theme.border }]} />}
+              {/* 행 사이 가로 구분선 */}
+              <View style={[styles.statDividerHorizontal, { backgroundColor: theme.border }]} />
 
-          <View style={[styles.statBox, isMultiRow && styles.gridStatBox]}>
-            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
-              이번 이닝
-            </Text>
-            <Text style={[styles.statValue, { color: theme.textPrimary }]}>
-              +{player.currentInningScore}
-            </Text>
-          </View>
+              {/* 2행: 에버리지 & 하이런 */}
+              <View style={styles.gridRow}>
+                <View style={styles.gridStatBox}>
+                  <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+                    에버리지
+                  </Text>
+                  <Text style={[styles.statValue, { color: '#03DAC6' }]}>
+                    {average}
+                  </Text>
+                </View>
+                <View style={[styles.statDividerVertical, { backgroundColor: theme.border, height: '70%' }]} />
+                <View style={styles.gridStatBox}>
+                  <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+                    하이런
+                  </Text>
+                  <Text style={[styles.statValue, { color: theme.textPrimary }]}>
+                    {player.highRun}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          ) : (
+            <>
+              <View style={styles.statBox}>
+                <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+                  최근 득점
+                </Text>
+                <Text style={[styles.statValue, { color: theme.textSecondary }]}>
+                  {player.lastInningScore > 0 ? `+${player.lastInningScore}` : `${player.lastInningScore}`}
+                </Text>
+              </View>
 
-          {!isMultiRow && <View style={[styles.statDividerVertical, { backgroundColor: theme.border }]} />}
+              <View style={[styles.statDividerVertical, { backgroundColor: theme.border }]} />
 
-          <View style={[styles.statBox, isMultiRow && styles.gridStatBox]}>
-            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
-              에버리지
-            </Text>
-            <Text style={[styles.statValue, { color: '#03DAC6' }]}>
-              {average}
-            </Text>
-          </View>
+              <View style={styles.statBox}>
+                <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+                  이번 이닝
+                </Text>
+                <Text style={[styles.statValue, { color: theme.textPrimary }]}>
+                  +{player.currentInningScore}
+                </Text>
+              </View>
 
-          {!isMultiRow && <View style={[styles.statDividerVertical, { backgroundColor: theme.border }]} />}
+              <View style={[styles.statDividerVertical, { backgroundColor: theme.border }]} />
 
-          <View style={[styles.statBox, isMultiRow && styles.gridStatBox]}>
-            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
-              하이런
-            </Text>
-            <Text style={[styles.statValue, { color: theme.textPrimary }]}>
-              {player.highRun}
-            </Text>
-          </View>
+              <View style={styles.statBox}>
+                <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+                  에버리지
+                </Text>
+                <Text style={[styles.statValue, { color: '#03DAC6' }]}>
+                  {average}
+                </Text>
+              </View>
+
+              <View style={[styles.statDividerVertical, { backgroundColor: theme.border }]} />
+
+              <View style={styles.statBox}>
+                <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+                  하이런
+                </Text>
+                <Text style={[styles.statValue, { color: theme.textPrimary }]}>
+                  {player.highRun}
+                </Text>
+              </View>
+            </>
+          )}
         </View>
       </View>
 
@@ -473,35 +524,42 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       paddingVertical: s(6),
     },
     statsGrid: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
+      flexDirection: 'column',
       borderRadius: s(14),
       paddingVertical: s(10),
       paddingHorizontal: s(10),
-      justifyContent: 'space-between',
-      alignContent: 'center',
+      justifyContent: 'space-around',
+      alignItems: 'center',
       width: s(220),
       height: '100%',
-      gap: s(6),
     },
     compactStatsGrid: {
       width: s(180),
       paddingVertical: s(6),
       paddingHorizontal: s(6),
     },
+    gridRow: {
+      flexDirection: 'row',
+      width: '100%',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
     statBox: {
       flex: 1,
       alignItems: 'center',
     },
     gridStatBox: {
-      flex: 0,
-      width: '47%',
+      flex: 1,
       alignItems: 'center',
-      marginVertical: s(2),
     },
     statDividerVertical: {
       width: line(1),
       height: '75%',
+    },
+    statDividerHorizontal: {
+      height: line(1),
+      width: '85%',
+      alignSelf: 'center',
     },
     statLabel: {
       fontSize: f(12),
