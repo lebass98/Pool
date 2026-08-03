@@ -276,6 +276,7 @@ export default function BilliardsScoreboardScreen() {
                             inning={gameState.inning}
                             theme={theme}
                             isCompact={isCompact}
+                            isMultiRow={players.length >= 4}
                             onAddScore={(delta) => handleAddScore(index, delta)}
                           />
                         </View>

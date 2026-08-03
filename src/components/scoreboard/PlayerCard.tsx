@@ -106,6 +106,7 @@ interface PlayerCardProps {
   inning: number;
   theme: ThemeColors;
   isCompact?: boolean;
+  isMultiRow?: boolean;
   onAddScore: (delta: number) => void;
 }
 
@@ -116,6 +117,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
   inning,
   theme,
   isCompact = false,
+  isMultiRow = false,
   onAddScore,
 }) => {
   const { s, f, line, isSmallHeight } = useScale();
@@ -200,68 +202,72 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
         </View>
       </View>
 
-      {/* Main Score Display (대형 득점 카운터 텍스트 + 3D 카드 입체 회전 애니메이션) */}
-      <View style={styles.scoreContainer}>
-        <FlipScoreText
-          score={player.currentScore}
+      {/* Main Score & Sub Stats Container */}
+      <View style={isMultiRow ? styles.bodyRow : styles.bodyColumn}>
+        {/* Main Score Display (대형 득점 카운터 텍스트 + 3D 카드 입체 회전 애니메이션) */}
+        <View style={[styles.scoreContainer, isMultiRow && styles.scoreContainerSide]}>
+          <FlipScoreText
+            score={player.currentScore}
+            style={[
+              styles.mainScoreText,
+              sizeMode === 'mini' && styles.miniScoreText,
+              sizeMode === 'compact' && styles.compactScoreText,
+              sizeMode === 'medium' && styles.mediumScoreText,
+              isMultiRow && styles.sideScoreText,
+              { color: theme.textPrimary },
+            ]}
+          />
+        </View>
+
+        {/* Sub Stats: 이전 이닝 / 이번 이닝 / 에버리지 / 하이런 */}
+        <View
           style={[
-            styles.mainScoreText,
-            sizeMode === 'mini' && styles.miniScoreText,
-            sizeMode === 'compact' && styles.compactScoreText,
-            sizeMode === 'medium' && styles.mediumScoreText,
-            { color: theme.textPrimary },
+            isMultiRow ? styles.statsColumn : styles.statsRow,
+            isCompact && (isMultiRow ? styles.compactStatsColumn : styles.compactStatsRow),
+            { backgroundColor: theme.statBoxBg },
           ]}
-        />
-      </View>
+        >
+          <View style={styles.statBox}>
+            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+              최근 득점
+            </Text>
+            <Text style={[styles.statValue, { color: theme.textSecondary }]}>
+              {player.lastInningScore > 0 ? `+${player.lastInningScore}` : `${player.lastInningScore}`}
+            </Text>
+          </View>
 
-      {/* Sub Stats: 이전 이닝 / 이번 이닝 / 에버리지 / 하이런 */}
-      <View
-        style={[
-          styles.statsRow,
-          isCompact && styles.compactStatsRow,
-          { backgroundColor: theme.statBoxBg },
-        ]}
-      >
-        <View style={styles.statBox}>
-          <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
-            최근 득점
-          </Text>
-          <Text style={[styles.statValue, { color: theme.textSecondary }]}>
-            {player.lastInningScore > 0 ? `+${player.lastInningScore}` : `${player.lastInningScore}`}
-          </Text>
-        </View>
+          <View style={[isMultiRow ? styles.statDividerHorizontal : styles.statDividerVertical, { backgroundColor: theme.border }]} />
 
-        <View style={[styles.statDivider, { backgroundColor: theme.border }]} />
+          <View style={styles.statBox}>
+            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+              이번 이닝
+            </Text>
+            <Text style={[styles.statValue, { color: theme.textPrimary }]}>
+              +{player.currentInningScore}
+            </Text>
+          </View>
 
-        <View style={styles.statBox}>
-          <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
-            이번 이닝
-          </Text>
-          <Text style={[styles.statValue, { color: theme.textPrimary }]}>
-            +{player.currentInningScore}
-          </Text>
-        </View>
+          <View style={[isMultiRow ? styles.statDividerHorizontal : styles.statDividerVertical, { backgroundColor: theme.border }]} />
 
-        <View style={[styles.statDivider, { backgroundColor: theme.border }]} />
+          <View style={styles.statBox}>
+            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+              에버리지
+            </Text>
+            <Text style={[styles.statValue, { color: '#03DAC6' }]}>
+              {average}
+            </Text>
+          </View>
 
-        <View style={styles.statBox}>
-          <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
-            에버리지
-          </Text>
-          <Text style={[styles.statValue, { color: '#03DAC6' }]}>
-            {average}
-          </Text>
-        </View>
+          <View style={[isMultiRow ? styles.statDividerHorizontal : styles.statDividerVertical, { backgroundColor: theme.border }]} />
 
-        <View style={[styles.statDivider, { backgroundColor: theme.border }]} />
-
-        <View style={styles.statBox}>
-          <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
-            하이런
-          </Text>
-          <Text style={[styles.statValue, { color: theme.textPrimary }]}>
-            {player.highRun}
-          </Text>
+          <View style={styles.statBox}>
+            <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
+              하이런
+            </Text>
+            <Text style={[styles.statValue, { color: theme.textPrimary }]}>
+              {player.highRun}
+            </Text>
+          </View>
         </View>
       </View>
 
@@ -434,6 +440,27 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     miniScoreText: {
       fontSize: f(130),
     },
+    bodyRow: {
+      flexDirection: 'row',
+      flex: 1,
+      width: '100%',
+      gap: s(12),
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    bodyColumn: {
+      flex: 1,
+      width: '100%',
+    },
+    scoreContainerSide: {
+      flex: 1.5,
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    sideScoreText: {
+      fontSize: f(130),
+    },
     statsRow: {
       flexDirection: 'row',
       borderRadius: s(14),
@@ -445,13 +472,33 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     compactStatsRow: {
       paddingVertical: s(6),
     },
+    statsColumn: {
+      flexDirection: 'column',
+      borderRadius: s(14),
+      paddingVertical: s(12),
+      paddingHorizontal: s(10),
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      minWidth: s(110),
+      height: '100%',
+      marginVertical: 0,
+    },
+    compactStatsColumn: {
+      paddingVertical: s(8),
+      paddingHorizontal: s(8),
+      minWidth: s(95),
+    },
     statBox: {
       flex: 1,
       alignItems: 'center',
     },
-    statDivider: {
+    statDividerVertical: {
       width: line(1),
       height: '75%',
+    },
+    statDividerHorizontal: {
+      height: line(1),
+      width: '75%',
     },
     statLabel: {
       fontSize: f(12),
