@@ -75,6 +75,7 @@ export default function BilliardsScoreboardScreen() {
     canUndo,
     setGameType,
     updatePlayerTargetScore,
+    setPlayerExactTargetScore,
     addRegisteredPlayer,
     deleteRegisteredPlayer,
     selectPlayersForGame,
@@ -183,6 +184,7 @@ export default function BilliardsScoreboardScreen() {
                 onSelectGameType={setGameType}
                 onSelectPlayerCount={handleLandingSelectPlayerCount}
                 onUpdateTargetScore={updatePlayerTargetScore}
+                onSetExactTargetScore={setPlayerExactTargetScore}
                 onOpenSettings={() => setIsSettingsOpen(true)}
                 onStartGame={handleLandingStartGame}
                 onToggleTheme={() => setIsThemeModalOpen(true)}

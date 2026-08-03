@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -10,6 +10,7 @@ import { BlurView } from 'expo-blur';
 import { ScaleFn, useScale } from '@/constants/layout';
 import { ThemeColors } from '@/constants/themeColors';
 import { GameType, Player, RegisteredPlayer } from '@/types/scoreboard.types';
+import { HandicapKeypadModal } from './HandicapKeypadModal';
 
 interface StartLandingScreenProps {
   theme: ThemeColors;
@@ -21,6 +22,7 @@ interface StartLandingScreenProps {
   onSelectGameType: (type: GameType) => void;
   onSelectPlayerCount: (count: number) => void;
   onUpdateTargetScore: (playerIndex: number, delta: number) => void;
+  onSetExactTargetScore?: (playerIndex: number, exactValue: number) => void;
   onOpenSettings: () => void;
   onStartGame: () => void;
   onToggleTheme: () => void;
@@ -35,12 +37,14 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
   onSelectGameType,
   onSelectPlayerCount,
   onUpdateTargetScore,
+  onSetExactTargetScore,
   onOpenSettings,
   onStartGame,
   onToggleTheme,
 }) => {
   const { s, f, line, isFoldRatio } = useScale();
   const styles = useMemo(() => createStyles(s, f, line, isFoldRatio), [s, f, line, isFoldRatio]);
+  const [keypadPlayerIndex, setKeypadPlayerIndex] = useState<number | null>(null);
 
   const deltaUnit = gameType === '4ball' ? 10 : 1;
   const count = players.length;
@@ -254,14 +258,20 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
                             <Text style={[styles.minusBtnText, !theme.isDark && { color: '#DC2626' }]}>-</Text>
                           </TouchableOpacity>
 
-                          <View style={[styles.targetScoreBox, !theme.isDark && styles.lightTargetScoreBox]}>
+                          <TouchableOpacity
+                            style={[styles.targetScoreBox, !theme.isDark && styles.lightTargetScoreBox]}
+                            onPress={() => setKeypadPlayerIndex(idx)}
+                            activeOpacity={0.75}
+                            accessibilityRole="button"
+                            accessibilityLabel={`${player.name} 목표 점수 입력`}
+                          >
                             <Text style={[styles.targetScoreNum, !theme.isDark && { color: '#0F172A' }]}>
                               {player.targetScore}
                             </Text>
-                            <Text style={[styles.targetScoreUnit, !theme.isDark && { color: '#0F172A' }]}>
-                              PTS
-                            </Text>
-                          </View>
+                            <View style={styles.inputBadgeTag}>
+                              <Text style={styles.inputBadgeTagText}>입력</Text>
+                            </View>
+                          </TouchableOpacity>
 
                           <TouchableOpacity
                             style={[styles.adjustBtn, styles.plusBtn, !theme.isDark && styles.lightPlusBtn]}
@@ -293,6 +303,32 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
           </View>
         </TouchableOpacity>
       </View>
+
+      {/* 다이얼 키패드 목표 점수 입력 모달 */}
+      {keypadPlayerIndex !== null && players[keypadPlayerIndex] && (
+        <HandicapKeypadModal
+          visible={keypadPlayerIndex !== null}
+          playerName={players[keypadPlayerIndex].name}
+          initialValue={players[keypadPlayerIndex].targetScore}
+          theme={theme}
+          onClose={() => setKeypadPlayerIndex(null)}
+          onConfirm={(val) => {
+            const idx = keypadPlayerIndex;
+            if (idx !== null) {
+              if (onSetExactTargetScore) {
+                onSetExactTargetScore(idx, val);
+              } else {
+                const delta = val - players[idx].targetScore;
+                onUpdateTargetScore(idx, delta);
+              }
+            }
+          }}
+          hasNextPlayer={keypadPlayerIndex < players.length - 1}
+          onNextPlayer={() => {
+            setKeypadPlayerIndex((prev) => (prev !== null && prev < players.length - 1 ? prev + 1 : null));
+          }}
+        />
+      )}
     </View>
   );
 };
@@ -876,6 +912,18 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       fontSize: f(13),
       fontWeight: '800',
       color: '#64748B',
+    },
+    inputBadgeTag: {
+      backgroundColor: '#03DAC6',
+      paddingHorizontal: s(6),
+      paddingVertical: s(2),
+      borderRadius: s(6),
+      marginLeft: s(2),
+    },
+    inputBadgeTagText: {
+      color: '#000000',
+      fontSize: f(11),
+      fontWeight: '900',
     },
     footerBox: {
       alignItems: 'center',

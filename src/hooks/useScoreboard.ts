@@ -82,12 +82,23 @@ export const useScoreboard = () => {
     );
   };
 
-  // 개별 선수 목표 점수(핸디) 직접 변경
+  // 개별 선수 목표 점수(핸디) 증감 변경
   const updatePlayerTargetScore = (playerIndex: number, delta: number) => {
     setPlayers((prev) =>
       prev.map((p, idx) => {
         if (idx !== playerIndex) return p;
         const newTarget = Math.max(1, p.targetScore + delta);
+        return { ...p, targetScore: newTarget, currentScore: newTarget };
+      })
+    );
+  };
+
+  // 개별 선수 목표 점수(핸디) 수치 직접 설정 (키패드용)
+  const setPlayerExactTargetScore = (playerIndex: number, exactScore: number) => {
+    setPlayers((prev) =>
+      prev.map((p, idx) => {
+        if (idx !== playerIndex) return p;
+        const newTarget = Math.max(1, exactScore);
         return { ...p, targetScore: newTarget, currentScore: newTarget };
       })
     );
@@ -352,6 +363,7 @@ export const useScoreboard = () => {
     canUndo: history.length > 0,
     setGameType,
     updatePlayerTargetScore,
+    setPlayerExactTargetScore,
     addRegisteredPlayer,
     deleteRegisteredPlayer,
     selectPlayersForGame,
