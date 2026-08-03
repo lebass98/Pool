@@ -361,12 +361,12 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     scoreBtn: {
       borderRadius: s(14),
-      paddingVertical: s(18),
+      paddingVertical: s(19.8),
       alignItems: 'center',
       justifyContent: 'center',
     },
     compactScoreBtn: {
-      paddingVertical: s(14),
+      paddingVertical: s(15.4),
     },
     minusBtn: {
       flex: 1,
