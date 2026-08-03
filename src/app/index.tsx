@@ -162,12 +162,7 @@ export default function BilliardsScoreboardScreen() {
       style={[
         styles.overlayBackground,
         {
-          backgroundColor:
-            themeMode === 'theme3'
-              ? '#ECE9F8'
-              : theme.isDark
-                ? '#0B132B'
-                : '#F8FAFC',
+          backgroundColor: theme.bg,
         },
       ]}
     >

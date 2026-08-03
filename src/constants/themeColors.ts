@@ -59,24 +59,24 @@ export const theme2Light: ThemeColors = {
   statBoxBg: '#F8FAFC',
 };
 
-// 3테마: 스포츠 그래픽 그래픽카드 모드 (Premier League / Broadcast Graphics Image Feel)
+// 3테마: 스포츠 그래픽 그래픽카드 모드 (Premier League / Overwatch Challenges Feel)
 export const theme3Neon: ThemeColors = {
   themeMode: 'theme3',
   themeName: '테마 3',
   isDark: false,
-  bg: '#ECE9F8', // 쿨 라벤더 비주얼 그래픽 모드 배경
-  cardBg: '#FFFFFF', // 깨끗한 불투명 그래픽 카드
-  cardActiveBg: '#3B82F6', // 활성화 턴: 강렬한 네온 엘렉트릭 블루 그래픽 카드
-  border: '#C084FC', // 브로드캐스트 가이드 라인
-  activeBorder: '#7C3AED',
-  textPrimary: '#0F172A',
-  textSecondary: '#4C1D95', // 인텐스 퍼플 헤더 텍스트
-  textAccent: '#6D28D9',
-  topBarBg: '#FFFFFF',
-  badgeBg: '#F3E8FF',
-  inputBg: '#FFFFFF',
+  bg: '#4BA2E3', // 오버워치 챌린지풍의 청량한 세룰리안 스카이블루 배경
+  cardBg: 'rgba(255, 255, 255, 0.85)', // 배경이 부드럽게 투과되는 반투명 흰색 카드
+  cardActiveBg: '#00F2C3', // 활성화 턴: 오버워치 완료 챌린지 느낌의 강렬한 네온 민트/시안
+  border: 'rgba(255, 255, 255, 0.28)', // 부드러운 화이트 투명 경계선
+  activeBorder: '#00E5FF',
+  textPrimary: '#0F172A', // 선명한 차콜 텍스트로 가독성 보장
+  textSecondary: '#475569',
+  textAccent: '#FF9100', // 오버워치 배틀패스 포인트 골드 오렌지색
+  topBarBg: 'rgba(255, 255, 255, 0.18)', // 스카이블루 배경에 녹아드는 반투명 헤더 바
+  badgeBg: 'rgba(255, 255, 255, 0.28)', // 반투명 화이트 배지 배경
+  inputBg: 'rgba(255, 255, 255, 0.85)',
   modalBg: '#FFFFFF',
-  statBoxBg: '#F5F3FF',
+  statBoxBg: 'rgba(0, 0, 0, 0.05)', // 연한 반투명 블랙 스탯 카드 배경
 };
 
 // 하위 호환 alias
