@@ -683,8 +683,8 @@ const createStyles = (
     container: {
       flex: 1,
       paddingHorizontal: s(16),
-      paddingVertical: s(isSmallHeight ? 4 : 10),
-      justifyContent: 'space-between',
+      paddingVertical: s(isSmallHeight ? 8 : 16),
+      gap: s(isSmallHeight ? 8 : 16),
     },
     topBar: {
       flexDirection: 'row',
@@ -751,7 +751,7 @@ const createStyles = (
     },
     cardsScrollContainer: {
       flex: 1,
-      marginVertical: s(isSmallHeight ? 2 : 4),
+      marginVertical: 0,
       position: 'relative',
       justifyContent: 'center',
     },
