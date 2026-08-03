@@ -43,6 +43,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
   onToggleTheme,
 }) => {
   const { s, f, line, isFoldRatio } = useScale();
+  const styles = useMemo(() => createStyles(s, f, line, isFoldRatio), [s, f, line, isFoldRatio]);
   const [keypadPlayerIndex, setKeypadPlayerIndex] = useState<number | null>(null);
   const [isScoreWarningOpen, setIsScoreWarningOpen] = useState(false);
 
