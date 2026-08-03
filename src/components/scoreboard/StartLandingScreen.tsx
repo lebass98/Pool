@@ -43,8 +43,17 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
   onToggleTheme,
 }) => {
   const { s, f, line, isFoldRatio } = useScale();
-  const styles = useMemo(() => createStyles(s, f, line, isFoldRatio), [s, f, line, isFoldRatio]);
   const [keypadPlayerIndex, setKeypadPlayerIndex] = useState<number | null>(null);
+  const [isScoreWarningOpen, setIsScoreWarningOpen] = useState(false);
+
+  const handleStartGamePress = () => {
+    const hasZeroTarget = players.some((p) => p.targetScore <= 0);
+    if (hasZeroTarget) {
+      setIsScoreWarningOpen(true);
+      return;
+    }
+    onStartGame();
+  };
 
   const deltaUnit = gameType === '4ball' ? 10 : 1;
   const count = players.length;
@@ -295,7 +304,7 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
       <View style={styles.footerBox}>
         <TouchableOpacity
           style={[styles.startGameBtn, !theme.isDark && styles.lightStartGameBtn]}
-          onPress={onStartGame}
+          onPress={handleStartGamePress}
           activeOpacity={0.85}
         >
           <View style={[styles.btnGlassInner, !theme.isDark && styles.lightBtnGlassInner]}>
@@ -303,6 +312,32 @@ export const StartLandingScreen: React.FC<StartLandingScreenProps> = ({
           </View>
         </TouchableOpacity>
       </View>
+
+      {/* 점수 미입력 경고 팝업 모달 */}
+      <Modal visible={isScoreWarningOpen} transparent animationType="fade" onRequestClose={() => setIsScoreWarningOpen(false)}>
+        <View style={styles.warningOverlay}>
+          <TouchableOpacity style={styles.warningBackdropTouch} activeOpacity={1} onPress={() => setIsScoreWarningOpen(false)} />
+          <View style={styles.warningModalFrame}>
+            <Text style={styles.warningTitle}>알림</Text>
+            <Text style={styles.warningMessage}>점수를 입력하세요</Text>
+            <Text style={styles.warningSubMessage}>모든 선수의 목표 점수를 설정해야 경기를 시작할 수 있습니다.</Text>
+            
+            <TouchableOpacity
+              style={styles.warningConfirmBtn}
+              onPress={() => {
+                setIsScoreWarningOpen(false);
+                const zeroIdx = players.findIndex((p) => p.targetScore <= 0);
+                if (zeroIdx !== -1) {
+                  setKeypadPlayerIndex(zeroIdx);
+                }
+              }}
+              activeOpacity={0.8}
+            >
+              <Text style={styles.warningConfirmBtnText}>확인</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
 
       {/* 다이얼 키패드 목표 점수 입력 모달 */}
       {keypadPlayerIndex !== null && players[keypadPlayerIndex] && (
@@ -912,6 +947,62 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, isFoldRatio: boolea
       fontSize: f(13),
       fontWeight: '800',
       color: '#64748B',
+    },
+    warningOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.82)',
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 1100,
+    },
+    warningBackdropTouch: {
+      ...StyleSheet.absoluteFillObject,
+    },
+    warningModalFrame: {
+      width: s(360),
+      backgroundColor: '#1E232A',
+      borderRadius: s(20),
+      borderWidth: line(2),
+      borderColor: '#F59E0B',
+      padding: s(24),
+      alignItems: 'center',
+      shadowColor: '#F59E0B',
+      shadowOffset: { width: 0, height: s(8) },
+      shadowOpacity: 0.3,
+      shadowRadius: s(16),
+      elevation: 10,
+    },
+    warningTitle: {
+      color: '#F59E0B',
+      fontSize: f(16),
+      fontWeight: '800',
+      marginBottom: s(6),
+    },
+    warningMessage: {
+      color: '#FFFFFF',
+      fontSize: f(24),
+      fontWeight: '900',
+      marginBottom: s(8),
+      textAlign: 'center',
+    },
+    warningSubMessage: {
+      color: '#94A3B8',
+      fontSize: f(14),
+      fontWeight: '600',
+      textAlign: 'center',
+      marginBottom: s(20),
+    },
+    warningConfirmBtn: {
+      backgroundColor: '#F59E0B',
+      width: '100%',
+      paddingVertical: s(14),
+      borderRadius: s(12),
+      alignItems: 'center',
+    },
+    warningConfirmBtnText: {
+      color: '#000000',
+      fontSize: f(18),
+      fontWeight: '900',
     },
     inputBadgeTag: {
       backgroundColor: '#03DAC6',

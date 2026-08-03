@@ -35,8 +35,8 @@ export const useScoreboard = () => {
   const [gameType, setGameTypeState] = useState<GameType>('3ball');
 
   const [players, setPlayers] = useState<Player[]>([
-    createPlayer('p1', '김당구', 20),
-    createPlayer('p2', '박당구', 20),
+    createPlayer('p1', '김당구', 0),
+    createPlayer('p2', '박당구', 0),
   ]);
 
   const [gameState, setGameState] = useState<GameState>({
@@ -72,8 +72,8 @@ export const useScoreboard = () => {
     setGameTypeState(type);
     setGameState((prev) => ({ ...prev, gameType: type }));
 
-    // 종목에 맞춘 기본 목표 점수 보정 (4구: 100점, 3구: 20점)
-    const defaultTarget = type === '4ball' ? 100 : 20;
+    // 경기 전 기본 목표 점수 0점 초기화
+    const defaultTarget = 0;
     setPlayers((prev) =>
       prev.map((p) => ({
         ...p,
@@ -126,10 +126,10 @@ export const useScoreboard = () => {
 
     if (activeRegistered.length < 2) return;
 
-    const defaultTarget = gameType === '4ball' ? 100 : 20;
+    const defaultTarget = 0;
 
     const newPlayers: Player[] = activeRegistered.map((r) =>
-      createPlayer(r.id, r.name, r.targetScore || defaultTarget)
+      createPlayer(r.id, r.name, 0)
     );
 
     setPlayers(newPlayers);
