@@ -98,7 +98,7 @@ export const useScoreboard = () => {
     setPlayers((prev) =>
       prev.map((p, idx) => {
         if (idx !== playerIndex) return p;
-        const newTarget = Math.max(1, exactScore);
+        const newTarget = Math.max(0, exactScore);
         return { ...p, targetScore: newTarget, currentScore: newTarget };
       })
     );

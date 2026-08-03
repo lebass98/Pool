@@ -26,13 +26,13 @@ export const HandicapKeypadModal: React.FC<HandicapKeypadModalProps> = ({
 }) => {
   const { s, f, line } = useScale();
   const styles = React.useMemo(() => createStyles(s, f, line), [s, f, line]);
-  const [inputValue, setInputValue] = useState<string>(String(initialValue));
+  const [inputValue, setInputValue] = useState<string>('0');
 
   useEffect(() => {
     if (visible) {
-      setInputValue(String(initialValue));
+      setInputValue('0');
     }
-  }, [visible, initialValue]);
+  }, [visible]);
 
   const handlePressNumber = (num: number) => {
     let nextStr = '';
