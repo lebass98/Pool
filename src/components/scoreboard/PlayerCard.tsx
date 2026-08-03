@@ -380,12 +380,12 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       opacity: 0.6,
     },
     minusBtnText: {
-      fontSize: f(20),
+      fontSize: f(16),
       fontWeight: '800',
     },
     plusBtnText: {
       color: '#000000',
-      fontSize: f(22),
+      fontSize: f(17.6),
       fontWeight: '900',
     },
   });
