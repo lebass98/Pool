@@ -35,29 +35,33 @@ export const HandicapKeypadModal: React.FC<HandicapKeypadModalProps> = ({
   }, [visible, initialValue]);
 
   const handlePressNumber = (num: number) => {
+    let nextStr = '';
     if (inputValue === '0') {
-      setInputValue(String(num));
+      nextStr = String(num);
     } else if (inputValue.length < 3) {
-      setInputValue(inputValue + String(num));
+      nextStr = inputValue + String(num);
+    } else {
+      return;
     }
+    setInputValue(nextStr);
+    const val = parseInt(nextStr, 10) || 0;
+    onConfirm(val);
   };
 
   const handleClear = () => {
+    let nextStr = '0';
     if (inputValue.length > 1) {
-      setInputValue(inputValue.slice(0, -1));
-    } else {
-      setInputValue('0');
+      nextStr = inputValue.slice(0, -1);
     }
+    setInputValue(nextStr);
+    const val = parseInt(nextStr, 10) || 0;
+    onConfirm(val);
   };
 
   const handleConfirm = () => {
     const val = parseInt(inputValue, 10) || 0;
     onConfirm(val);
-    if (hasNextPlayer && onNextPlayer) {
-      onNextPlayer();
-    } else {
-      onClose();
-    }
+    onClose();
   };
 
   if (!visible) return null;
@@ -123,7 +127,7 @@ export const HandicapKeypadModal: React.FC<HandicapKeypadModalProps> = ({
               ))}
             </View>
 
-            {/* 지움, 0, 다음 */}
+            {/* 지움, 0, 확인 */}
             <View style={styles.row}>
               <TouchableOpacity
                 style={[styles.keyBtn, styles.actionBtn]}
@@ -146,9 +150,7 @@ export const HandicapKeypadModal: React.FC<HandicapKeypadModalProps> = ({
                 onPress={handleConfirm}
                 activeOpacity={0.7}
               >
-                <Text style={styles.nextBtnText}>
-                  {hasNextPlayer ? '다음' : '완료'}
-                </Text>
+                <Text style={styles.nextBtnText}>확인</Text>
               </TouchableOpacity>
             </View>
           </View>
