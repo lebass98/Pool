@@ -288,7 +288,10 @@ export const useScoreboard = () => {
         idx === gameState.currentTurnIndex
           ? {
               ...player,
-              lastInningScore: player.currentInningScore,
+              lastInningScore:
+                player.currentInningScore !== 0
+                  ? player.currentInningScore
+                  : player.lastInningScore,
               currentInningScore: 0,
             }
           : player
