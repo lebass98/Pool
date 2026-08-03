@@ -25,7 +25,7 @@ export const HandicapKeypadModal: React.FC<HandicapKeypadModalProps> = ({
   hasNextPlayer = false,
 }) => {
   const { s, f, line } = useScale();
-  const styles = React.useMemo(() => createStyles(s, f, line), [s, f, line]);
+  const styles = React.useMemo(() => createStyles(s, f, line, theme), [s, f, line, theme]);
   const [inputValue, setInputValue] = useState<string>('0');
 
   useEffect(() => {
@@ -150,7 +150,7 @@ export const HandicapKeypadModal: React.FC<HandicapKeypadModalProps> = ({
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={[styles.keyBtn, styles.actionBtn]}
+                style={[styles.keyBtn, styles.confirmBtn]}
                 onPress={handleConfirm}
                 activeOpacity={0.7}
               >
@@ -164,11 +164,11 @@ export const HandicapKeypadModal: React.FC<HandicapKeypadModalProps> = ({
   );
 };
 
-const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
+const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn, theme: ThemeColors) =>
   StyleSheet.create({
     modalOverlay: {
       flex: 1,
-      backgroundColor: 'rgba(0, 0, 0, 0.78)',
+      backgroundColor: 'rgba(8, 12, 20, 0.75)',
       justifyContent: 'center',
       alignItems: 'center',
       zIndex: 1000,
@@ -177,33 +177,34 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       ...StyleSheet.absoluteFillObject,
     },
     keypadOuterFrame: {
-      width: s(320),
-      backgroundColor: '#121418',
-      borderRadius: s(20),
-      borderWidth: line(2.5),
-      borderColor: '#4A505C',
-      padding: s(16),
+      width: s(360),
+      backgroundColor: theme.modalBg,
+      borderRadius: s(28),
+      borderWidth: line(1.5),
+      borderColor: theme.border,
+      padding: s(22),
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: s(10) },
-      shadowOpacity: 0.5,
-      shadowRadius: s(20),
-      elevation: 12,
+      shadowOffset: { width: 0, height: s(12) },
+      shadowOpacity: theme.isDark ? 0.45 : 0.15,
+      shadowRadius: s(24),
+      elevation: 16,
     },
     headerDisplay: {
-      backgroundColor: '#1C2028',
-      borderRadius: s(12),
-      borderWidth: line(1),
-      borderColor: '#333A48',
-      paddingHorizontal: s(16),
-      paddingVertical: s(12),
-      marginBottom: s(16),
+      backgroundColor: theme.statBoxBg,
+      borderRadius: s(18),
+      borderWidth: line(1.2),
+      borderColor: theme.border,
+      paddingHorizontal: s(20),
+      paddingVertical: s(14),
+      marginBottom: s(20),
       alignItems: 'center',
     },
     playerTitle: {
-      color: '#94A3B8',
+      color: theme.textSecondary,
       fontSize: f(14),
-      fontWeight: '700',
-      marginBottom: s(4),
+      fontWeight: '800',
+      marginBottom: s(6),
+      letterSpacing: s(0.5),
     },
     displayValueRow: {
       flexDirection: 'row',
@@ -211,55 +212,60 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       gap: s(4),
     },
     displayValueText: {
-      color: '#03DAC6',
-      fontSize: f(36),
+      color: theme.themeMode === 'theme3' ? '#FF9100' : theme.isDark ? '#03DAC6' : theme.textAccent,
+      fontSize: f(48),
       fontWeight: '900',
       fontVariant: ['tabular-nums'],
     },
     displayUnitText: {
-      color: '#CBD5E1',
-      fontSize: f(18),
+      color: theme.textPrimary,
+      fontSize: f(20),
       fontWeight: '800',
+      marginLeft: s(2),
     },
     grid: {
-      gap: s(10),
+      gap: s(12),
     },
     row: {
       flexDirection: 'row',
-      gap: s(10),
+      gap: s(12),
       justifyContent: 'space-between',
     },
     keyBtn: {
       flex: 1,
-      height: s(62),
-      backgroundColor: '#2A2E38',
-      borderRadius: s(12),
-      borderWidth: line(1.5),
-      borderColor: '#454C5A',
+      height: s(68),
+      backgroundColor: theme.isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)',
+      borderRadius: s(16),
+      borderWidth: line(1),
+      borderColor: theme.border,
       justifyContent: 'center',
       alignItems: 'center',
       shadowColor: '#000',
-      shadowOffset: { width: 0, height: s(4) },
-      shadowOpacity: 0.3,
+      shadowOffset: { width: 0, height: s(3) },
+      shadowOpacity: theme.isDark ? 0.12 : 0.04,
       shadowRadius: s(4),
-      elevation: 4,
+      elevation: 2,
     },
     actionBtn: {
-      backgroundColor: '#20242D',
-      borderColor: '#3A404E',
+      backgroundColor: theme.isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.06)',
+      borderColor: theme.border,
+    },
+    confirmBtn: {
+      backgroundColor: theme.themeMode === 'theme3' ? '#FF9100' : theme.isDark ? '#03DAC6' : theme.textAccent,
+      borderColor: 'transparent',
     },
     numKeyText: {
-      color: '#FFFFFF',
+      color: theme.textPrimary,
       fontSize: f(28),
-      fontWeight: '900',
-    },
-    clearBtnText: {
-      color: '#E2E8F0',
-      fontSize: f(18),
       fontWeight: '800',
     },
+    clearBtnText: {
+      color: theme.textSecondary,
+      fontSize: f(18),
+      fontWeight: '700',
+    },
     nextBtnText: {
-      color: '#FBBF24',
+      color: theme.themeMode === 'theme3' ? '#0F172A' : theme.isDark ? '#000000' : '#FFFFFF',
       fontSize: f(18),
       fontWeight: '900',
     },
