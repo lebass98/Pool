@@ -219,15 +219,15 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
           />
         </View>
 
-        {/* Sub Stats: 이전 이닝 / 이번 이닝 / 에버리지 / 하이런 */}
+        {/* Sub Stats: 최근 득점 / 이번 이닝 / 에버리지 / 하이런 */}
         <View
           style={[
-            isMultiRow ? styles.statsColumn : styles.statsRow,
-            isCompact && (isMultiRow ? styles.compactStatsColumn : styles.compactStatsRow),
+            isMultiRow ? styles.statsGrid : styles.statsRow,
+            isCompact && (isMultiRow ? styles.compactStatsGrid : styles.compactStatsRow),
             { backgroundColor: theme.statBoxBg },
           ]}
         >
-          <View style={styles.statBox}>
+          <View style={[styles.statBox, isMultiRow && styles.gridStatBox]}>
             <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
               최근 득점
             </Text>
@@ -236,9 +236,9 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
             </Text>
           </View>
 
-          <View style={[isMultiRow ? styles.statDividerHorizontal : styles.statDividerVertical, { backgroundColor: theme.border }]} />
+          {!isMultiRow && <View style={[styles.statDividerVertical, { backgroundColor: theme.border }]} />}
 
-          <View style={styles.statBox}>
+          <View style={[styles.statBox, isMultiRow && styles.gridStatBox]}>
             <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
               이번 이닝
             </Text>
@@ -247,9 +247,9 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
             </Text>
           </View>
 
-          <View style={[isMultiRow ? styles.statDividerHorizontal : styles.statDividerVertical, { backgroundColor: theme.border }]} />
+          {!isMultiRow && <View style={[styles.statDividerVertical, { backgroundColor: theme.border }]} />}
 
-          <View style={styles.statBox}>
+          <View style={[styles.statBox, isMultiRow && styles.gridStatBox]}>
             <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
               에버리지
             </Text>
@@ -258,9 +258,9 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
             </Text>
           </View>
 
-          <View style={[isMultiRow ? styles.statDividerHorizontal : styles.statDividerVertical, { backgroundColor: theme.border }]} />
+          {!isMultiRow && <View style={[styles.statDividerVertical, { backgroundColor: theme.border }]} />}
 
-          <View style={styles.statBox}>
+          <View style={[styles.statBox, isMultiRow && styles.gridStatBox]}>
             <Text style={[styles.statLabel, { color: theme.textSecondary }]}>
               하이런
             </Text>
@@ -453,7 +453,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       width: '100%',
     },
     scoreContainerSide: {
-      flex: 1.5,
+      flex: 1,
       height: '100%',
       justifyContent: 'center',
       alignItems: 'center',
@@ -472,33 +472,36 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     compactStatsRow: {
       paddingVertical: s(6),
     },
-    statsColumn: {
-      flexDirection: 'column',
+    statsGrid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
       borderRadius: s(14),
-      paddingVertical: s(12),
+      paddingVertical: s(10),
       paddingHorizontal: s(10),
-      alignItems: 'center',
-      justifyContent: 'space-around',
-      minWidth: s(110),
+      justifyContent: 'space-between',
+      alignContent: 'center',
+      width: s(220),
       height: '100%',
-      marginVertical: 0,
+      gap: s(6),
     },
-    compactStatsColumn: {
-      paddingVertical: s(8),
-      paddingHorizontal: s(8),
-      minWidth: s(95),
+    compactStatsGrid: {
+      width: s(180),
+      paddingVertical: s(6),
+      paddingHorizontal: s(6),
     },
     statBox: {
       flex: 1,
       alignItems: 'center',
     },
+    gridStatBox: {
+      flex: 0,
+      width: '47%',
+      alignItems: 'center',
+      marginVertical: s(2),
+    },
     statDividerVertical: {
       width: line(1),
       height: '75%',
-    },
-    statDividerHorizontal: {
-      height: line(1),
-      width: '75%',
     },
     statLabel: {
       fontSize: f(12),
