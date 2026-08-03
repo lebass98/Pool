@@ -45,10 +45,7 @@ export function useBilliardsTimer() {
 
     const pad = (num: number) => String(num).padStart(2, '0');
 
-    if (hours > 0) {
-      return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-    }
-    return `${pad(minutes)}:${pad(seconds)}`;
+    return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
   }, []);
 
   return {
