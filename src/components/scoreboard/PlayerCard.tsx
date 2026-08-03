@@ -203,9 +203,9 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
       </View>
 
       {/* Main Score & Sub Stats Container */}
-      <View style={isMultiRow ? styles.bodyRow : styles.bodyColumn}>
+      <View style={styles.bodyColumn}>
         {/* Main Score Display (대형 득점 카운터 텍스트 + 3D 카드 입체 회전 애니메이션) */}
-        <View style={[styles.scoreContainer, isMultiRow && styles.scoreContainerSide]}>
+        <View style={styles.scoreContainer}>
           <FlipScoreText
             score={player.currentScore}
             style={[
@@ -222,7 +222,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
         {/* Sub Stats: 최근 득점 / 이번 이닝 / 에버리지 / 하이런 */}
         <View
           style={[
-            isMultiRow ? styles.statsGrid : styles.statsRow,
+            isMultiRow ? styles.statsGridAbsolute : styles.statsRow,
             isCompact && (isMultiRow ? styles.compactStatsGrid : styles.compactStatsRow),
             { backgroundColor: theme.statBoxBg },
           ]}
@@ -491,23 +491,10 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     miniScoreText: {
       fontSize: f(130),
     },
-    bodyRow: {
-      flexDirection: 'row',
-      flex: 1,
-      width: '100%',
-      gap: s(12),
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    },
     bodyColumn: {
       flex: 1,
       width: '100%',
-    },
-    scoreContainerSide: {
-      flex: 1,
-      height: '100%',
-      justifyContent: 'center',
-      alignItems: 'center',
+      position: 'relative',
     },
     sideScoreText: {
       fontSize: f(130),
@@ -523,7 +510,11 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     compactStatsRow: {
       paddingVertical: s(6),
     },
-    statsGrid: {
+    statsGridAbsolute: {
+      position: 'absolute',
+      right: 0,
+      top: '50%',
+      transform: [{ translateY: -s(70) }],
       flexDirection: 'column',
       borderRadius: s(14),
       paddingVertical: s(10),
@@ -531,10 +522,13 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       justifyContent: 'space-around',
       alignItems: 'center',
       width: s(220),
-      height: '100%',
+      height: s(140),
+      zIndex: 10,
     },
     compactStatsGrid: {
       width: s(180),
+      height: s(120),
+      transform: [{ translateY: -s(60) }],
       paddingVertical: s(6),
       paddingHorizontal: s(6),
     },
