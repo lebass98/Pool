@@ -211,7 +211,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       width: '100%',
       borderRadius: s(22),
       paddingHorizontal: s(20),
-      paddingVertical: s(18),
+      paddingVertical: s(12),
       justifyContent: 'space-between',
       shadowColor: '#000',
       shadowOffset: { width: 0, height: s(6) },
@@ -221,7 +221,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
     },
     compactCard: {
       paddingHorizontal: s(14),
-      paddingVertical: s(12),
+      paddingVertical: s(8),
       borderRadius: s(18),
     },
     activeShadow: {
@@ -236,7 +236,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: s(4),
+      marginBottom: s(2),
     },
     nameWithTurnRow: {
       flexDirection: 'row',
@@ -313,24 +313,24 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       width: '100%',
       alignItems: 'center',
       justifyContent: 'center',
-      marginVertical: s(2),
+      marginVertical: 0,
     },
     mainScoreText: {
       fontFamily: 'PretendardGOV-ExtraBold',
-      fontSize: f(170),
+      fontSize: f(280),
       fontWeight: '900',
-      letterSpacing: -s(2),
+      letterSpacing: -s(4),
       includeFontPadding: false,
       textAlign: 'center',
     },
     mediumScoreText: {
-      fontSize: f(140),
+      fontSize: f(220),
     },
     compactScoreText: {
-      fontSize: f(110),
+      fontSize: f(170),
     },
     miniScoreText: {
-      fontSize: f(85),
+      fontSize: f(130),
     },
     statsRow: {
       flexDirection: 'row',
@@ -338,7 +338,7 @@ const createStyles = (s: ScaleFn, f: ScaleFn, line: ScaleFn) =>
       paddingVertical: s(8),
       paddingHorizontal: s(10),
       alignItems: 'center',
-      marginVertical: s(8),
+      marginVertical: s(4),
     },
     compactStatsRow: {
       paddingVertical: s(6),
