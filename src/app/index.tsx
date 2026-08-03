@@ -211,21 +211,8 @@ export default function BilliardsScoreboardScreen() {
                     </View>
                   </View>
 
-                  {/* Center: Inning Badge */}
-                  <View style={styles.inningCenterBox}>
-                    <View
-                      style={[styles.inningBadge, { backgroundColor: theme.badgeBg }]}
-                    >
-                      <Text
-                        style={[styles.inningBadgeText, { color: theme.textPrimary }]}
-                      >
-                        제 {gameState.inning} 이닝
-                      </Text>
-                    </View>
-                  </View>
-
-                  {/* Right: Timer Container */}
-                  <View style={styles.timerRightBox}>
+                  {/* Center: Timer Container */}
+                  <View style={styles.timerCenterBox}>
                     <View
                       style={[
                         styles.timerContainer,
@@ -239,10 +226,20 @@ export default function BilliardsScoreboardScreen() {
                         },
                       ]}
                     >
-                      <Text style={styles.timerLabel}>
-                        경기 시간
-                      </Text>
                       <Text style={styles.timerText}>{formattedTime}</Text>
+                    </View>
+                  </View>
+
+                  {/* Right: Inning Badge */}
+                  <View style={styles.inningRightBox}>
+                    <View
+                      style={[styles.inningBadge, { backgroundColor: theme.badgeBg }]}
+                    >
+                      <Text
+                        style={[styles.inningBadgeText, { color: theme.textPrimary }]}
+                      >
+                        제 {gameState.inning} 이닝
+                      </Text>
                     </View>
                   </View>
                 </View>
@@ -708,11 +705,11 @@ const createStyles = (
       flex: 1,
       alignItems: 'flex-start',
     },
-    inningCenterBox: {
+    timerCenterBox: {
       flex: 1,
       alignItems: 'center',
     },
-    timerRightBox: {
+    inningRightBox: {
       flex: 1,
       alignItems: 'flex-end',
     },
