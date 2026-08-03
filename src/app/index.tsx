@@ -229,7 +229,14 @@ export default function BilliardsScoreboardScreen() {
                     <View
                       style={[
                         styles.timerContainer,
-                        { backgroundColor: theme.badgeBg },
+                        {
+                          backgroundColor:
+                            theme.themeMode === 'theme2'
+                              ? '#0F172A'
+                              : theme.themeMode === 'theme3'
+                              ? '#3B0764'
+                              : 'rgba(15, 23, 42, 0.9)',
+                        },
                       ]}
                     >
                       <Text style={styles.timerLabel}>
