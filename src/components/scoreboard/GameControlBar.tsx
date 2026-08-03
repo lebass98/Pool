@@ -171,27 +171,27 @@ const createStyles = (s: ScaleFn, f: ScaleFn) =>
     },
     btnText: {
       color: '#121212',
-      fontSize: f(24),
+      fontSize: f(19.2),
       fontWeight: '500',
     },
     startBtnText: {
       color: '#000000',
-      fontSize: f(24),
+      fontSize: f(19.2),
       fontWeight: '600',
     },
     pauseBtnText: {
       color: '#000000',
-      fontSize: f(24),
+      fontSize: f(19.2),
       fontWeight: '600',
     },
     finishBtnText: {
       color: '#FFFFFF',
-      fontSize: f(24),
+      fontSize: f(19.2),
       fontWeight: '600',
     },
     resetBtnText: {
       color: '#FFFFFF',
-      fontSize: f(24),
+      fontSize: f(19.2),
       fontWeight: '600',
     },
     disabledBtn: {
