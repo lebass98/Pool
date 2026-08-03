@@ -19,6 +19,10 @@
 
 - 모든 코드 작성 및 수정 후에는 커밋/응답 전 반드시 Expo 검증 명령어(`npx expo export --platform web`)를 수행하여 문법(Syntax) 또는 모듈 파싱 오류가 없는지 사전 체킹하세요.
 
+# 리드미 업데이트 동기화 규칙 (README Update & Sync Rules)
+
+- AI 작업 및 답변 완료 시마다, 수행한 작업 내용을 간추려서 `README.md` 하단의 `📅 업데이트 내역 (Changelog)` 섹션에 날짜(YYYY-MM-DD)별로 자동으로 업데이트하여 지속적으로 기록을 유지하세요.
+
 # 안티그래비티 어시스턴트 준수 규칙 (Antigravity Assistant Guidelines)
 
 ### 1. 답변 및 커뮤니케이션 스타일
