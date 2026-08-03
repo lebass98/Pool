@@ -4,35 +4,35 @@ import { ScaleFn, useScale } from '@/constants/layout';
 import { ThemeColors } from '@/constants/themeColors';
 import { Player } from '@/types/scoreboard.types';
 
-// 점수 변경 시 버티컬 롤링 애니메이션 컴포넌트 (Slot Machine Roll)
-interface RollingScoreTextProps {
+// 점수 변경 시 3D 카드 입체 회전 애니메이션 컴포넌트 (3D Perspective Flip)
+interface FlipScoreTextProps {
   score: number;
   style: any;
 }
 
-const RollingScoreText: React.FC<RollingScoreTextProps> = ({ score, style }) => {
+const FlipScoreText: React.FC<FlipScoreTextProps> = ({ score, style }) => {
   const [displayScore, setDisplayScore] = useState(score);
   const [prevScore, setPrevScore] = useState(score);
-  const [isRolling, setIsRolling] = useState(false);
+  const [isFlipping, setIsFlipping] = useState(false);
   const anim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     if (score !== displayScore) {
       setPrevScore(displayScore);
       setDisplayScore(score);
-      setIsRolling(true);
+      setIsFlipping(true);
       anim.setValue(0);
       Animated.timing(anim, {
         toValue: 1,
-        duration: 320,
+        duration: 360,
         useNativeDriver: true,
       }).start(() => {
-        setIsRolling(false);
+        setIsFlipping(false);
       });
     }
   }, [score, displayScore]);
 
-  if (!isRolling) {
+  if (!isFlipping) {
     return (
       <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.4} style={style}>
         {displayScore}
@@ -40,32 +40,38 @@ const RollingScoreText: React.FC<RollingScoreTextProps> = ({ score, style }) => 
     );
   }
 
-  const isUp = score < prevScore; // 득점 시 점수 감소 (차감형 스코어)
-  const prevTranslateY = anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, isUp ? -60 : 60],
+  // 3D Perspective Flip (0 -> 0.5 구간: 이전 점수가 90도 뒤집어지며 접힘 / 0.5 -> 1 구간: 새 점수가 -90도에서 0도로 펼쳐짐)
+  const isUp = score < prevScore; // 득점 시 점수 감소
+  const prevRotateX = anim.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: ['0deg', isUp ? '-90deg' : '90deg', isUp ? '-90deg' : '90deg'],
   });
   const prevOpacity = anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 0],
+    inputRange: [0, 0.49, 0.5, 1],
+    outputRange: [1, 1, 0, 0],
   });
 
-  const currTranslateY = anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [isUp ? 60 : -60, 0],
+  const currRotateX = anim.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [isUp ? '90deg' : '-90deg', isUp ? '90deg' : '-90deg', '0deg'],
   });
   const currOpacity = anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 1],
+    inputRange: [0, 0.5, 0.51, 1],
+    outputRange: [0, 0, 1, 1],
   });
 
   return (
     <View style={{ position: 'relative', width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
-      {/* 퇴장하는 이전 점수 */}
+      {/* 퇴장하는 이전 점수 (3D Flip Out) */}
       <Animated.View
         style={[
           StyleSheet.absoluteFillObject,
-          { justifyContent: 'center', alignItems: 'center', transform: [{ translateY: prevTranslateY }], opacity: prevOpacity },
+          {
+            justifyContent: 'center',
+            alignItems: 'center',
+            transform: [{ perspective: 400 }, { rotateX: prevRotateX }],
+            opacity: prevOpacity,
+          },
         ]}
       >
         <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.4} style={style}>
@@ -73,11 +79,16 @@ const RollingScoreText: React.FC<RollingScoreTextProps> = ({ score, style }) => 
         </Text>
       </Animated.View>
 
-      {/* 등장하는 새 점수 */}
+      {/* 등장하는 새 점수 (3D Flip In) */}
       <Animated.View
         style={[
           StyleSheet.absoluteFillObject,
-          { justifyContent: 'center', alignItems: 'center', transform: [{ translateY: currTranslateY }], opacity: currOpacity },
+          {
+            justifyContent: 'center',
+            alignItems: 'center',
+            transform: [{ perspective: 400 }, { rotateX: currRotateX }],
+            opacity: currOpacity,
+          },
         ]}
       >
         <Text numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.4} style={style}>
@@ -189,9 +200,9 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
         </View>
       </View>
 
-      {/* Main Score Display (대형 득점 카운터 텍스트 + 버티컬 롤링 애니메이션) */}
+      {/* Main Score Display (대형 득점 카운터 텍스트 + 3D 카드 입체 회전 애니메이션) */}
       <View style={styles.scoreContainer}>
-        <RollingScoreText
+        <FlipScoreText
           score={player.currentScore}
           style={[
             styles.mainScoreText,
